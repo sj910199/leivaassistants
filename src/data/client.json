@@ -1,0 +1,15 @@
+{
+	"name": "Leiva Assistants",
+	"email": "Leivaassistants@gmail.com",
+	"phoneForTel": "+1-123-456-7890",
+	"phoneFormatted": "(123) 456-7890",
+	"address": {
+		"lineOne": "address line one",
+		"lineTwo": null,
+		"city": "",
+		"state": "",
+		"zip": "",
+		"mapLink": "https://www.google.com/maps"
+	},
+	"domain": "https://leiva-assistants.ca/"
+}
