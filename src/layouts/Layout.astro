@@ -8,9 +8,11 @@ import client from "@data/client.json";
 // import "@styles/root.less";
 // import '@styles/dark.less';
 import "../styles/global.css";
-import { getOptimizedImage } from "../js/utils";
+import { getOptimizedImage } from "@js/utils";
 
 import ogImg from "@assets/images/og/site-og.jpg";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
 
 const ogImage = await getOptimizedImage(ogImg);
 
@@ -103,8 +105,15 @@ const {
     </title>
   </head>
 
-  <body>
-    <slot />
+  <body class="flex flex-col">
+    <a class="sr-only" aria-label="skip to main content" href="#main"
+      >Click To Skip To Main Content</a
+    >
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>
 

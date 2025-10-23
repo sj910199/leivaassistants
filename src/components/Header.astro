@@ -1,0 +1,519 @@
+---
+import navData from "@data/navData.json";
+import MainLogo from "@assets/images/logo/main-logo.png";
+import { Image } from "astro:assets";
+
+import type { HTMLAttributes } from "astro/types";
+import ChevronDown from "@components/icons/utility/ChevronDown.astro";
+import ChevronUp from "@components/icons/utility/ChevronUp.astro";
+
+interface Props extends HTMLAttributes<"header"> {}
+
+const props = Astro.props as Props;
+---
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+</style>
+
+<header
+  id="cs-navigation"
+  class="sticky w-full z-10000 px-4 py-3 bg-emerald-200/75 backdrop-blur-[30px] shadow-[rgba(149,157,165,0.2)_0px_8px_24px] lg:px-4 lg:py-0"
+  style="font-family: 'Poppins', sans-serif;"
+  {...props}
+>
+  <div
+    class="cs-container max-w-7xl mx-auto flex justify-end items-center gap-6 lg:justify-start"
+  >
+    <!-- Logo -->
+    <a
+      href="/"
+      class="cs-logo mr-auto flex justify-center items-center w-full max-w-36.5 h-full lg:w-[18.4%] lg:max-w-87.5 lg:h-16.25 z-100"
+      aria-label="back to home"
+    >
+      <Image
+        src={MainLogo}
+        alt="Main logo massage"
+        class="px-2 drop-shadow-md max-w-[100px] w-full h-full object-contain object-left"
+      />
+    </a>
+
+    <!-- Navigation -->
+    <nav class="cs-nav" role="navigation">
+      <!-- Mobile Nav Toggle -->
+      <button
+        class="cs-toggle w-11 h-11 ml-auto bg-transparent border-none rounded flex justify-center items-center lg:hidden"
+        id="mobile-menu-toggle"
+        aria-expanded="false"
+        aria-controls="cs-expanded-ul"
+        aria-label="Toggle mobile menu."
+      >
+        <div class="cs-box w-6 h-3.5 relative" aria-hidden="true">
+          <span class="cs-line cs-line1 absolute left-1/2 -translate-x-1/2"
+          ></span>
+          <span class="cs-line cs-line2 absolute left-1/2 -translate-x-1/2"
+          ></span>
+          <span class="cs-line cs-line3 absolute left-1/2 -translate-x-1/2"
+          ></span>
+        </div>
+      </button>
+
+      <!-- Navigation Items -->
+      <div
+        class="cs-ul-wrapper fixed top-full right-0 h-screen bg-white shadow-[inset_rgba(0,0,0,0.2)_0px_8px_24px] overflow-hidden lg:relative lg:top-0 lg:h-auto lg:bg-transparent lg:shadow-none lg:opacity-100 lg:visible lg:transform-none"
+      >
+        <ul
+          id="cs-expanded-ul"
+          class="cs-ul w-auto min-w-[40%] h-[65vh] m-0 pt-12 pr-10 pb-8 pl-[4.375rem] flex flex-col justify-start items-end gap-5 overflow-scroll lg:w-full lg:h-auto lg:p-0 lg:flex-row lg:justify-start lg:items-center lg:gap-6 lg:overflow-visible"
+        >
+          {
+            navData.map((entry) => (
+              <li
+                class:list={[
+                  "cs-li w-full text-right opacity-0 lg:list-none lg:py-8 lg:flex-none lg:opacity-100 lg:text-left lg:w-auto",
+                  { "cs-dropdown relative": entry.children?.length > 0 },
+                ]}
+              >
+                {entry.children?.length > 0 ? (
+                  <div class="block relative lg:contents">
+                    <a
+                      href={entry.url}
+                      class:list={[
+                        "cs-li-link inline-block text-base leading-tight no-underline rounded-full bg-orange-50 pr-8 pl-3 py-1 text-gray-950 hover:bg-orange-100 transition-colors lg:text-sm lg:pr-3 lg:block",
+                        {
+                          "cs-active bg-orange-200 text-gray-50":
+                            Astro.url.pathname === entry.url,
+                        },
+                      ]}
+                      aria-current={
+                        Astro.url.pathname === entry.url ? "page" : undefined
+                      }
+                    >
+                      {entry.key}
+                    </a>
+                    <button
+                      aria-expanded="false"
+                      aria-controls={`submenu-${entry.key}`}
+                      class:list={[
+                        "submenu-btn block z-10 absolute right-0 top-1/2 -translate-y-1/2 h-full rounded-full rounded-tl-none rounded-bl-none bg-orange-100 px-1 py-1 text-gray-950 hover:bg-orange-100 transition-colors lg:hidden",
+                        { "cs-active": Astro.url.pathname.includes(entry.url) },
+                      ]}
+                    >
+                      <span class="down-icon">
+                        <ChevronDown />
+                      </span>
+                      <span class="up-icon hidden">
+                        <ChevronUp />
+                      </span>
+                    </button>
+                  </div>
+                ) : (
+                  <a
+                    href={entry.url}
+                    class:list={[
+                      "cs-li-link inline-block text-base leading-tight no-underline rounded-full bg-orange-50 px-3 py-1 text-gray-950 hover:bg-orange-100 transition-colors lg:text-sm lg:block",
+                      {
+                        "cs-active bg-orange-200 text-gray-50":
+                          Astro.url.pathname === entry.url,
+                      },
+                    ]}
+                    aria-current={
+                      Astro.url.pathname === entry.url ? "page" : undefined
+                    }
+                  >
+                    {entry.key}
+                  </a>
+                )}
+
+                {entry.children?.length > 0 && (
+                  <ul
+                    id={`submenu-${entry.key}`}
+                    class="cs-drop-ul h-0 m-0 px-6 py-0 bg-emerald-200/75 rounded-xl border border-emerald-300 flex flex-col justify-start items-end gap-3 overflow-hidden opacity-0 invisible lg:min-w-[12.5rem] lg:m-0 lg:p-0 lg:bg-white lg:shadow-[rgba(149,157,165,0.2)_0px_10px_16px] lg:border-b-[5px] lg:border-b-emerald-300 lg:border-x-0 lg:border-t-0 lg:absolute lg:top-full lg:z-[-100] lg:rounded-xl"
+                  >
+                    {entry.children.map((child) => (
+                      <li class="cs-drop-li text-right list-none w-full h-auto opacity-0 lg:text-base lg:no-underline lg:block">
+                        <a
+                          href={child.url}
+                          class="cs-li-link cs-drop-link text-sm leading-tight whitespace-nowrap text-gray-950 hover:bg-orange-100 transition-colors lg:text-base lg:leading-normal lg:w-full lg:box-border lg:p-3 lg:text-black lg:block lg:hover:bg-gray-100"
+                          aria-current={
+                            Astro.url.pathname === child.url
+                              ? "page"
+                              : undefined
+                          }
+                        >
+                          {child.key}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- Popup Overlay -->
+<div
+  id="popup"
+  class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[9999] hidden"
+>
+  <div
+    class="p-6 rounded-xl shadow-xl w-11/12 max-w-md"
+    style="background: rgba(255, 255, 255, 0.3);"
+  >
+    <div class="flex flex-col gap-4">
+      <a
+        href="https://www.massagebook.com/therapists/StoneMassage?src=external"
+        class="cs-button-solid rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem]"
+      >
+        Book In-Clinic Appointment (Online)
+      </a>
+      <a
+        href="tel:587-938-0458"
+        class="cs-button-solid rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem]"
+      >
+        Call to Book In-Home Massage
+      </a>
+      <button
+        onclick="document.getElementById('popup').classList.add('hidden')"
+        class="text-sm text-white-500 hover:text-white mt-2"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target instanceof Element && target.closest(".submenu-btn")) {
+      e.stopPropagation();
+    }
+  });
+
+  // Mobile menu toggle
+  const mobileToggle = document.getElementById("mobile-menu-toggle");
+  const navigation = document.getElementById("cs-navigation");
+  const body = document.body;
+
+  mobileToggle?.addEventListener("click", () => {
+    const isActive = navigation?.classList.toggle("cs-active");
+    mobileToggle.setAttribute("aria-expanded", isActive ? "true" : "false");
+    if (isActive) {
+      body.classList.add("cs-open");
+    } else {
+      body.classList.remove("cs-open");
+    }
+  });
+
+  // Mobile dropdown toggles
+  document.querySelectorAll(".submenu-btn").forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const parent = btn.closest(".cs-dropdown");
+      const isActive = parent?.classList.toggle("cs-active");
+      btn.setAttribute("aria-expanded", isActive ? "true" : "false");
+    });
+  });
+</script>
+
+<style>
+  /* Body overflow when mobile menu is open */
+  body.cs-open {
+    overflow: hidden;
+  }
+
+  /* Mobile Navigation Active States */
+  @media only screen and (max-width: 63.9375rem) {
+    #cs-navigation::before {
+      content: "";
+      width: 0%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.6);
+      opacity: 0;
+      display: block;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      z-index: -11;
+      transition:
+        width 0.5s,
+        opacity 0.3s;
+      backdrop-filter: blur(10px);
+    }
+
+    #cs-navigation.cs-active::before {
+      width: 100%;
+      opacity: 1;
+    }
+
+    #cs-navigation.cs-active .cs-ul-wrapper {
+      opacity: 1;
+      visibility: visible;
+      transform: scaleX(1);
+      transition-delay: 0.2s;
+    }
+
+    #cs-navigation.cs-active .cs-li {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Hamburger Animation */
+    #cs-navigation .cs-line {
+      width: 100%;
+      height: 2px;
+      background-color: #1a1a1a;
+      border-radius: 2px;
+      transition:
+        transform 0.5s,
+        top 0.3s,
+        left 0.3s,
+        bottom 0.3s,
+        opacity 0.3s;
+    }
+
+    #cs-navigation .cs-line1 {
+      top: 0;
+    }
+
+    #cs-navigation .cs-line2 {
+      top: 50%;
+      transform: translateX(-50%) translateY(-50%);
+    }
+
+    #cs-navigation .cs-line3 {
+      bottom: 0;
+    }
+
+    #cs-navigation.cs-active .cs-line1 {
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(225deg);
+    }
+
+    #cs-navigation.cs-active .cs-line2 {
+      top: 50%;
+      transform: translate(-50%, -50%) translateY(0) rotate(-225deg);
+      transform-origin: center;
+    }
+
+    #cs-navigation.cs-active .cs-line3 {
+      opacity: 0;
+      bottom: 100%;
+    }
+
+    /* Mobile ul wrapper transitions */
+    .cs-ul-wrapper {
+      transform: scaleX(0);
+      transform-origin: top right;
+      transition:
+        transform 0.4s,
+        opacity 0.3s;
+    }
+
+    /* Staggered animation for mobile menu items */
+    .cs-li {
+      transform: translateX(-2.5rem);
+      transition:
+        transform 0.6s,
+        opacity 0.9s;
+    }
+
+    .cs-li:nth-of-type(1) {
+      transition-delay: 0.05s;
+    }
+    .cs-li:nth-of-type(2) {
+      transition-delay: 0.1s;
+    }
+    .cs-li:nth-of-type(3) {
+      transition-delay: 0.15s;
+    }
+    .cs-li:nth-of-type(4) {
+      transition-delay: 0.2s;
+    }
+    .cs-li:nth-of-type(5) {
+      transition-delay: 0.25s;
+    }
+    .cs-li:nth-of-type(6) {
+      transition-delay: 0.3s;
+    }
+    .cs-li:nth-of-type(7) {
+      transition-delay: 0.35s;
+    }
+    .cs-li:nth-of-type(8) {
+      transition-delay: 0.4s;
+    }
+    .cs-li:nth-of-type(9) {
+      transition-delay: 0.45s;
+    }
+
+    /* Mobile dropdown */
+    .cs-dropdown.cs-active .submenu-btn .down-icon {
+      display: none;
+    }
+
+    .cs-dropdown.cs-active .submenu-btn .up-icon {
+      display: inline;
+    }
+
+    .cs-dropdown.cs-active .cs-drop-ul {
+      height: auto;
+      margin: 0.75rem 0 0 0;
+      padding: 1.5rem;
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
+
+    .cs-dropdown.cs-active .cs-drop-li {
+      opacity: 1;
+    }
+
+    .cs-drop-ul {
+      transform: scale(0);
+      transform-origin: top right;
+      transition:
+        padding 0.3s,
+        margin 0.3s,
+        height 0.3s,
+        opacity 0.3s,
+        transform 0.3s,
+        visibility 0.3s;
+    }
+  }
+
+  /* Desktop Navigation */
+  @media only screen and (min-width: 64rem) {
+    /* Desktop dropdown hover */
+    .cs-dropdown:hover .cs-drop-ul,
+    .cs-dropdown.cs-active .cs-drop-ul {
+      opacity: 1;
+      visibility: visible;
+      transform: scaleY(1);
+    }
+
+    .cs-dropdown:hover .cs-drop-li,
+    .cs-dropdown.cs-active .cs-drop-li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .cs-drop-ul {
+      transform: scaleY(0);
+      transform-origin: top;
+      transition:
+        transform 0.3s,
+        visibility 0.3s,
+        opacity 0.3s;
+    }
+
+    .cs-drop-li {
+      transform: translateY(-0.625rem);
+      transition:
+        opacity 0.6s,
+        transform 0.6s;
+    }
+
+    /* Staggered animation for dropdown items */
+    .cs-drop-li:nth-of-type(1) {
+      transition-delay: 0.05s;
+    }
+    .cs-drop-li:nth-of-type(2) {
+      transition-delay: 0.1s;
+    }
+    .cs-drop-li:nth-of-type(3) {
+      transition-delay: 0.15s;
+    }
+    .cs-drop-li:nth-of-type(4) {
+      transition-delay: 0.2s;
+    }
+    .cs-drop-li:nth-of-type(5) {
+      transition-delay: 0.25s;
+    }
+    .cs-drop-li:nth-of-type(6) {
+      transition-delay: 0.3s;
+    }
+    .cs-drop-li:nth-of-type(7) {
+      transition-delay: 0.35s;
+    }
+    .cs-drop-li:nth-of-type(8) {
+      transition-delay: 0.4s;
+    }
+    .cs-drop-li:nth-of-type(9) {
+      transition-delay: 0.45s;
+    }
+    .cs-drop-li:nth-of-type(10) {
+      transition-delay: 0.5s;
+    }
+    .cs-drop-li:nth-of-type(11) {
+      transition-delay: 0.55s;
+    }
+    .cs-drop-li:nth-of-type(12) {
+      transition-delay: 0.6s;
+    }
+    .cs-drop-li:nth-of-type(13) {
+      transition-delay: 0.65s;
+    }
+
+    /* Focus styles */
+    .cs-drop-link:focus-within {
+      outline: 2px solid currentColor;
+      outline-offset: -2px;
+    }
+  }
+
+  /* Dark Mode Styles */
+  @media only screen and (max-width: 63.9375rem) {
+    body.dark-mode #cs-navigation .cs-logo {
+      filter: grayscale(1) brightness(1000%);
+    }
+
+    body.dark-mode #cs-navigation .cs-line {
+      background-color: #fff;
+    }
+
+    body.dark-mode #cs-navigation .cs-ul-wrapper {
+      background-color: var(--medium);
+    }
+
+    body.dark-mode #cs-navigation .cs-li-link {
+      color: var(--bodyTextColorWhite);
+    }
+  }
+
+  @media only screen and (min-width: 64rem) {
+    body.dark-mode #cs-navigation .cs-logo {
+      filter: grayscale(1) brightness(1000%);
+    }
+
+    body.dark-mode #cs-navigation .cs-li-link {
+      color: var(--bodyTextColorWhite);
+    }
+
+    body.dark-mode #cs-navigation .cs-drop-ul {
+      background-color: var(--dark);
+    }
+
+    body.dark-mode #cs-navigation .cs-drop-link:hover {
+      background-color: var(--medium);
+    }
+
+    body.dark-mode #cs-navigation .cs-drop-icon {
+      filter: grayscale(1) brightness(1000%);
+    }
+  }
+
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+</style>
