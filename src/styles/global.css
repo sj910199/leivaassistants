@@ -1,5 +1,44 @@
 @import "tailwindcss";
+@font-face {
+  font-family: "Bebas Neue";
+  src: url("/assets/fonts/BebasNeue-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
+/* Roboto Regular (400) */
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("/assets/fonts/roboto-v29-latin-regular.woff2") format("woff2"),
+    url("/assets/fonts/roboto-v29-latin-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Roboto Bold (700) */
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("/assets/fonts/roboto-v29-latin-700.woff2") format("woff2"),
+    url("/assets/fonts/roboto-v29-latin-700.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Roboto Black (900) */
+@font-face {
+  font-family: "Roboto";
+  src:
+    url("/assets/fonts/roboto-v29-latin-900.woff2") format("woff2"),
+    url("/assets/fonts/roboto-v29-latin-900.woff") format("woff");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 @theme {
   --color-primary: #040404;
   --color-primary-foreground: #FFFFFF;
@@ -8,4 +47,9 @@
   --color-accent-secondary: #92038B;
   --radius-primary: 16px;
   --radius-secondary: 40px;
+ --font-bebas:"Bebas Neue", system-ui, -apple-system, Segoe UI, Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+
+ --font-roboto: "Roboto", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
 }

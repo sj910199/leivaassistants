@@ -28,14 +28,14 @@ const props = Astro.props as Props;
     <!-- Logo -->
     <a
       href="/"
-      class="cs-logo z-100 mr-auto flex h-full w-full max-w-36.5 items-center justify-center lg:h-16.25 lg:w-[18.4%] lg:max-w-87.5"
+      class="cs-logo mr-auto flex h-full items-center"
       aria-label="back to home"
     >
-      <Image
-        src={MainLogo}
-        alt="Main logo massage"
-        class="h-full w-full max-w-[100px] object-contain object-left px-2 drop-shadow-md"
-      />
+      <span
+        class="font-bebas text-[20px] font-semibold tracking-wide text-primary-foreground uppercase select-none lg:text-[1.875rem]"
+      >
+        LEIVA ASSISTANTS
+      </span>
     </a>
 
     <!-- Navigation -->
@@ -74,7 +74,7 @@ const props = Astro.props as Props;
             navData.map((entry) => (
               <li
                 class:list={[
-                  "cs-li group w-full text-right opacity-0 lg:w-auto lg:flex-none lg:list-none lg:py-8 lg:text-left lg:opacity-100",
+                  "cs-li group w-full text-right opacity-0 lg:w-auto lg:flex-none lg:list-none lg:py-7 lg:text-left lg:opacity-100",
                   { "cs-dropdown relative": entry.children?.length > 0 },
                 ]}
               >
@@ -83,7 +83,7 @@ const props = Astro.props as Props;
                     <a
                       href={entry.url}
                       class:list={[
-                        "cs-li-link relative inline-block rounded-full bg-primary py-1 pr-8 pl-2 text-base leading-tight text-primary-foreground no-underline transition-colors",
+                        "cs-li-link relative inline-block rounded-full bg-primary py-1 pr-8 pl-2 font-roboto text-base leading-tight text-primary-foreground no-underline transition-colors",
                         "lg:block lg:px-2 before:lg:block",
                         "before:absolute before:bottom-0.5 before:left-0 before:hidden before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-accent before:opacity-100 before:transition-transform before:duration-300",
                         "group-hover:before:scale-x-100 hover:before:scale-x-100",
@@ -118,7 +118,7 @@ const props = Astro.props as Props;
                   <a
                     href={entry.url}
                     class:list={[
-                      "cs-li-link relative inline-block overflow-clip rounded-full bg-primary px-2 py-1 text-base leading-tight text-primary-foreground no-underline transition-colors",
+                      "cs-li-link relative inline-block overflow-clip rounded-full bg-primary px-2 py-1 font-roboto text-base leading-tight text-primary-foreground no-underline transition-colors",
                       "lg:block",
                       "before:absolute before:bottom-0.5 before:left-0 before:block before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-accent before:opacity-100 before:transition-transform before:duration-300",
                       "hover:before:scale-x-100",
@@ -140,7 +140,7 @@ const props = Astro.props as Props;
                     id={`submenu-${entry.key}`}
                     class:list={[
                       "cs-drop-ul m-0 flex flex-col items-end justify-start gap-3 overflow-hidden border border-accent-secondary bg-accent px-6 py-0",
-                      "lg:absolute lg:top-full lg:m-0 lg:min-w-50 lg:border-x-0 lg:border-t-0 lg:border-b-emerald-300 lg:bg-white lg:p-0 lg:shadow-[rgba(149,157,165,0.2)_0px_10px_16px]",
+                      "lg:absolute lg:top-full lg:m-0 lg:min-w-50 lg:border-x-0 lg:border-t-0 lg:border-b-[#5A766A] lg:bg-primary lg:p-0 lg:shadow-[rgba(149,157,165,0.2)_0px_10px_16px]",
                       "invisible h-0 opacity-0 lg:z-[-100] lg:border-b-0",
                       "group-hover:visible group-hover:h-auto group-hover:opacity-100 group-hover:lg:z-100 group-hover:lg:border-b-[5px]",
                     ]}
@@ -149,7 +149,10 @@ const props = Astro.props as Props;
                       <li class="cs-drop-li h-auto w-full list-none opacity-0 lg:block lg:text-base lg:no-underline">
                         <a
                           href={child.url}
-                          class="cs-li-link cs-drop-link text-sm leading-tight whitespace-nowrap text-accent-foreground transition-colors hover:bg-orange-100 lg:box-border lg:block lg:w-full lg:p-3 lg:text-base lg:leading-normal lg:text-black lg:hover:bg-gray-100"
+                          class:list={[
+                            "cs-li-link cs-drop-link font-roboto text-sm leading-tight whitespace-nowrap text-accent-foreground transition-colors",
+                            "hover:bg-primary-foreground lg:box-border lg:block lg:w-full lg:p-3 lg:text-base lg:leading-normal lg:text-primary-foreground lg:duration-500 lg:hover:text-primary",
+                          ]}
                           aria-current={
                             Astro.url.pathname === child.url
                               ? "page"
@@ -171,8 +174,8 @@ const props = Astro.props as Props;
       <a
         href="#"
         class:list={[
-          "relative inline-block overflow-clip rounded-lg bg-primary px-2 py-4 text-base leading-tight whitespace-nowrap text-accent-foreground uppercase no-underline transition-colors",
-          "before:absolute before:inset-0 before:bg-accent before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-full",
+          "relative inline-block overflow-clip rounded-lg bg-primary px-2 py-4 font-roboto text-base leading-tight font-bold whitespace-nowrap text-accent-foreground uppercase no-underline transition-colors",
+          "before:absolute before:inset-0 before:bg-accent before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-[105%]",
           "lg:px-8",
         ]}
         aria-current="page"
