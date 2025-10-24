@@ -1,6 +1,9 @@
 ---
 import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
+import heroBg from "@assets/images/bg/hero-bg.png";
+
+import { Image, Picture } from "astro:assets";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -14,39 +17,26 @@ import Layout from "../layouts/Layout.astro";
   <section id="hero-1426">
     <div class="cs-container">
       <div class="cs-content">
-        <span class="cs-topper"> Save Our Earth, One Person at a Time</span>
-        <h1 class="cs-title">Let’s Go Green As It Makes Environment</h1>
-        <p class="cs-text">
-          We help companies develop powerful corporate social responsibility,
-          grantmaking, and employee engagement strategies.
+        <h1 class="cs-title font-bebas">
+          Hire the Top 1% of Virtual Assistants Who Build Businesses
+        </h1>
+        <p class="cs-text font-roboto">
+          Hire business-building virtual assistants in 21 days or less and save
+          up to 80% on payroll.
         </p>
         <div class="cs-button-group">
-          <a href="" class="cs-button-solid cs-button1">Join Community</a>
-          <a href="" class="cs-button-solid cs-button2">Donate Now</a>
+          <a href="" class="cs-button-solid cs-button1">Hire now</a>
         </div>
       </div>
     </div>
 
     <!-- Background Image -->
-    <picture class="cs-background">
-      <source
-        media="(max-width: 600px)"
-        srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Landscapes/field-m.jpg"
-      />
-      <source
-        media="(min-width: 601px)"
-        srcset="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Landscapes/field.jpg"
-      />
-      <img
-        loading="lazy"
-        decoding="async"
-        src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Images/Landscapes/field.jpg"
-        alt="field"
-        width="1920"
-        height="1200"
-        aria-hidden="true"
-      />
-    </picture>
+    <Picture
+      src={heroBg}
+      formats={["avif", "webp"]}
+      alt="blurred circle side by side"
+      pictureAttributes={{ class: "cs-background " }}
+    />
   </section>
 </Layout>
 
@@ -81,7 +71,6 @@ import Layout from "../layouts/Layout.astro";
       content: "";
       width: 100%;
       height: 100%;
-      background: #000;
       opacity: 0.48;
       position: absolute;
       display: block;
@@ -113,19 +102,6 @@ import Layout from "../layouts/Layout.astro";
       width: 100%;
       max-width: 39.375rem;
     }
-    #hero-1426 .cs-topper {
-      /* 13px - 16px */
-      font-size: clamp(0.8125rem, 1.5vw, 1rem);
-      line-height: 1.2em;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-align: center;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-      color: var(--secondary);
-      display: inline-block;
-      position: relative;
-    }
     #hero-1426 .cs-title {
       /* 39px - 61px */
       font-size: clamp(2.4375rem, 6.4vw, 3.8125rem);
@@ -133,7 +109,7 @@ import Layout from "../layouts/Layout.astro";
       line-height: 1.2em;
       text-align: center;
       max-width: 51.8125rem;
-      color: #fff;
+      color: var(--color-primary);
       position: relative;
     }
     #hero-1426 .cs-text {
@@ -146,7 +122,7 @@ import Layout from "../layouts/Layout.astro";
       max-width: clamp(29rem, 60vw, 38.785rem);
       margin: 0 auto 0;
       margin-bottom: 2rem;
-      color: #fff;
+      color: var(--color-primary);
     }
     #hero-1426 .cs-button-group {
       display: flex;
