@@ -1,11 +1,8 @@
 ---
 import navData from "@data/navData.json";
-import MainLogo from "@assets/images/logo/main-logo.png";
-import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 
 import type { HTMLAttributes } from "astro/types";
-import ChevronDown from "@components/icons/utility/ChevronDown.astro";
-import ChevronUp from "@components/icons/utility/ChevronUp.astro";
 
 interface Props extends HTMLAttributes<"header"> {}
 
@@ -107,10 +104,10 @@ const props = Astro.props as Props;
                       ]}
                     >
                       <span class="down-icon">
-                        <ChevronDown />
+                        <Icon name="tabler:chevron-down:" />
                       </span>
                       <span class="up-icon hidden">
-                        <ChevronUp />
+                        <Icon name="tabler:chevron-up" />
                       </span>
                     </button>
                   </div>

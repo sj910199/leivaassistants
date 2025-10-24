@@ -2,6 +2,8 @@
 import FacebookIcon from "./icons/socials/FacebookIcon.astro";
 import InstagramIcon from "./icons/socials/InstagramIcon.astro";
 import TwitterIcon from "./icons/socials/TwitterIcon.astro";
+
+import { Icon } from "astro-icon/components";
 ---
 
 <!-- ============================================ --><!--                   Footer                     --><!-- ============================================ -->
@@ -144,51 +146,30 @@ import TwitterIcon from "./icons/socials/TwitterIcon.astro";
             aria-label="visit google profile"
             href=""
           >
-            <TwitterIcon class:list={"cs-social-img block h-3.25 w-auto"} />
-            <!-- <img
-              class="cs-social-img block h-[0.8125rem] w-auto"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="https://csimg.nyc3.digitaloceanspaces.com/Social/google.svg"
-              alt="google"
-              width="11"
-              height="11"
-            /> -->
+            <Icon
+              name="tabler:brand-google"
+              class="cs-social-img block h-3.25 w-auto"
+            />
           </a>
           <a
             class="cs-social-link relative z-[1] flex h-6 w-6 items-center justify-center rounded-full bg-[#4e4b66] transition-all duration-300"
             aria-label="visit facebook profile"
             href=""
           >
-            <FacebookIcon class:list={"cs-social-img block h-3.25 w-auto"} />
-            <!-- <img
-              class="cs-social-img block h-[0.8125rem] w-auto"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="https://csimg.nyc3.digitaloceanspaces.com/Social/Facebook.svg"
-              alt="facebook"
-              width="6"
-              height="11"
-            /> -->
+            <Icon
+              name="tabler:brand-facebook-filled"
+              class="cs-social-img block h-3.25 w-auto"
+            />
           </a>
           <a
             class="cs-social-link relative z-[1] flex h-6 w-6 items-center justify-center rounded-full bg-[#4e4b66] transition-all duration-300"
             aria-label="visit instagram profile"
             href=""
           >
-            <InstagramIcon class:list={"cs-social-img block h-3.25 w-auto"} />
-            <!-- <img
-              class="cs-social-img block h-[0.8125rem] w-auto"
-              aria-hidden="true"
-              loading="lazy"
-              decoding="async"
-              src="https://csimg.nyc3.digitaloceanspaces.com/Social/instagram.svg"
-              alt="instagram"
-              width="11"
-              height="11"
-            /> -->
+            <Icon
+              name="tabler:brand-instagram-filled"
+              class="cs-social-img block h-3.25 w-auto"
+            />
           </a>
         </div>
       </li>
