@@ -5,61 +5,38 @@
     "children": []
   },
   {
-    "key": "About Us",
-    "url": "/about",
-    "children": []
-  },
-  {
     "key": "Services",
     "url": "/services/",
     "children": [
       {
-        "key": "Deep Tissue Massage",
-        "url": "/services/deep-tissue"
+        "key": "Executive Assistant",
+        "url": "/services/executive-assistant"
       },
       {
-        "key": "Hot Stone Massage",
-        "url": "/services/hot-stone"
+        "key": "Customer Support Assistant",
+        "url": "/services/customer-support-assistant"
       },
       {
-        "key": "Relaxation Massage",
-        "url": "/services/relaxation"
+        "key": "Social Media Manager",
+        "url": "/services/social-media-manager"
       },
       {
-        "key": "Pregnancy Massage",
-        "url": "/services/pregnancy"
+        "key": "Virtual Assistant",
+        "url": "/services/virtual-assistant"
       },
       {
-        "key": "Cupping",
-        "url": "/services/cupping"
+        "key": "Administrative Assistant",
+        "url": "/services/administrative-assistant"
       },
       {
-        "key": "Sports Massage",
-        "url": "/services/sports"
-      },
-      {
-        "key": "Craniosacral Massage",
-        "url": "/services/craniosacral"
-      },
-      {
-        "key": "MVA (Motor Vehicle Accident) Massage",
-        "url": "/services/mva"
+        "key": "Real Estate Assistant",
+        "url": "/services/real-estate-assistant"
       }
-  ]
+    ]
   },
   {
-    "key": "Contact Us",
-    "url": "/contact/",
-    "children": []
-  },
-  {
-    "key": "Direct Billing",
-    "url": "/direct-billing/",
-    "children": []
-  },
-  {
-    "key": "Book Appointment",
-    "url": "/booking/",
+    "key": "How It Works",
+    "url": "/how-it-works/",
     "children": []
   }
 ]

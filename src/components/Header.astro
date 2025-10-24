@@ -18,37 +18,37 @@ const props = Astro.props as Props;
 
 <header
   id="cs-navigation"
-  class="sticky w-full z-10000 px-4 py-3 bg-emerald-200/75 backdrop-blur-[30px] shadow-[rgba(149,157,165,0.2)_0px_8px_24px] lg:px-4 lg:py-0"
+  class="sticky z-10000 w-full bg-primary px-4 py-3 shadow-[rgba(149,157,165,0.2)_0px_8px_24px] backdrop-blur-[30px] lg:px-4 lg:py-0"
   style="font-family: 'Poppins', sans-serif;"
   {...props}
 >
   <div
-    class="cs-container max-w-7xl mx-auto flex justify-end items-center gap-6 lg:justify-start"
+    class="cs-container mx-auto flex max-w-7xl items-center justify-end gap-0 md:gap-6 lg:justify-start"
   >
     <!-- Logo -->
     <a
       href="/"
-      class="cs-logo mr-auto flex justify-center items-center w-full max-w-36.5 h-full lg:w-[18.4%] lg:max-w-87.5 lg:h-16.25 z-100"
+      class="cs-logo z-100 mr-auto flex h-full w-full max-w-36.5 items-center justify-center lg:h-16.25 lg:w-[18.4%] lg:max-w-87.5"
       aria-label="back to home"
     >
       <Image
         src={MainLogo}
         alt="Main logo massage"
-        class="px-2 drop-shadow-md max-w-[100px] w-full h-full object-contain object-left"
+        class="h-full w-full max-w-[100px] object-contain object-left px-2 drop-shadow-md"
       />
     </a>
 
     <!-- Navigation -->
-    <nav class="cs-nav" role="navigation">
+    <nav class="cs-nav flex items-center gap-3 lg:gap-4" role="navigation">
       <!-- Mobile Nav Toggle -->
       <button
-        class="cs-toggle w-11 h-11 ml-auto bg-transparent border-none rounded flex justify-center items-center lg:hidden"
+        class="cs-toggle order-2 ml-auto flex h-11 w-11 items-center justify-center rounded border-none bg-transparent lg:order-1 lg:hidden"
         id="mobile-menu-toggle"
         aria-expanded="false"
         aria-controls="cs-expanded-ul"
         aria-label="Toggle mobile menu."
       >
-        <div class="cs-box w-6 h-3.5 relative" aria-hidden="true">
+        <div class="cs-box relative h-3.5 w-6" aria-hidden="true">
           <span class="cs-line cs-line1 absolute left-1/2 -translate-x-1/2"
           ></span>
           <span class="cs-line cs-line2 absolute left-1/2 -translate-x-1/2"
@@ -59,27 +59,34 @@ const props = Astro.props as Props;
       </button>
 
       <!-- Navigation Items -->
+      <!-- overflow-hidden -->
       <div
-        class="cs-ul-wrapper fixed top-full right-0 h-screen bg-white shadow-[inset_rgba(0,0,0,0.2)_0px_8px_24px] overflow-hidden lg:relative lg:top-0 lg:h-auto lg:bg-transparent lg:shadow-none lg:opacity-100 lg:visible lg:transform-none"
+        class:list={[
+          "cs-ul-wrapper fixed top-full right-0 h-screen bg-primary shadow-[inset_rgba(0,0,0,0.2)_0px_8px_24px]",
+          "lg:visible lg:relative lg:top-0 lg:h-auto lg:transform-none lg:bg-transparent lg:opacity-100 lg:shadow-none",
+        ]}
       >
         <ul
           id="cs-expanded-ul"
-          class="cs-ul w-auto min-w-[40%] h-[65vh] m-0 pt-12 pr-10 pb-8 pl-[4.375rem] flex flex-col justify-start items-end gap-5 overflow-scroll lg:w-full lg:h-auto lg:p-0 lg:flex-row lg:justify-start lg:items-center lg:gap-6 lg:overflow-visible"
+          class="cs-ul m-0 flex h-[65vh] w-auto min-w-[40%] flex-col items-end justify-start gap-5 overflow-scroll pt-12 pr-10 pb-8 pl-[4.375rem] lg:h-auto lg:w-full lg:flex-row lg:items-center lg:justify-start lg:gap-6 lg:overflow-visible lg:p-0"
         >
           {
             navData.map((entry) => (
               <li
                 class:list={[
-                  "cs-li w-full text-right opacity-0 lg:list-none lg:py-8 lg:flex-none lg:opacity-100 lg:text-left lg:w-auto",
+                  "cs-li group w-full text-right opacity-0 lg:w-auto lg:flex-none lg:list-none lg:py-8 lg:text-left lg:opacity-100",
                   { "cs-dropdown relative": entry.children?.length > 0 },
                 ]}
               >
                 {entry.children?.length > 0 ? (
-                  <div class="block relative lg:contents">
+                  <div class="relative block lg:contents">
                     <a
                       href={entry.url}
                       class:list={[
-                        "cs-li-link inline-block text-base leading-tight no-underline rounded-full bg-orange-50 pr-8 pl-3 py-1 text-gray-950 hover:bg-orange-100 transition-colors lg:text-sm lg:pr-3 lg:block",
+                        "cs-li-link relative inline-block rounded-full bg-primary py-1 pr-8 pl-2 text-base leading-tight text-primary-foreground no-underline transition-colors",
+                        "lg:block lg:px-2 before:lg:block",
+                        "before:absolute before:bottom-0.5 before:left-0 before:hidden before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-accent before:opacity-100 before:transition-transform before:duration-300",
+                        "group-hover:before:scale-x-100 hover:before:scale-x-100",
                         {
                           "cs-active bg-orange-200 text-gray-50":
                             Astro.url.pathname === entry.url,
@@ -95,7 +102,7 @@ const props = Astro.props as Props;
                       aria-expanded="false"
                       aria-controls={`submenu-${entry.key}`}
                       class:list={[
-                        "submenu-btn block z-10 absolute right-0 top-1/2 -translate-y-1/2 h-full rounded-full rounded-tl-none rounded-bl-none bg-orange-100 px-1 py-1 text-gray-950 hover:bg-orange-100 transition-colors lg:hidden",
+                        "submenu-btn absolute top-1/2 right-0 z-10 block h-full -translate-y-1/2 rounded-full rounded-tl-none rounded-bl-none bg-accent px-1 py-1 text-accent-foreground transition-colors hover:bg-orange-100 lg:hidden",
                         { "cs-active": Astro.url.pathname.includes(entry.url) },
                       ]}
                     >
@@ -111,7 +118,10 @@ const props = Astro.props as Props;
                   <a
                     href={entry.url}
                     class:list={[
-                      "cs-li-link inline-block text-base leading-tight no-underline rounded-full bg-orange-50 px-3 py-1 text-gray-950 hover:bg-orange-100 transition-colors lg:text-sm lg:block",
+                      "cs-li-link relative inline-block overflow-clip rounded-full bg-primary px-2 py-1 text-base leading-tight text-primary-foreground no-underline transition-colors",
+                      "lg:block",
+                      "before:absolute before:bottom-0.5 before:left-0 before:block before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-accent before:opacity-100 before:transition-transform before:duration-300",
+                      "hover:before:scale-x-100",
                       {
                         "cs-active bg-orange-200 text-gray-50":
                           Astro.url.pathname === entry.url,
@@ -128,13 +138,18 @@ const props = Astro.props as Props;
                 {entry.children?.length > 0 && (
                   <ul
                     id={`submenu-${entry.key}`}
-                    class="cs-drop-ul h-0 m-0 px-6 py-0 bg-emerald-200/75 rounded-xl border border-emerald-300 flex flex-col justify-start items-end gap-3 overflow-hidden opacity-0 invisible lg:min-w-[12.5rem] lg:m-0 lg:p-0 lg:bg-white lg:shadow-[rgba(149,157,165,0.2)_0px_10px_16px] lg:border-b-[5px] lg:border-b-emerald-300 lg:border-x-0 lg:border-t-0 lg:absolute lg:top-full lg:z-[-100] lg:rounded-xl"
+                    class:list={[
+                      "cs-drop-ul m-0 flex flex-col items-end justify-start gap-3 overflow-hidden border border-accent-secondary bg-accent px-6 py-0",
+                      "lg:absolute lg:top-full lg:m-0 lg:min-w-50 lg:border-x-0 lg:border-t-0 lg:border-b-emerald-300 lg:bg-white lg:p-0 lg:shadow-[rgba(149,157,165,0.2)_0px_10px_16px]",
+                      "invisible h-0 opacity-0 lg:z-[-100] lg:border-b-0",
+                      "group-hover:visible group-hover:h-auto group-hover:opacity-100 group-hover:lg:z-100 group-hover:lg:border-b-[5px]",
+                    ]}
                   >
                     {entry.children.map((child) => (
-                      <li class="cs-drop-li text-right list-none w-full h-auto opacity-0 lg:text-base lg:no-underline lg:block">
+                      <li class="cs-drop-li h-auto w-full list-none opacity-0 lg:block lg:text-base lg:no-underline">
                         <a
                           href={child.url}
-                          class="cs-li-link cs-drop-link text-sm leading-tight whitespace-nowrap text-gray-950 hover:bg-orange-100 transition-colors lg:text-base lg:leading-normal lg:w-full lg:box-border lg:p-3 lg:text-black lg:block lg:hover:bg-gray-100"
+                          class="cs-li-link cs-drop-link text-sm leading-tight whitespace-nowrap text-accent-foreground transition-colors hover:bg-orange-100 lg:box-border lg:block lg:w-full lg:p-3 lg:text-base lg:leading-normal lg:text-black lg:hover:bg-gray-100"
                           aria-current={
                             Astro.url.pathname === child.url
                               ? "page"
@@ -152,41 +167,21 @@ const props = Astro.props as Props;
           }
         </ul>
       </div>
+
+      <a
+        href="#"
+        class:list={[
+          "relative inline-block overflow-clip rounded-lg bg-primary px-2 py-4 text-base leading-tight whitespace-nowrap text-accent-foreground uppercase no-underline transition-colors",
+          "before:absolute before:inset-0 before:bg-accent before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-full",
+          "lg:px-8",
+        ]}
+        aria-current="page"
+      >
+        <span class="relative z-100">Hire Now</span>
+      </a>
     </nav>
   </div>
 </header>
-
-<!-- Popup Overlay -->
-<div
-  id="popup"
-  class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[9999] hidden"
->
-  <div
-    class="p-6 rounded-xl shadow-xl w-11/12 max-w-md"
-    style="background: rgba(255, 255, 255, 0.3);"
-  >
-    <div class="flex flex-col gap-4">
-      <a
-        href="https://www.massagebook.com/therapists/StoneMassage?src=external"
-        class="cs-button-solid rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem]"
-      >
-        Book In-Clinic Appointment (Online)
-      </a>
-      <a
-        href="tel:587-938-0458"
-        class="cs-button-solid rounded-full text-center text-white leading-snug p-4 text-[.6rem] md:text-[1rem]"
-      >
-        Call to Book In-Home Massage
-      </a>
-      <button
-        onclick="document.getElementById('popup').classList.add('hidden')"
-        class="text-sm text-white-500 hover:text-white mt-2"
-      >
-        Close
-      </button>
-    </div>
-  </div>
-</div>
 
 <script>
   document.addEventListener("click", (e) => {
