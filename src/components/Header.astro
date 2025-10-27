@@ -36,7 +36,7 @@ const props = Astro.props as Props;
     </a>
 
     <!-- Navigation -->
-    <nav class="cs-nav flex items-center gap-3 lg:gap-4" role="navigation">
+    <nav class="cs-nav flex items-center gap-6 lg:gap-8" role="navigation">
       <!-- Mobile Nav Toggle -->
       <button
         class="cs-toggle order-2 ml-auto flex h-11 w-11 items-center justify-center rounded border-none bg-transparent lg:order-1 lg:hidden"
@@ -65,13 +65,13 @@ const props = Astro.props as Props;
       >
         <ul
           id="cs-expanded-ul"
-          class="cs-ul m-0 flex h-[65vh] w-auto min-w-[40%] flex-col items-end justify-start gap-5 overflow-scroll pt-12 pr-10 pb-8 pl-[4.375rem] lg:h-auto lg:w-full lg:flex-row lg:items-center lg:justify-start lg:gap-6 lg:overflow-visible lg:p-0"
+          class="cs-ul m-0 flex h-[65vh] w-auto min-w-[40%] flex-col items-end justify-start gap-8 overflow-scroll pt-12 pr-10 pb-8 pl-17.5 lg:h-auto lg:w-full lg:flex-row lg:items-center lg:justify-start lg:gap-6 lg:overflow-visible lg:p-0"
         >
           {
             navData.map((entry) => (
               <li
                 class:list={[
-                  "cs-li group w-full text-right opacity-0 lg:w-auto lg:flex-none lg:list-none lg:py-7 lg:text-left lg:opacity-100",
+                  "cs-li group w-full text-right opacity-0 lg:w-auto lg:flex-none lg:list-none lg:py-7.5 lg:text-left lg:opacity-100",
                   { "cs-dropdown relative": entry.children?.length > 0 },
                 ]}
               >
@@ -171,7 +171,7 @@ const props = Astro.props as Props;
       <a
         href="#"
         class:list={[
-          "relative inline-block overflow-clip rounded-lg bg-primary px-2 py-4 font-roboto text-base leading-tight font-bold whitespace-nowrap text-accent-foreground uppercase no-underline transition-colors",
+          "relative inline-block w-full max-w-[172px] overflow-clip rounded-lg bg-primary px-2 py-[18px] text-center font-roboto text-sm leading-tight font-bold whitespace-nowrap text-accent-foreground uppercase no-underline transition-colors md:text-base lg:ml-8",
           "before:absolute before:inset-0 before:bg-accent before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-[105%]",
           "lg:px-8",
         ]}
