@@ -2,14 +2,18 @@
 import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
 import heroBg from "@assets/images/bg/hero-bg.png";
+import heroBlur from "@assets/images/bg/hero-bg-blur.webp";
 
 import { Picture } from "astro:assets";
+import { getBlurStyle } from "@utils/imageOptimization";
+
+const heroBlurStyle = getBlurStyle(heroBlur.src);
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
+<Layout preloadedImage={heroBg}>
   <!-- ============================================ -->
   <!--                    Hero                      -->
   <!-- ============================================ -->
@@ -17,24 +21,41 @@ import { Picture } from "astro:assets";
   <section id="hero-1426">
     <div class="cs-container">
       <div class="cs-content">
-        <h1 class="cs-title font-bebas">
+        <h1
+          class="relative w-full max-w-[913px] text-center font-bebas text-[clamp(2.4375rem,6.4vw,6rem)] leading-[120%] font-normal tracking-normal text-pretty text-primary"
+        >
           Hire the Top 1% of Virtual Assistants Who Build Businesses
         </h1>
-        <p class="cs-text font-roboto">
+
+        <p
+          class="max-w-[clamp(29rem, 60vw, 38.785rem)] mx-auto mt-0 mb-8 w-full text-center font-roboto text-[clamp(1rem,1.95vw,1.25rem)] leading-[1.5em] font-normal tracking-normal text-secondary"
+        >
           Hire business-building virtual assistants in 21 days or less and save
           up to 80% on payroll.
         </p>
         <div class="cs-button-group">
-          <a href="" class="cs-button-solid cs-button1">Hire now</a>
+          <a
+            href=""
+            class:list={[
+              "relative m-0 inline-block min-w-50 overflow-clip rounded-xl border-2 border-primary bg-transparent px-6 py-0 text-center leading-[clamp(2.875rem,5.5vw,3.5rem)] font-bold text-primary decoration-0 transition-colors duration-300 hover:text-accent-foreground",
+              "before:absolute before:-inset-1 before:-translate-x-51 before:rounded-xl before:bg-accent before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-0",
+            ]}
+          >
+            <span class="relative z-100">Hire Now</span>
+          </a>
         </div>
       </div>
     </div>
 
     <Picture
       src={heroBg}
+      style={heroBlurStyle}
+      class:list={"absolute inset-0 object-cover"}
       formats={["avif", "webp"]}
       alt="blurred circle side by side"
-      pictureAttributes={{ class: "cs-background " }}
+      pictureAttributes={{
+        class: "h-full w-full block absolute top-0 left-0 -z-2",
+      }}
     />
   </section>
 </Layout>
@@ -56,37 +77,6 @@ import { Picture } from "astro:assets";
       position: relative;
       z-index: 1;
     }
-    #hero-1426 .cs-background {
-      width: 100%;
-      height: 100%;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -2;
-    }
-    #hero-1426 .cs-background:before {
-      /* Overlay */
-      content: "";
-      width: 100%;
-      height: 100%;
-      opacity: 0.48;
-      position: absolute;
-      display: block;
-      top: 0;
-      left: 0;
-      z-index: 1;
-      /* prevents the cursor from interacting with it */
-      pointer-events: none;
-    }
-    #hero-1426 .cs-background img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
     #hero-1426 .cs-container {
       width: 100%;
       max-width: 80rem;
@@ -101,71 +91,11 @@ import { Picture } from "astro:assets";
       width: 100%;
       max-width: 39.375rem;
     }
-    #hero-1426 .cs-title {
-      /* 39px - 61px */
-      font-size: clamp(2.4375rem, 6.4vw, 3.8125rem);
-      font-weight: 700;
-      line-height: 1.2em;
-      text-align: center;
-      max-width: 51.8125rem;
-      color: var(--color-primary);
-      position: relative;
-    }
-    #hero-1426 .cs-text {
-      /* 16px - 20px */
-      font-size: clamp(1rem, 1.95vw, 1.25rem);
-      line-height: 1.5em;
-      text-align: center;
-      width: 100%;
-      /* 464px - 622px */
-      max-width: clamp(29rem, 60vw, 38.785rem);
-      margin: 0 auto 0;
-      margin-bottom: 2rem;
-      color: var(--color-primary);
-    }
     #hero-1426 .cs-button-group {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 0.5rem;
-    }
-    #hero-1426 .cs-button-solid {
-      font-size: 1rem;
-      /* 46px - 56px */
-      line-height: clamp(2.875rem, 5.5vw, 3.5rem);
-      text-decoration: none;
-      font-weight: 700;
-      text-align: center;
-      margin: 0;
-      color: #1a1a1a;
-      min-width: 12.5rem;
-      padding: 0 1.5rem;
-      background-color: var(--primary);
-      border-radius: 0.5rem;
-      display: inline-block;
-      position: relative;
-      z-index: 1;
-      /* prevents padding from adding to the width */
-      box-sizing: border-box;
-    }
-    #hero-1426 .cs-button-solid:before {
-      content: "";
-      position: absolute;
-      height: 100%;
-      width: 0%;
-      background: #000;
-      opacity: 1;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      border-radius: 0.25rem;
-      transition: width 0.3s;
-    }
-    #hero-1426 .cs-button-solid:hover:before {
-      width: 100%;
-    }
-    #hero-1426 .cs-button1 {
-      background-color: var(--secondary);
     }
   }
   /* Dark Mode */
