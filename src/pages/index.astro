@@ -17,8 +17,10 @@ const heroBlurStyle = getBlurStyle(heroBlur.src);
   <!-- ============================================ -->
   <!--                    Hero                      -->
   <!-- ============================================ -->
-
-  <section id="hero-1426">
+  <section
+    id="hero-1426"
+    class="relative z-1 overflow-clip px-4 pt-38 pb-[clamp(12.5rem,25.95vw,18.75em)] text-center"
+  >
     <div class="cs-container">
       <div class="cs-content">
         <h1
@@ -50,7 +52,7 @@ const heroBlurStyle = getBlurStyle(heroBlur.src);
     <Picture
       src={heroBg}
       style={heroBlurStyle}
-      class:list={"absolute inset-0 object-cover"}
+      class:list={"absolute top-1/2 -translate-y-1/2 object-cover lg:inset-0 lg:translate-0"}
       formats={["avif", "webp"]}
       alt="blurred circle side by side"
       pictureAttributes={{
@@ -67,16 +69,6 @@ const heroBlurStyle = getBlurStyle(heroBlur.src);
 
   /* Mobile - 360px */
   @media only screen and (min-width: 0rem) {
-    #hero-1426 {
-      /* Centers button */
-      text-align: center;
-      /* 200px - 300px - leaving extra space for the navigation */
-      padding: clamp(12.5rem, 25.95vw, 18.75em) 1rem;
-      /* prevents the topper line from causing an overflow */
-      overflow: hidden;
-      position: relative;
-      z-index: 1;
-    }
     #hero-1426 .cs-container {
       width: 100%;
       max-width: 80rem;
