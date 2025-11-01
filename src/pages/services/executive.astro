@@ -1,0 +1,172 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "src/layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+import ServiceDetail from "@components/ServiceDetail.astro";
+import ServiceHero, {
+  type ServiceFeature,
+} from "@components/ServiceHero.astro";
+import Mail from "@components/Icons/Mail.svg";
+import Calendar from "@components/Icons/Calendar.svg";
+import Filter from "@components/Icons/Filter.svg";
+import Shield from "@components/Icons/Shield.svg";
+import Drafting from "@components/Icons/Drafting.svg";
+import StoreBell from "@components/Icons/StoreBell.svg";
+import ServiceCard from "@components/ServiceCard.astro";
+import CalendarSvc from "@components/ServiceIcon/CalendarSvc.svg";
+import AppSvc from "@components/ServiceIcon/AppSvc.svg";
+import CheckboxSvc from "@components/ServiceIcon/CheckboxSvc.svg";
+
+import heroBg from "@assets/images/bg/hero-bg.png";
+import ApplicationLogosCarousel from "@components/ApplicationLogosCarousel.astro";
+
+const title = "Executive Assistant";
+const description = `
+        Let our virtual assistants handle the tasks that slow you down, so you
+        can focus on strategy, growth, and the things you love most. With
+        reliable support and seamless execution, we make running your business
+        easier, smarter, and stress-free.
+`;
+
+const serviceFeature: ServiceFeature = {
+  title,
+  description,
+  features: [
+    {
+      Icon: Mail,
+      description: "Calendar and email management",
+    },
+    {
+      Icon: Shield,
+      description: "Travel arrangements and reservations",
+    },
+    {
+      Icon: Calendar,
+      description: "Meeting scheduling and follow-ups",
+    },
+    {
+      Icon: Drafting,
+      description: "Drafting reports and internal memos",
+    },
+    {
+      Icon: Filter,
+      description: "Inbox triage and priority filtering",
+    },
+    {
+      Icon: StoreBell,
+      description: "Managing to-do lists and reminders",
+    },
+  ],
+};
+---
+
+<Layout preloadedImage={heroBg}>
+  <ServiceHero serviceFeature={serviceFeature} />
+  <ServiceDetail title="Keep your customers happy, even while you sleep.">
+    <div class="service-grid w-full">
+      <!-- max-w-136  -->
+      <ServiceCard
+        class="w-full px-5 xl:px-10 2xl:px-15"
+        style="grid-area:calendar"
+        id="calendar-service"
+      >
+        <Fragment slot="title">
+          Organize and maintain your
+          <br />
+          calendar with precision
+        </Fragment>
+        <Fragment slot="content">
+          <CalendarSvc class="aspect-video h-auto w-62.5 xs:w-75 sm:w-auto" />
+        </Fragment>
+      </ServiceCard>
+
+      <ServiceCard
+        class="w-full px-5 xl:px-10 2xl:px-15"
+        style="grid-area:app"
+        id="app-service"
+      >
+        <Fragment slot="title">
+          Manage your inbox and handle
+          <br />
+          important communications
+        </Fragment>
+        <Fragment slot="content">
+          <AppSvc class="aspect-video h-auto w-62.5 xs:w-75 sm:w-auto" />
+        </Fragment>
+      </ServiceCard>
+
+      <ServiceCard
+        class="w-full px-5 xl:px-10 2xl:px-15"
+        style="grid-area:checkbox"
+        id="checkbox-service"
+      >
+        <Fragment slot="title">
+          Organize and maintain your
+          <br />
+          calendar with precision
+        </Fragment>
+        <Fragment slot="content">
+          <CheckboxSvc class="aspect-video h-auto w-62.5 xs:w-75 sm:w-auto" />
+        </Fragment>
+      </ServiceCard>
+    </div>
+  </ServiceDetail>
+
+  <ApplicationLogosCarousel />
+</Layout>
+
+<style>
+  .service-grid {
+    display: grid;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    place-content: center;
+    gap: 1.5rem;
+    grid-template-areas:
+      "app"
+      "calendar"
+      "checkbox";
+  }
+
+  @media (width <= 48rem) {
+    #checkbox-service,
+    #calendar-service,
+    #app-service {
+      background-color: #ededed !important;
+    }
+  }
+  @media (width >= 60rem) {
+    .service-grid {
+      grid-template-columns: repeat(2, auto);
+      grid-template-rows: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      grid-template-areas:
+        "app calendar"
+        "app checkbox";
+    }
+    #app-service {
+      background-color: #ededed;
+    }
+  }
+  @media (width >= 90rem) {
+    .service-grid {
+      grid-template-columns: repeat(3, auto);
+      grid-template-rows: 1fr auto 5.9375rem;
+      place-content: center;
+      grid-template-areas:
+        ". app ."
+        "calendar app checkbox"
+        "calendar . checkbox";
+    }
+    #calendar-service {
+      background-color: #ededed;
+    }
+
+    /* bg-[#EDEDED]!  */
+  }
+</style>

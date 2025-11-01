@@ -1,0 +1,172 @@
+/* CODESTITCH STYLES, RESET, HEADER/NAVIGATION AND FOOTER */
+/*-- -------------------------- -->
+<---        Core Styles         -->
+<--- -------------------------- -*/
+/* CodeStitch Root and Helpers */
+@media only screen and (min-width: 0rem) {
+  :root {
+    --primary: #4594f2;
+    --primaryLight: #000000;
+    --secondary: #000000;
+    --secondaryLight: #000000;
+    --headerColor: #000000;
+    --bodyTextColor: #000000;
+    --bodyTextColorWhite: #fafafa;
+    --bodybg: #f9f9f9;
+    /* 13px - 16px */
+    --topperFontSize: clamp(0.8125rem, 1.6vw, 1rem);
+    /* 31px - 49px */
+    --headerFontSize: clamp(1.9375rem, 3.9vw, 3.0625rem);
+    --bodyFontSize: 1.1rem;
+    /* 60px - 100px top and bottom */
+    --sectionPadding: clamp(3rem, 7.82vw, 6.25rem) 1rem;
+    --cardRounded: 24px;
+    --buttonRounded: 12px;
+  }
+  .cs-topper {
+    display: block;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: var(--topperFontSize);
+    line-height: 1.2em;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: inherit;
+  }
+  .cs-title {
+    position: relative;
+    margin: 0 0 1rem 0;
+    max-width: 43.75rem;
+    font-size: var(--headerFontSize);
+    line-height: 1.2em;
+    font-weight: 900;
+    color: var(--headerColor);
+    text-align: inherit;
+  }
+  .cs-text {
+    margin: 0;
+    max-width: 40.625rem;
+    width: 100%;
+    font-size: var(--bodyFontSize);
+    line-height: 1.5em;
+    color: var(--bodyTextColor);
+    text-align: center;
+  }
+  .cs-button-solid {
+    z-index: 1;
+    position: relative;
+    display: inline-block;
+    background-color: var(--primary);
+    width: auto;
+    padding: 0 1.875rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 1rem;
+    line-height: 3.125em;
+    font-weight: bold;
+    color: #000;
+    transition: color 0.3s;
+    transition-delay: 0.1s;
+    text-align: center;
+    border-radius: 5rem;
+  }
+  .cs-button-solid:before {
+    border-radius: 5rem;
+  }
+  .cs-button-solid:hover {
+    color: #fff;
+  }
+  .cs-button-solid:hover:before {
+    width: 100%;
+  }
+  .cs-button-solid:before {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    opacity: 1;
+    display: block;
+    background-color: #000;
+    height: 100%;
+    width: 0;
+    transition: width 0.3s;
+  }
+  .cs-hide-on-mobile {
+    display: none;
+  }
+}
+/* Desktop - 1024px */
+@media only screen and (min-width: 64rem) {
+  .cs-hide-on-mobile {
+    display: block;
+  }
+  .cs-hide-on-desktop {
+    display: none;
+  }
+}
+/* Fonts and general styles */
+@media only screen and (min-width: 0rem) {
+  .skip {
+    z-index: -1111111;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  /* roboto-regular - latin */
+  @font-face {
+    font-style: normal;
+    font-family: "Montserrat";
+    font-weight: 400;
+    font-display: swap;
+    src:
+      local(""),
+      url("/assets/fonts/montserrat-v26-latin-regular.woff2") format("woff2"),
+      /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url("/assets/fonts/roboto-v29-latin-regular.woff") format("woff");
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* roboto-700 - latin */
+  @font-face {
+    font-style: normal;
+    font-family: "Montserrat";
+    font-weight: 700;
+    font-display: swap;
+    src:
+      local(""),
+      url("/assets/fonts/montserrat-v26-latin-700.woff2") format("woff2"),
+      /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url("/assets/fonts/roboto-v29-latin-700.woff") format("woff");
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+  /* roboto-900 - latin */
+  @font-face {
+    font-style: normal;
+    font-family: "Montserrat";
+    font-weight: 900;
+    font-display: swap;
+    src:
+      local(""),
+      url("/assets/fonts/montserrat-v26-latin-900.woff2") format("woff2"),
+      /* Chrome 26+, Opera 23+, Firefox 39+ */
+        url("/assets/fonts/roboto-v29-latin-900.woff") format("woff");
+    /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+  }
+}
+/* Reset Margins */
+@media only screen and (min-width: 1024px) {
+  body,
+  html {
+    margin: 0;
+    padding: 0;
+  }
+}
+/* Scale full website with the viewport width */
+@media only screen and (min-width: 3000px) {
+  body,
+  html {
+    font-size: 0.55vw;
+  }
+}

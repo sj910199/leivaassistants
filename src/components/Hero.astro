@@ -1,0 +1,36 @@
+---
+import HireBtn from "@components/HireBtn.astro";
+import { Image } from "astro:assets";
+import heroBg from "@assets/images/bg/hero-bg.png";
+---
+
+<section
+  id="hero-1426"
+  class="relative z-1 overflow-x-clip px-4 pt-38 pb-[clamp(7.5rem,25.95vw,9em)] text-center"
+>
+  <div
+    class="w-fll m-auto flex max-w-360 flex-wrap items-center justify-center gap-12"
+  >
+    <div class="w-full max-w-228">
+      <h1
+        class="relative w-full text-center font-bebas text-[clamp(2.4375rem,6.4vw,6rem)] leading-[120%] font-normal tracking-normal text-pretty text-primary"
+      >
+        Hire the Top 1% of <br /> Virtual Assistants Who <br /> Build Businesses
+      </h1>
+
+      <p
+        class="mx-auto mt-0 mb-8 w-full max-w-160 text-center font-roboto text-[clamp(1rem,1.95vw,1.25rem)] leading-[1.5em] font-normal tracking-normal text-secondary"
+      >
+        Hire business-building virtual assistants in 21 days or less and save up
+        to 80% on payroll.
+      </p>
+      <HireBtn />
+    </div>
+  </div>
+
+  <Image
+    src={heroBg}
+    alt={"blur for bg"}
+    class={"absolute inset-0 w-full h-full -z-1  "}
+  />
+</section>

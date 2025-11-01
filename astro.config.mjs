@@ -1,20 +1,17 @@
 // @ts-check
-import { defineConfig, passthroughImageService } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from "@tailwindcss/vite";
 
-import sitemap from '@astrojs/sitemap';
+import sitemap from "@astrojs/sitemap";
 
-import icon from 'astro-icon';
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
-  site:"https://leivaassistants.netlify.app/",
+  site: "https://leivaassistants.netlify.app/",
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
   },
   integrations: [sitemap(), icon()],
-  image:{
-    service: passthroughImageService()
-  }
 });

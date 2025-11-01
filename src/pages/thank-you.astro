@@ -1,0 +1,213 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+import heroBg from "@assets/images/bg/hero-bg.png";
+import Hero from "@components/Hero.astro";
+import s3Bg from "@assets/images/bg/section-bg-3.png";
+import s3Blur from "@assets/images/bg/section-bg-3-blur.png";
+import s4Bg from "@assets/images/bg/section-bg-4.png";
+import ImageWithBlur from "@components/ImageWithBlur.astro";
+
+import aLister from "@assets/images/client-logos/a-lister.png";
+import aListerBlur from "@assets/images/client-logos/a-lister-blur.png";
+import expLogo from "@assets/images/client-logos/exp-logo.png";
+import expLogoBlur from "@assets/images/client-logos/exp-logo-blur.png";
+import riseupLogo from "@assets/images/client-logos/riseup-logo.jpg";
+import riseupLogoBlur from "@assets/images/client-logos/riseup-logo-blur.jpg";
+
+interface reviewCard {
+  src: ImageMetadata;
+  blurSrc: ImageMetadata;
+  alt: string;
+  name: string;
+  position: string;
+  testimonial: string;
+  rating: number;
+}
+
+const reviewCards: reviewCard[] = [
+  {
+    src: aLister,
+    blurSrc: aListerBlur,
+    alt: "Alister",
+    name: "Alister",
+    position: "Founder of A-List Media",
+    testimonial: `
+Gen from Leiva Assistants has been an incredible addition to our team at A-List Media. From day one, she’s been proactive, professional, and a pleasure to work with — handling both client-facing and backend tasks with ease.
+Her communication skills and positive attitude make her a standout partner. I highly recommend Gen and the Leiva Assistants team to anyone looking for reliable, high-quality support.
+      `,
+    rating: 5,
+  },
+  {
+    src: expLogo,
+    blurSrc: expLogoBlur,
+    alt: "Exp Realty",
+    name: "Matthew",
+    position: "eXp Realty",
+    testimonial: `
+Working with Leiva Assistants has made a big difference in my business. They helped with my email marketing, content, and admin work — they’re organized, reliable, and make everything run smoother. Hiring a VA truly gave me back my time and let me focus on my clients again
+      `,
+    rating: 5,
+  },
+  {
+    src: riseupLogo,
+    blurSrc: riseupLogoBlur,
+    alt: " RiseUp Community",
+    name: "Max",
+    position: "Founder of RiseUp Community",
+    testimonial: `
+Leiva Assistants, especially Gen and Dominic, have been a huge help in growing my brand, RiseUp Community.
+They’ve created amazing graphics for our Instagram and School of Rise, helped generate leads, and managed a lot of the behind-the-scenes work that keeps things running smoothly.
+They’re fast, reliable, and super easy to work with — I barely have to check in because they just get things done. For the quality of work and the value, I couldn’t recommend Leiva Assistants more
+      `,
+    rating: 5,
+  },
+];
+const gridLayout = [
+  // Row 1
+  { kind: "logo", index: 0, pos: "md:col-start-1 md:row-start-1" }, // A‑Lister
+  { kind: "review", index: 2, pos: "md:col-start-2 md:row-start-1" }, // RiseUp review
+  { kind: "logo", index: 2, pos: "md:col-start-3 md:row-start-1" }, // RiseUp
+  // Row 2
+  { kind: "review", index: 0, pos: "md:col-start-1 md:row-start-2" }, // A‑Lister review
+  { kind: "logo", index: 1, pos: "md:col-start-2 md:row-start-2" }, // eXp
+  { kind: "review", index: 1, pos: "md:col-start-3 md:row-start-2" }, // eXp review
+];
+
+// Soft backgrounds per brand (tweak as needed)
+const logoBg = ["bg-[#F3CDEB]", "bg-[#E6E6E6]", "bg-[#CFD3F6]"];
+---
+
+<Layout preloadedImage={heroBg} renderNav={false}>
+  <!-- ============================================ -->
+  <!--                    Hero                      -->
+  <!-- ============================================ -->
+  <Hero />
+
+  <section class="relative z-1 overflow-clip px-4 py-section">
+    <ImageWithBlur
+      src={s3Bg}
+      alt={"blur for bg"}
+      blurSrc={s3Blur.src}
+      class={"absolute inset-0 w-full h-full -z-1  "}
+    />
+    <div
+      class="mx-auto aspect-video max-w-323.25 rounded-secondary bg-[#d9d9d9] p-8"
+    >
+      <iframe
+        src="https://www.youtube.com/embed/voW54CMiBr4?autoplay=1&loop=0&playlist=voW54CMiBr4&controls=1&mute=0"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        class="h-full w-full rounded-secondary"
+        title="Thanks you and see you"></iframe>
+    </div>
+  </section>
+
+  <section id="use-case-section" class="relative px-4 py-section">
+    <Image
+      src={s4Bg}
+      alt={"blur for bg"}
+      class={"absolute inset-0 w-full h-full -z-1  "}
+    />
+
+    <div
+      class="mx-auto flex w-full max-w-7xl flex-col items-center gap-12 lg:flex-row lg:items-start lg:justify-between"
+    >
+      <!-- Left content -->
+      <div
+        class="flex w-full max-w-md flex-col items-center text-left lg:max-w-76.25 lg:items-start"
+      >
+        <span
+          class="mb-6.25 block font-roboto text-base leading-h font-bold tracking-widest text-accent uppercase"
+        >
+          testimonials
+        </span>
+
+        <!-- 3. Header with text gradient -->
+        <h2
+          class="m-0 mb-4 bg-linear-to-r from-primary to-accent bg-clip-text text-center font-roboto text-[clamp(2.5rem,5vw,3.0625rem)] leading-h font-bold tracking-normal text-transparent md:text-nowrap lg:text-left"
+        >
+          What Our
+          <br class="hidden md:inline" />
+          Clients Say
+        </h2>
+
+        <p
+          class="mx-auto mt-0 mb-8 w-full max-w-160 text-center font-roboto text-[clamp(1rem,1.95vw,1.25rem)] leading-[1.5em] font-normal tracking-normal text-secondary lg:text-left"
+        >
+          Orci eu lobortis elementum nibh tellus. Vulputate eu scelerisque felis
+          imperdiet proin fermentum leo vel. Luctus accumsan tortor.
+        </p>
+      </div>
+      <div class="w-full lg:max-w-[860px]">
+        <div
+          class="grid grid-cols-1 gap-8 md:[grid-auto-rows:minmax(0,1fr)] md:grid-cols-3"
+        >
+          {
+            gridLayout.map((slot, i) => {
+              const item = reviewCards[slot.index];
+              // md:h-[320px]
+              if (slot.kind === "logo") {
+                return (
+                  <div
+                    class={`rounded-2xl ${logoBg[slot.index]} flex h-[280px] items-center justify-center p-6 md:h-full ${slot.pos}`}
+                  >
+                    <ImageWithBlur
+                      src={item.src}
+                      blurSrc={item.blurSrc.src}
+                      alt={item.alt}
+                      class="max-h-full max-w-full object-contain"
+                    />
+                  </div>
+                );
+              }
+
+              // Review tile
+              return (
+                <article
+                  class={`rounded-2xl bg-white/80 p-6 text-center shadow-[0_6px_20px_rgba(0,0,0,0.06)] backdrop-blur lg:bg-transparent lg:shadow-none ${slot.pos}`}
+                >
+                  {/* Stars */}
+                  <div class="mb-3 flex justify-center gap-1">
+                    {Array.from({ length: 5 }, (_, s) => (
+                      <svg
+                        class:list={[
+                          "h-4 w-5",
+                          s < item.rating
+                            ? "fill-[#FFA500] text-[#FFA500]"
+                            : "fill-gray-300 text-gray-300",
+                        ]}
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                      >
+                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                      </svg>
+                    ))}
+                  </div>
+
+                  {/* Author */}
+                  <div class="mb-3">
+                    <p class="m-0 font-roboto text-[1.25rem] leading-h font-bold text-primary">
+                      {item.name}
+                    </p>
+                    <p class="m-0 font-roboto leading-p text-[#4e4b66]">
+                      {item.position}
+                    </p>
+                  </div>
+
+                  {/* Testimonial */}
+                  <p class="m-0 font-roboto text-[clamp(0.8rem,5vw,1.5625rem)] leading-h font-bold text-primary md:line-clamp-7">
+                    "{item.testimonial}"
+                  </p>
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

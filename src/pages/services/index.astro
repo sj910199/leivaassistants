@@ -1,0 +1,141 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+
+import heroBg from "@assets/images/bg/hero-bg.png";
+import HireBtn from "@components/HireBtn.astro";
+import ApplicationLogosCarousel from "@components/ApplicationLogosCarousel.astro";
+
+interface ServiceCard {
+  title: string;
+  description: string;
+  href: string;
+}
+
+interface ServiceCard {
+  title: string;
+  description: string;
+  href: string;
+}
+
+const serviceCards: ServiceCard[] = [
+  {
+    title: "Executive Assistant",
+    description:
+      "Manage your schedule with precision so you can focus on leading.",
+    href: "/services/executive",
+  },
+  {
+    title: "Customer Support Assistant",
+    description:
+      "Deliver customer support that keeps your customers happy and loyal.",
+    href: "/services/support",
+  },
+  {
+    title: "Social Media Manager",
+    description:
+      "Build your brand online through engaging content, consistent posting, and more.",
+    href: "/services/social",
+  },
+  {
+    title: "Virtual Assistant",
+    description:
+      "Handle day-to-day tasks efficiently, freeing up your time for what matters.",
+    href: "/services/virtual",
+  },
+  {
+    title: "Administrative Assistant",
+    description:
+      "Keep operations smooth and tasks organized with expert document and task management.",
+    href: "/services/admin",
+  },
+  {
+    title: "Real Estate Assistant",
+    description: "Close deals faster with property listings to help.",
+    href: "/estate",
+  },
+];
+---
+
+<Layout preloadedImage={heroBg}>
+  <!-- ============================================ -->
+  <!--                  Services                    -->
+  <!-- ============================================ -->
+
+  <section
+    id="main-services"
+    class="relative z-1 overflow-clip px-4 py-section"
+  >
+    <div
+      class="mx-auto flex w-full max-w-176 flex-col gap-[clamp(2rem,4vw,3rem)] md:max-w-7xl"
+    >
+      <div class="max-w-195.75">
+        <span
+          class="mb-6 block text-center font-roboto text-base leading-[120%] font-bold tracking-widest text-accent-secondary uppercase md:text-left"
+        >
+          Our services
+        </span>
+
+        <!-- 3. Header with text gradient -->
+        <h2
+          class="m-0 mb-7 bg-linear-to-r from-primary to-accent bg-clip-text text-center font-roboto text-[clamp(2.5rem,5vw,3.0625rem)] leading-[120%] font-bold tracking-normal text-transparent md:text-left"
+        >
+          Scale Your Business and Simplify Your Life
+        </h2>
+
+        <p
+          class="m-0 w-full text-center font-roboto text-base leading-p text-tertiary md:text-left"
+        >
+          Let our virtual assistants handle the tasks that slow you down, so you
+          can focus on strategy, growth, and the things you love most. With
+          reliable support and seamless execution, we make running your business
+          easier, smarter, and stress-free.
+        </p>
+      </div>
+      <!-- grid-cols-[repeat(auto-fit,minmax(min(413.33px,100%),1fr))] -->
+      <!-- sm:grid-cols-2 lg:grid-cols-6 lg:grid-rows-2 -->
+
+      <div
+        class="mb-4 grid grid-cols-[repeat(auto-fit,minmax(min(310px,100%),1fr))] gap-5"
+      >
+        {
+          serviceCards.map((card) => (
+            <div class="group flex flex-col gap-4 rounded-sm bg-accent-tertiary px-7 py-10 transition-colors duration-200 hover:bg-primary">
+              <h6
+                class="font-roboto text-[clamp(1rem,5vw,1.5625rem)] font-bold text-primary transition-colors duration-200 group-hover:text-primary-foreground"
+                transition:name={card.href}
+              >
+                {card.title}
+              </h6>
+              <p class="flex-1 font-roboto leading-p text-primary transition-colors duration-200 group-hover:text-primary-foreground">
+                {card.description}
+              </p>
+              <a
+                href={card.href}
+                class="group/link inline-flex w-fit items-center gap-2 leading-p font-bold text-accent-secondary transition-colors duration-200 group-hover:text-accent hover:underline"
+              >
+                <span>Read More</span>
+
+                <Icon
+                  name="tabler:arrow-right"
+                  class="size-5 transition-transform duration-200 group-hover/link:translate-x-1"
+                />
+              </a>
+            </div>
+          ))
+        }
+      </div>
+
+      <HireBtn />
+    </div>
+
+    <Image
+      src={heroBg}
+      alt={"blur for bg"}
+      class={"absolute inset-0 w-full h-full -z-1  "}
+    />
+  </section>
+
+  <ApplicationLogosCarousel />
+</Layout>

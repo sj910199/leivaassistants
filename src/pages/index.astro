@@ -1,99 +1,511 @@
 ---
-import Welcome from "../components/Welcome.astro";
+import type { GetStaticPaths } from "astro";
 import Layout from "../layouts/Layout.astro";
+import TestimonialsCarousel from "@components/TestimonialsCarousel.astro";
+import ApplicationLogosCarousel from "@components/ApplicationLogosCarousel.astro";
+import LightBulb from "@components/Icons/Lightbulb.svg";
+import Puzzle from "@components/Icons/Puzzle.svg";
+import Gears from "@components/Icons/Gears.svg";
+import HireBtn from "@components/HireBtn.astro";
+
+import { Picture, Image } from "astro:assets";
+import { getBlurStyle } from "@utils/imageOptimization";
+import { Icon } from "astro-icon/components";
+
 import heroBg from "@assets/images/bg/hero-bg.png";
 import heroBlur from "@assets/images/bg/hero-bg-blur.webp";
+import s3Bg from "@assets/images/bg/section-bg-3.png";
+import s3Blur from "@assets/images/bg/section-bg-3-blur.png";
+import s4Bg from "@assets/images/bg/section-bg-4.png";
+import s4Blur from "@assets/images/bg/section-bg-4-blur.png";
+import s5Bg from "@assets/images/bg/section-bg-5.png";
+import s5Blur from "@assets/images/bg/section-bg-5-blur.png";
 
-import { Picture } from "astro:assets";
-import { getBlurStyle } from "@utils/imageOptimization";
+import svcImg1 from "@assets/images/ai-images/img-1.png";
+import svcImg1Blur from "@assets/images/ai-images/img-1-blur.png";
+import svcImg2 from "@assets/images/ai-images/img-2.png";
+import svcImg2Blur from "@assets/images/ai-images/img-2-blur.png";
+import svcImg3 from "@assets/images/ai-images/img-3.png";
+import svcImg3Blur from "@assets/images/ai-images/img-3-blur.png";
+import svcImg4 from "@assets/images/ai-images/img-4.png";
+import svcImg4Blur from "@assets/images/ai-images/img-4-blur.png";
+import svcImg5 from "@assets/images/ai-images/img-5.png";
+import svcImg5Blur from "@assets/images/ai-images/img-5-blur.png";
+import type { ImageMetadata } from "astro";
+import { title } from "process";
+import Hero from "@components/Hero.astro";
 
 const heroBlurStyle = getBlurStyle(heroBlur.src);
+const s3BlurStyle = getBlurStyle(s3Blur.src);
+const s4BlurStyle = getBlurStyle(s4Blur.src);
+const s5BlurStyle = getBlurStyle(s5Blur.src);
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Updated ServiceCard type to include new properties
+type ServiceCard = {
+  title: string;
+  description: string;
+  href?: string;
+  img: ImageMetadata;
+  alt: string;
+  blurImg: string;
+  gridArea: string; // for css grid placement
+  titleColor?: string; // for special title color
+};
+
+// 1. Updated data to match the new design
+const serviceCards: ServiceCard[] = [
+  {
+    title: "Streamline Your Team Communication",
+    description:
+      "Keep your business moving fast. Bring all your chats, updates, and files into one clean view — so you never waste another minute chasing messages or missed details.",
+    alt: "Team communication on a laptop screen",
+    href: "#",
+    img: svcImg3, // Video call image
+    blurImg: getBlurStyle(svcImg3Blur.src),
+    gridArea: "streamline",
+  },
+  {
+    title: "Optimize How You Work",
+    description:
+      "See exactly where your time goes. Spot inefficiencies, double down on what drives growth, and make smarter moves every day — backed by real data.",
+    alt: "A woman with a headset waving at her laptop",
+    href: "#",
+    img: svcImg4, // Woman with headset
+    blurImg: getBlurStyle(svcImg4Blur.src),
+    gridArea: "optimize",
+  },
+  {
+    title: "Build Stronger Customer Relationships",
+    description:
+      "Turn every interaction into an opportunity. Automate follow-ups, keep leads warm, and deliver a personal touch — without adding extra hours to your day.",
+    alt: "A smiling man in a black hoodie",
+    href: "#",
+    img: svcImg1, // Man in hoodie
+    blurImg: getBlurStyle(svcImg1Blur.src),
+    gridArea: "build",
+  },
+  {
+    title: "Protect What You're Building",
+    description:
+      "Your data, deals, and ideas are your edge. We keep everything secure and compliant automatically, so you can scale with confidence.",
+    alt: "A smiling woman in a beige blazer",
+    href: "#",
+    img: svcImg2, // Woman in blazer
+    blurImg: getBlurStyle(svcImg2Blur.src),
+    gridArea: "protect",
+  },
+  {
+    title: "Delegate Like a Pro",
+    description:
+      "You don’t have to do it all. Hand off busywork to AI or your team automatically, and focus your energy on the big decisions that actually grow your business.",
+    alt: "A smiling man with glasses and a headset",
+    href: "#",
+    img: svcImg5, // Man with glasses
+    blurImg: getBlurStyle(svcImg5Blur.src),
+    gridArea: "delegate",
+    titleColor: "text-accent", // Special color
+  },
+];
 ---
 
 <Layout preloadedImage={heroBg}>
   <!-- ============================================ -->
   <!--                    Hero                      -->
   <!-- ============================================ -->
-  <section
-    id="hero-1426"
-    class="relative z-1 overflow-clip px-4 pt-38 pb-[clamp(12.5rem,25.95vw,18.75em)] text-center"
-  >
-    <div class="cs-container">
-      <div class="cs-content">
-        <h1
-          class="relative w-full max-w-[913px] text-center font-bebas text-[clamp(2.4375rem,6.4vw,6rem)] leading-[120%] font-normal tracking-normal text-pretty text-primary"
-        >
-          Hire the Top 1% of Virtual Assistants Who Build Businesses
-        </h1>
+  <Hero />
 
-        <p
-          class="max-w-[clamp(29rem, 60vw, 38.785rem)] mx-auto mt-0 mb-8 w-full text-center font-roboto text-[clamp(1rem,1.95vw,1.25rem)] leading-[1.5em] font-normal tracking-normal text-secondary"
+  <TestimonialsCarousel />
+
+  <ApplicationLogosCarousel />
+
+  <!-- ============================================ -->
+  <!--                   Steps                      -->
+  <!-- ============================================ -->
+  <section
+    id="steps-1173"
+    class="relative z-[1] overflow-clip px-4 py-[var(--spacing-section)]"
+  >
+    <Image
+      src={s3Bg}
+      alt={"blur for bg"}
+      style={s3BlurStyle}
+      class={"absolute inset-0 w-full h-full -z-1  "}
+    />
+
+    <div
+      class="mx-auto flex w-full max-w-[44rem] flex-col items-center gap-[clamp(3rem,6vw,4rem)] md:max-w-7xl"
+    >
+      <!-- Header -->
+      <div class="flex w-full flex-col items-center text-center">
+        <span
+          class="mb-1 block font-roboto text-base leading-[120%] font-bold tracking-[0.1rem] text-accent uppercase"
         >
-          Hire business-building virtual assistants in 21 days or less and save
-          up to 80% on payroll.
+          How it works
+        </span>
+        <h2
+          class="m-0 mb-4 max-w-[43.75rem] text-center font-roboto text-[clamp(1.9375rem,3.9vw,3.0625rem)] leading-[120%] font-black text-primary uppercase"
+        >
+          3 steps only
+        </h2>
+        <p class="m-0 w-full max-w-156 text-base leading-[150%] text-primary">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa libero
+          sint hic accusantium exercitationem, voluptatem officia quaerat velit
+          quis ullam?
         </p>
-        <div class="cs-button-group">
-          <a
-            href=""
-            class:list={[
-              "relative m-0 inline-block min-w-50 overflow-clip rounded-xl border-2 border-primary bg-transparent px-6 py-0 text-center leading-[clamp(2.875rem,5.5vw,3.5rem)] font-bold text-primary decoration-0 transition-colors duration-300 hover:text-accent-foreground",
-              "before:absolute before:-inset-1 before:-translate-x-51 before:rounded-xl before:bg-accent before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-0",
-            ]}
+      </div>
+
+      <!-- Cards -->
+      <ul class="m-0 grid w-full grid-cols-12 gap-5 p-0">
+        <!-- Item 1 -->
+        <li
+          class="relative col-span-12 flex list-none flex-col items-center px-4 text-center md:col-span-4"
+        >
+          <picture
+            class="mb-6 flex h-22 w-22 items-center justify-center rounded-full border border-border"
           >
-            <span class="relative z-100">Hire Now</span>
-          </a>
+            <!-- class="h-auto w-10" -->
+            <LightBulb />
+          </picture>
+
+          <!-- New heading format -->
+          <h3
+            class="m-0 mb-3 font-roboto text-[1.5625rem] leading-[120%] font-bold tracking-normal text-primary"
+          >
+            STEP 1: Sign up
+          </h3>
+
+          <p
+            class="m-0 max-w-103.25 font-roboto text-base leading-[150%] font-normal tracking-normal text-black"
+          >
+            Fill out the sign up form and schedule a call with us.
+          </p>
+
+          <!-- Arrow between cards on md+ only -->
+          <Icon
+            name="icons8:arrows-long-right"
+            class="hidden h-16 w-16 text-accent md:absolute md:top-3 md:right-[-2.75rem] md:block"
+          />
+        </li>
+
+        <!-- Item 2 -->
+        <li
+          class="relative col-span-12 flex list-none flex-col items-center px-4 text-center md:col-span-4"
+        >
+          <picture
+            class="mb-6 flex h-22 w-22 items-center justify-center rounded-full border border-[var(--color-border,#858585)]"
+          >
+            <Puzzle />
+          </picture>
+
+          <h3
+            class="m-0 mb-3 font-roboto text-[1.5625rem] leading-[120%] font-bold tracking-normal text-primary"
+          >
+            STEP 2: Tell us what you need
+          </h3>
+
+          <p
+            class="m-0 max-w-103.25 font-roboto text-base leading-[150%] font-normal tracking-normal text-black"
+          >
+            During our first call, we’ll discuss everything you’re looking for
+            in an assistant. We’ll use this information to find your perfect
+            candidates.
+          </p>
+
+          <!-- Arrow between cards on md+ only -->
+          <Icon
+            name="icons8:arrows-long-right"
+            class="hidden h-16 w-16 text-accent md:absolute md:top-3 md:-right-11 md:block"
+          />
+        </li>
+
+        <!-- Item 3 -->
+        <li
+          class="relative col-span-12 flex list-none flex-col items-center px-4 text-center md:col-span-4"
+        >
+          <picture
+            class="mb-6 flex h-22 w-22 items-center justify-center rounded-full border border-border"
+          >
+            <Gears />
+          </picture>
+
+          <h3
+            class="m-0 mb-3 font-roboto text-[1.5625rem] leading-[120%] font-bold tracking-normal text-primary"
+          >
+            STEP 3: Onboard your assistant On This
+          </h3>
+
+          <p
+            class="m-0 max-w-103.25 font-roboto text-base leading-[150%] font-normal tracking-normal text-black"
+          >
+            We’ll add your new assistants to your account dashboard. If you want
+            us to set you up with any virtual tools, we’ll do that too. On your
+            selected start date, your new assistants will get to work!
+          </p>
+          <!-- No arrow on last item -->
+        </li>
+      </ul>
+
+      <!-- CTA -->
+      <HireBtn />
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--                   USE CASE                   -->
+  <!-- ============================================ -->
+  <section id="use-case-section" class="relative px-4 py-section lg:pt-0">
+    <Image
+      src={s4Bg}
+      alt={"blur for bg"}
+      style={s4BlurStyle}
+      class={"absolute inset-0 w-full h-full -z-1  "}
+    />
+
+    <div
+      class="mx-auto flex w-full max-w-7xl flex-col items-center gap-12 lg:flex-row lg:items-start lg:justify-between"
+    >
+      <!-- Left content -->
+      <div
+        class="flex w-full max-w-md flex-col items-center text-left lg:absolute lg:items-start xl:mt-50"
+      >
+        <span
+          class="mb-6.25 block font-roboto text-base leading-[120%] font-bold tracking-widest text-accent uppercase"
+        >
+          Use Case
+        </span>
+
+        <!-- 3. Header with text gradient -->
+        <h2
+          class="m-0 mb-12 bg-linear-to-r from-primary to-accent bg-clip-text text-center font-roboto text-[clamp(2.5rem,5vw,3.0625rem)] leading-[120%] font-bold tracking-normal text-transparent md:text-nowrap lg:text-left"
+        >
+          Let Leiva Assistants handle
+          <br class="hidden md:inline" />
+          the rest so you can focus
+          <br class="hidden md:inline" />
+          on what truly matters.
+        </h2>
+
+        <HireBtn />
+      </div>
+
+      <!-- Right cards grid -->
+      <ul
+        id="use-case-grid"
+        class="m-0 grid w-full max-w-xl p-0 lg:w-auto lg:max-w-none lg:flex-1"
+      >
+        {
+          serviceCards.map((card) => (
+            <li
+              class="group flex list-none flex-col overflow-hidden rounded-2xl bg-gray-50/80 shadow-sm transition-shadow duration-300 hover:shadow-lg"
+              data-card={card.gridArea}
+              style={{ gridArea: card.gridArea }}
+            >
+              <a href={card.href ?? "#"} class="block no-underline">
+                <div class="overflow-hidden">
+                  <Picture
+                    class="h-120 w-full object-cover transition-transform duration-300 group-hover:scale-110 lg:h-full lg:min-h-full lg:w-full"
+                    src={card.img}
+                    alt={card.alt}
+                    style={card.blurImg}
+                  />
+                </div>
+                <div class="p-6">
+                  <h3
+                    class:list={[
+                      "m-0 mb-3 text-xl font-bold text-primary",
+                      card.titleColor ?? "",
+                    ]}
+                  >
+                    {card.title}
+                  </h3>
+                  <p class="m-0 text-base leading-relaxed text-secondary">
+                    {card.description}
+                  </p>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--         Comparison: Assistants vs In‑person  -->
+  <!-- ============================================ -->
+  <section
+    id="comparison-section"
+    class="relative px-4 py-[var(--spacing-section)]"
+  >
+    <Image
+      src={s5Bg}
+      alt={"blur for bg"}
+      style={s5BlurStyle}
+      class={"absolute inset-0 w-full h-full -z-15  "}
+    />
+
+    <div class="mx-auto w-full max-w-7xl">
+      <!-- Eyebrow + Heading + CTA -->
+      <div class="flex flex-col items-center gap-4 pb-12 text-center">
+        <span
+          class="font-roboto text-sm font-bold tracking-[0.1em] text-accent uppercase"
+        >
+          USE CASE
+        </span>
+
+        <h2
+          class="m-0 max-w-[30ch] bg-gradient-to-r from-primary to-accent bg-clip-text font-roboto text-[clamp(1.75rem,5vw,2.375rem)] leading-[1.2] font-black text-transparent"
+        >
+          Why choose Leiva Assistants over in-person hires?
+        </h2>
+
+        <HireBtn />
+      </div>
+
+      <!-- Cards -->
+      <div
+        class="mx-auto mt-10 grid grid-cols-1 place-content-center justify-items-center gap-15 lg:mt-14 lg:w-fit lg:grid-cols-2 lg:gap-33"
+      >
+        <!-- Card: Leiva Assistants -->
+        <div
+          class="relative w-full max-w-115 rounded-secondary bg-white/95 px-7 py-5 sm:p-11 md:px-22 md:py-16"
+        >
+          <!-- card glow -->
+          <div
+            class="pointer-events-none absolute inset-0 -z-10 rounded-secondary shadow-[0px_4px_100px_10px_#782b6363_inset,0px_4px_100px_10px_#a12e825e]"
+          >
+          </div>
+          <h3
+            class="mx-0 mt-0 mb-6.25 text-[1.5625rem] leading-tight font-bold text-[#4D4D4D]"
+          >
+            Leiva Assistants
+          </h3>
+          <p class="mt-0.5 mb-5 text-[12px] leading-none text-secondary">
+            (Remote Virtual Assistants)
+          </p>
+
+          <ul class="m-0 list-none space-y-4 p-0">
+            {
+              [
+                "Hire in less than 21 days",
+                "Up to 60% lower payroll cost",
+                "Half the cost overall",
+                "Pre-trained & AI powered",
+                "Scales up or down easily",
+                "Managed for you",
+                "Work your schedule",
+                "24/7 support",
+                "Handles business & personal tasks",
+                "Secure info sharing",
+                "Continuous improvement",
+              ].map((item) => (
+                <li class="flex items-start gap-3">
+                  <Icon
+                    name="tabler:circle-check-filled"
+                    class="mt-[2px] h-5 w-5 text-green-500"
+                  />
+                  <span class="text-[15px] leading-6 text-primary">{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Card: In-person Hiring -->
+        <div
+          class="relative w-full max-w-115 rounded-secondary bg-white/95 px-7 py-5 sm:p-11 md:px-22 md:py-16"
+        >
+          <!-- card glow -->
+          <div
+            class="pointer-events-none absolute inset-0 -z-10 rounded-secondary shadow-[0px_4px_100px_10px_#782b6363_inset,0px_4px_100px_10px_#a12e825e]"
+          >
+          </div>
+          <h3
+            class="mx-0 mt-0 mb-6.25 text-[1.5625rem] leading-[100%] font-bold text-[#4D4D4D]"
+          >
+            In-person Hiring
+          </h3>
+
+          <ul class="m-0 mt-[6px] list-none space-y-4 p-0">
+            {
+              [
+                "Takes months to hire",
+                "High payroll & overhead costs",
+                "Expensive to maintain",
+                "Requires full training",
+                "Hard to replace or adjust",
+                "You handle everything",
+                "Fixed hours only",
+                "No backup or coverage",
+                "Limited to role-specific work",
+                "Manual data handling",
+                "Static skill growth",
+              ].map((item) => (
+                <li class="flex items-start gap-3">
+                  <Icon
+                    name="tabler:circle-x-filled"
+                    class="mt-[2px] h-5 w-5 text-red-500"
+                  />
+                  <span class="text-[15px] leading-6 text-primary">{item}</span>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </div>
     </div>
-
-    <Picture
-      src={heroBg}
-      style={heroBlurStyle}
-      class:list={"absolute top-1/2 -translate-y-1/2 object-cover lg:inset-0 lg:translate-0"}
-      formats={["avif", "webp"]}
-      alt="blurred circle side by side"
-      pictureAttributes={{
-        class: "h-full w-full block absolute top-0 left-0 -z-2",
-      }}
-    />
   </section>
 </Layout>
-
 <style>
-  /*-- -------------------------- -->
-<---           Hero             -->
-<--- -------------------------- -*/
+  @media (max-width: 1023px) {
+    #use-case-grid {
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        "streamline"
+        "optimize"
+        "build"
+        "protect"
+        "delegate";
+      gap: 1.25rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    #use-case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 19.06rem);
+      grid-template-rows: auto 1fr 200px 1fr;
+      grid-template-areas:
+        "streamline optimize build"
+        "streamline optimize build"
+        "streamline optimize protect"
+        "streamline delegate .";
+      gap: 1.25rem;
+      align-items: start;
+      justify-content: end;
+    }
 
-  /* Mobile - 360px */
-  @media only screen and (min-width: 0rem) {
-    #hero-1426 .cs-container {
-      width: 100%;
-      max-width: 80rem;
-      margin: auto;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 3rem;
+    [data-card="streamline"] {
+      place-self: center;
     }
-    #hero-1426 .cs-content {
-      width: 100%;
-      max-width: 39.375rem;
+
+    [data-card="optimize"] {
+      align-self: end;
     }
-    #hero-1426 .cs-button-group {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+
+    [data-card="build"] {
+      align-self: end;
     }
-  }
-  /* Dark Mode */
-  @media only screen and (min-width: 0rem) {
-    body.dark-mode #hero-1426 .cs-background:before {
-      opacity: 0.72;
+    [data-card="build"] img {
+      min-height: 321px;
+    }
+
+    [data-card="delegate"] {
+    }
+
+    [data-card="protect"] img {
+      min-height: 396px;
     }
   }
+
+  /* box-shadow: 0px 4px 100px 10px rgba(120, 43, 99, 0.39); */
 </style>

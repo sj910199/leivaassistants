@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+import type { ComponentProps } from "astro/types";
+
+type Props = ComponentProps<typeof Image> & {
+  blurSrc?: string;
+};
+
+const { blurSrc, class: className, ...imageProps } = Astro.props as Props;
+---
+
+<Image
+  {...imageProps}
+  class:list={[
+    'data-[img-loaded="false"]:bg-cover data-[img-loaded="false"]:bg-center data-[img-loaded="false"]:blur-xs',
+    className,
+  ]}
+  data-img-loaded="false"
+  style={`background-image: url('${blurSrc}');`}
+/>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const images = document.querySelectorAll(
+      `img[data-img-loaded]`,
+    ) as NodeListOf<HTMLImageElement>;
+
+    if (images.length === 0) return;
+
+    images.forEach((img) => {
+      if (img.complete && img.naturalWidth > 0) {
+        img.dataset.imgLoaded = "true";
+        img.style.backgroundImage = "unset";
+      } else {
+        img.addEventListener(
+          "load",
+          () => {
+            img.dataset.imgLoaded = "true";
+            img.style.backgroundImage = "unset";
+          },
+          { once: true },
+        );
+      }
+    });
+  });
+</script>

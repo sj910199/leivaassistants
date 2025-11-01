@@ -21,6 +21,9 @@
       ],
       "@js/*": [
         "src/js/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
       ]
     },
     "incremental": true,

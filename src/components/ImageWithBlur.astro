@@ -1,0 +1,68 @@
+---
+// src/components/ImageWithBlur.astro (or wherever you define it)
+import { Image } from "astro:assets";
+import type { ComponentProps } from "astro/types";
+
+type Props = ComponentProps<typeof Image> & {
+  blurSrc?: string;
+};
+
+const { blurSrc, class: className, ...imageProps } = Astro.props as Props;
+// Generate a unique ID for each instance of the component to ensure JS targets correctly
+const uniqueId = `img-blur-${Math.random().toString(36).substring(2, 11)}`;
+---
+
+<Image
+  {...imageProps}
+  class:list={[
+    'data-[img-loaded="false"]:bg-cover data-[img-loaded="false"]:bg-center', // Only set background properties
+    "transition-opacity duration-300 ease-in-out", // Add transition for opacity
+    className,
+  ]}
+  id={uniqueId}
+  data-img-loaded="false"
+  style={blurSrc
+    ? `background-image: url('${blurSrc}'); opacity: 0;`
+    : "opacity: 0;"}
+/>
+
+<script define:vars={{ uniqueId: uniqueId }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Select the specific image instance by its unique ID
+    const img = document.getElementById(uniqueId);
+
+    if (!img) return; // Exit if the image element is not found
+
+    // Now that the script is running, make the main image visible to trigger the fade-in
+    // If blurSrc is defined, this means both the background-image (blur) and the main image content
+    // will be 'visible' (opacity:1) but the main image (src) will fade in over the background.
+    img.style.opacity = "1";
+
+    const handleImageLoad = () => {
+      img.dataset.imgLoaded = "true";
+      // This line removes the blurred background.
+      // For transparent images, this will cause the blurred background to abruptly disappear,
+      // revealing whatever is behind the <img> element.
+      img.style.backgroundImage = "unset";
+    };
+
+    // Check if the image is already loaded (e.g., from browser cache)
+    if (img.complete && img.naturalWidth > 0) {
+      handleImageLoad();
+    } else {
+      // If not loaded, attach an event listener to wait for it
+      img.addEventListener("load", handleImageLoad, { once: true });
+    }
+
+    // Optional: Add error handling
+    img.addEventListener(
+      "error",
+      () => {
+        img.dataset.imgLoaded = "error"; // Mark as failed
+        img.style.backgroundImage = "unset"; // Remove the blurred background even on error
+        // You might want to display a fallback image or an error icon here
+      },
+      { once: true },
+    );
+  });
+</script>

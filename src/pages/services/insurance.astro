@@ -1,0 +1,132 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+import ServiceDetail from "@components/ServiceDetail.astro";
+import ServiceHero, {
+  type ServiceFeature,
+} from "@components/ServiceHero.astro";
+
+import Shield from "@components/Icons/Shield.svg";
+import Drafting from "@components/Icons/Drafting.svg";
+import StoreBell from "@components/Icons/StoreBell.svg";
+import ServiceCard from "@components/ServiceCard.astro";
+
+import insurance1 from "@assets/images/services/insurance-1.png";
+import insurance2 from "@assets/images/services/insurance-2.png";
+import insurance3 from "@assets/images/services/insurance-3.png";
+
+import heroBg from "@assets/images/bg/hero-bg.png";
+import ApplicationLogosCarousel from "@components/ApplicationLogosCarousel.astro";
+
+const title = "Life Insurance Executive Assistant";
+const description = `
+Your right hand in organization, communication, and client management. A Life Insurance Executive Assistant helps agents and agency owners stay on top of daily operations — managing schedules, emails, follow-ups, and reports — so you can focus on client relationships, team growth, and closing policies.
+`;
+
+const serviceFeature: ServiceFeature = {
+  title,
+  description,
+  features: [
+    {
+      Icon: Shield,
+      description: "Calendar and appointment management",
+    },
+    {
+      Icon: Shield,
+      description: "Meeting coordination and follow-ups",
+    },
+    {
+      Icon: Drafting,
+      description: "Inbox triage and client communication",
+    },
+    {
+      Icon: Drafting,
+      description: "Preparing reports, presentations, and policy summaries",
+    },
+    {
+      Icon: StoreBell,
+      description: "CRM updates and data entry",
+    },
+    {
+      Icon: StoreBell,
+      description: "Managing to-do lists, reminders, and priorities",
+    },
+  ],
+};
+---
+
+<Layout preloadedImage={heroBg}>
+  <ServiceHero serviceFeature={serviceFeature} />
+
+  <ServiceDetail
+    title="You close the deals. We’ll keep your business running smoothly."
+  >
+    <div
+      class:list={[
+        "md:grid-rows-[auto auto] grid w-full grid-cols-[315px] place-content-center gap-5 sm:grid-cols-[450px]",
+        "md:grid-cols-2 md:justify-items-center lg:grid-cols-[auto_auto] lg:grid-rows-2 lg:gap-x-24 lg:gap-y-11",
+      ]}
+    >
+      <!-- max-w-136  -->
+      <ServiceCard
+        class="service-1 w-full max-w-112.5 px-5 md:col-span-2 lg:row-start-1 lg:row-end-3 lg:max-w-136"
+      >
+        <Fragment slot="title">
+          Never miss another call, meeting,
+          <br class="hidden lg:inline" />
+          or follow-up
+        </Fragment>
+        <Fragment slot="content">
+          <Image src={insurance1} class={"lg:w-full "} alt={"license img 1"} />
+          <!-- <div class="w-[300px]">
+            <Social1 />
+          </div> -->
+        </Fragment>
+      </ServiceCard>
+
+      <ServiceCard
+        class="w-full px-5 lg:row-start-1 lg:row-end-2 lg:max-w-148 xl:px-10 2xl:px-15"
+        id="app-service"
+      >
+        <Fragment slot="title">
+          Stay on top of every message
+          <br class="hidden lg:inline" />
+          and lead
+        </Fragment>
+        <Fragment slot="content">
+          <!-- <Social2 /> -->
+
+          <Image src={insurance2} alt={"license img 2"} />
+        </Fragment>
+      </ServiceCard>
+
+      <ServiceCard
+        class="w-full px-5 lg:max-w-148 xl:px-10 2xl:px-15"
+        id="checkbox-service"
+      >
+        <Fragment slot="title">
+          Reclaim your time and run your
+          <br class="hidden lg:inline" />
+          agency like a pro
+        </Fragment>
+        <Fragment slot="content">
+          <Image src={insurance3} alt={"license img 3"} />
+        </Fragment>
+      </ServiceCard>
+    </div>
+  </ServiceDetail>
+
+  <ApplicationLogosCarousel />
+</Layout>
+
+<style>
+  @media (width >= 64rem) {
+    .service-1 {
+      width: 34rem;
+    }
+    .service-1 img {
+      width: 18.75rem;
+    }
+  }
+</style>

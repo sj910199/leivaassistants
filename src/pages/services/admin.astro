@@ -1,0 +1,161 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "src/layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+import ServiceDetail from "@components/ServiceDetail.astro";
+import ServiceHero, {
+  type ServiceFeature,
+} from "@components/ServiceHero.astro";
+import Shield from "@components/Icons/Shield.svg";
+import Drafting from "@components/Icons/Drafting.svg";
+import StoreBell from "@components/Icons/StoreBell.svg";
+
+import ServiceCard from "@components/ServiceCard.astro";
+
+import Admin2 from "@components/ServiceIcon/Admin2.svg";
+import Admin1 from "@components/ServiceIcon/Admin1.svg";
+import Admin11 from "@components/ServiceIcon/Admin11.svg";
+import Admin1Img from "@assets/images/services/admin-1.png";
+import heroBg from "@assets/images/bg/hero-bg.png";
+
+import ApplicationLogosCarousel from "@components/ApplicationLogosCarousel.astro";
+
+const title = "Administrative Assistant";
+const description = ` The detail-oriented backbone of your backend operations. Admin Assistants ensure your digital systems are tidy, organized, and running smoothly — day in, day out.
+`;
+
+const serviceFeature: ServiceFeature = {
+  title,
+  description,
+  features: [
+    {
+      Icon: Shield,
+      description: "File and document management",
+    },
+    {
+      Icon: Shield,
+      description: "Internal team coordination",
+    },
+    {
+      Icon: Drafting,
+      description: "Data entry and report generation",
+    },
+    {
+      Icon: Drafting,
+      description: "System updates (e.g., Notion, Airtable)",
+    },
+    {
+      Icon: StoreBell,
+      description: "SOP writing and template creation",
+    },
+    {
+      Icon: StoreBell,
+      description: "Process documentation and upkeep",
+    },
+  ],
+};
+---
+
+<Layout preloadedImage={heroBg}>
+  <ServiceHero serviceFeature={serviceFeature} />
+
+  <ServiceDetail title="Make your operations run smooth, not stressful.">
+    <div
+      class="grid w-full grid-cols-1 justify-items-center gap-10.75 md:grid-cols-2"
+    >
+      <!-- max-w-136  -->
+      <ServiceCard
+        class="w-full max-w-154.5 bg-[#ededed]! px-5 xl:px-10 2xl:px-15"
+        contentClass="lg:size-full lg:pb-20 "
+        id="calendar-service"
+      >
+        <Fragment slot="title">
+          Update and maintain SOPs for
+          <br />
+          consistency and accuracy
+        </Fragment>
+        <Fragment slot="content">
+          <!-- <Support1 /> -->
+          <Image src={Admin1Img} alt={"virtual assistant "} />
+          <!-- <Admin1 />
+          <Admin11
+            class={"absolute inset-0 h-full w-1/2 mx-auto pb-20 object-cover"}
+          /> -->
+        </Fragment>
+      </ServiceCard>
+
+      <ServiceCard
+        class="w-full max-w-154.5 bg-[#ededed]! px-5 xl:px-10 2xl:px-15"
+        contentClass="lg:size-full lg:pb-20 "
+        id="app-service"
+      >
+        <Fragment slot="title">
+          Keep projects and data structured
+          <br />
+          for easy access
+        </Fragment>
+        <Fragment slot="content">
+          <Admin2 />
+        </Fragment>
+      </ServiceCard>
+    </div>
+  </ServiceDetail>
+
+  <ApplicationLogosCarousel />
+</Layout>
+
+<style>
+  .service-grid {
+    display: grid;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    place-content: center;
+    gap: 1.5rem;
+    grid-template-areas:
+      "app"
+      "calendar"
+      "checkbox";
+  }
+
+  @media (width <= 48rem) {
+    #checkbox-service,
+    #calendar-service,
+    #app-service {
+      background-color: #ededed !important;
+    }
+  }
+  @media (width >= 60rem) {
+    .service-grid {
+      grid-template-columns: repeat(2, auto);
+      grid-template-rows: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      grid-template-areas:
+        "app calendar"
+        "app checkbox";
+    }
+    #app-service {
+      background-color: #ededed;
+    }
+  }
+  @media (width >= 90rem) {
+    .service-grid {
+      grid-template-columns: repeat(3, auto);
+      grid-template-rows: 1fr auto 5.9375rem;
+      place-content: center;
+      grid-template-areas:
+        ". app ."
+        "calendar app checkbox"
+        "calendar . checkbox";
+    }
+    #calendar-service {
+      background-color: #ededed;
+    }
+
+    /* bg-[#EDEDED]!  */
+  }
+</style>

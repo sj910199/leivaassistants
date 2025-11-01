@@ -1,0 +1,153 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "src/layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+import ServiceDetail from "@components/ServiceDetail.astro";
+import ServiceHero, {
+  type ServiceFeature,
+} from "@components/ServiceHero.astro";
+import Shield from "@components/Icons/Shield.svg";
+import Drafting from "@components/Icons/Drafting.svg";
+import StoreBell from "@components/Icons/StoreBell.svg";
+
+import ServiceCard from "@components/ServiceCard.astro";
+
+import Virtual2 from "@components/ServiceIcon/Virtual2.svg";
+import Virtual1 from "@assets/images/services/virtual-1.png";
+
+import heroBg from "@assets/images/bg/hero-bg.png";
+
+import ApplicationLogosCarousel from "@components/ApplicationLogosCarousel.astro";
+
+const title = "Virtual Assistant";
+const description = `A flexible, generalist professional who can handle a mix of administrative, creative, and operational support. Perfect if you need a bit of everything handled by someone reliable.`;
+
+const serviceFeature: ServiceFeature = {
+  title,
+  description,
+  features: [
+    {
+      Icon: Shield,
+      description: "Internet research and data collection",
+    },
+    {
+      Icon: Shield,
+      description: "Light design (e.g., Canva) or presentation formatting",
+    },
+    {
+      Icon: Drafting,
+      description: "Lead generation and CRM updates",
+    },
+    {
+      Icon: Drafting,
+      description: "Online order or subscription management",
+    },
+    {
+      Icon: StoreBell,
+      description: "Scheduling meetings or events",
+    },
+    {
+      Icon: StoreBell,
+      description: "Inbox clean-up and automation",
+    },
+  ],
+};
+---
+
+<Layout preloadedImage={heroBg}>
+  <ServiceHero serviceFeature={serviceFeature} />
+  <ServiceDetail title="Stop doing it all yourself.">
+    <div
+      class="grid w-full grid-cols-1 justify-items-center gap-10.75 md:grid-cols-2"
+    >
+      <!-- max-w-136  -->
+      <ServiceCard
+        class="w-full max-w-154.5 bg-[#ededed]! px-5 xl:px-10 2xl:px-15"
+        id="calendar-service"
+      >
+        <Fragment slot="title">
+          Handle daily admin tasks like research,
+          <br />
+          follow-ups, and scheduling
+        </Fragment>
+        <Fragment slot="content">
+          <!-- <Support1 /> -->
+          <Image src={Virtual1} alt={"virtual assistant "} />
+        </Fragment>
+      </ServiceCard>
+
+      <ServiceCard
+        class="w-full max-w-154.5 bg-[#ededed]! px-5 xl:px-10 2xl:px-15"
+        contentClass="size-full pb-20 "
+        id="app-service"
+      >
+        <Fragment slot="title">
+          Manage recurring tasks to keep your
+          <br />
+          operations running smoothly
+        </Fragment>
+        <Fragment slot="content">
+          <Virtual2 class="w-50 lg:w-full" />
+        </Fragment>
+      </ServiceCard>
+    </div>
+  </ServiceDetail>
+
+  <ApplicationLogosCarousel />
+</Layout>
+
+<style>
+  .service-grid {
+    display: grid;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    place-content: center;
+    gap: 1.5rem;
+    grid-template-areas:
+      "app"
+      "calendar"
+      "checkbox";
+  }
+
+  @media (width <= 48rem) {
+    #checkbox-service,
+    #calendar-service,
+    #app-service {
+      background-color: #ededed !important;
+    }
+  }
+  @media (width >= 60rem) {
+    .service-grid {
+      grid-template-columns: repeat(2, auto);
+      grid-template-rows: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      grid-template-areas:
+        "app calendar"
+        "app checkbox";
+    }
+    #app-service {
+      background-color: #ededed;
+    }
+  }
+  @media (width >= 90rem) {
+    .service-grid {
+      grid-template-columns: repeat(3, auto);
+      grid-template-rows: 1fr auto 5.9375rem;
+      place-content: center;
+      grid-template-areas:
+        ". app ."
+        "calendar app checkbox"
+        "calendar . checkbox";
+    }
+    #calendar-service {
+      background-color: #ededed;
+    }
+
+    /* bg-[#EDEDED]!  */
+  }
+</style>

@@ -1,0 +1,147 @@
+---
+import type { GetStaticPaths } from "astro";
+import Layout from "src/layouts/Layout.astro";
+import { Image } from "astro:assets";
+
+import ServiceDetail from "@components/ServiceDetail.astro";
+import ServiceHero, {
+  type ServiceFeature,
+} from "@components/ServiceHero.astro";
+import Shield from "@components/Icons/Shield.svg";
+import Drafting from "@components/Icons/Drafting.svg";
+import StoreBell from "@components/Icons/StoreBell.svg";
+import ServiceCard from "@components/ServiceCard.astro";
+
+import Support1 from "@components/ServiceIcon/Support1.svg";
+import Support2 from "@components/ServiceIcon/Support2.svg";
+import Support1Img from "@assets/images/services/support-1.png";
+
+import heroBg from "@assets/images/bg/hero-bg.png";
+import ApplicationLogosCarousel from "@components/ApplicationLogosCarousel.astro";
+
+const title = "Customer Support Assistant";
+const description = `Keep customers happy, supported, and loyal. These assistants manage communication across email, chat, and support platforms to deliver fast, empathetic service that drives retention.`;
+
+const serviceFeature: ServiceFeature = {
+  title,
+  description,
+  features: [
+    {
+      Icon: Shield,
+      description: "Respond to customer inquiries via email or chat",
+    },
+    {
+      Icon: Shield,
+      description: "Process returns or refunds",
+    },
+    {
+      Icon: Drafting,
+      description: "Manage ticketing systems (e.g., Zendesk, Freshdesk)",
+    },
+    {
+      Icon: Drafting,
+      description: "Monitor reviews and feedback channels",
+    },
+    {
+      Icon: StoreBell,
+      description: "Escalate issues to internal teams",
+    },
+  ],
+};
+---
+
+<Layout preloadedImage={heroBg}>
+  <ServiceHero serviceFeature={serviceFeature} />
+  <ServiceDetail title="Keep your customers happy, even while you sleep.">
+    <div
+      class="grid w-full grid-cols-1 justify-items-center gap-10.75 md:grid-cols-2"
+    >
+      <!-- max-w-136  -->
+      <ServiceCard
+        class="w-full max-w-154.5 bg-[#ededed]! px-5 xl:px-10 2xl:px-15"
+        id="calendar-service"
+      >
+        <Fragment slot="title">
+          Handle up to 80% of customer
+          <br />
+          inquiries and support tickets Organize
+        </Fragment>
+        <Fragment slot="content">
+          <!-- <Support1 /> -->
+          <Image src={Support1Img} alt={"chat messages"} />
+        </Fragment>
+      </ServiceCard>
+
+      <ServiceCard
+        class="w-full max-w-154.5 bg-[#ededed]! px-5 xl:px-10 2xl:px-15"
+        id="app-service"
+      >
+        <Fragment slot="title">
+          Our strategy is to manage most
+          <br />
+          inquiries efficiently.
+        </Fragment>
+        <Fragment slot="content">
+          <Support2 />
+        </Fragment>
+      </ServiceCard>
+    </div>
+  </ServiceDetail>
+
+  <ApplicationLogosCarousel />
+</Layout>
+
+<style>
+  .service-grid {
+    display: grid;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    place-content: center;
+    gap: 1.5rem;
+    grid-template-areas:
+      "app"
+      "calendar"
+      "checkbox";
+  }
+
+  @media (width <= 48rem) {
+    #checkbox-service,
+    #calendar-service,
+    #app-service {
+      background-color: #ededed !important;
+    }
+  }
+  @media (width >= 60rem) {
+    .service-grid {
+      grid-template-columns: repeat(2, auto);
+      grid-template-rows: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      grid-template-areas:
+        "app calendar"
+        "app checkbox";
+    }
+    #app-service {
+      background-color: #ededed;
+    }
+  }
+  @media (width >= 90rem) {
+    .service-grid {
+      grid-template-columns: repeat(3, auto);
+      grid-template-rows: 1fr auto 5.9375rem;
+      place-content: center;
+      grid-template-areas:
+        ". app ."
+        "calendar app checkbox"
+        "calendar . checkbox";
+    }
+    #calendar-service {
+      background-color: #ededed;
+    }
+
+    /* bg-[#EDEDED]!  */
+  }
+</style>

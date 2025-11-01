@@ -10,27 +10,35 @@
     "children": [
       {
         "key": "Executive Assistant",
-        "url": "/services/executive-assistant"
+        "url": "/services/executive"
       },
       {
         "key": "Customer Support Assistant",
-        "url": "/services/customer-support-assistant"
+        "url": "/services/support"
       },
       {
         "key": "Social Media Manager",
-        "url": "/services/social-media-manager"
+        "url": "/services/social"
       },
       {
         "key": "Virtual Assistant",
-        "url": "/services/virtual-assistant"
+        "url": "/services/virtual"
       },
       {
         "key": "Administrative Assistant",
-        "url": "/services/administrative-assistant"
+        "url": "/services/admin"
       },
       {
         "key": "Real Estate Assistant",
-        "url": "/services/real-estate-assistant"
+        "url": "/services/estate"
+      },
+      {
+        "key": "Life Insurance Licensing Coordinator",
+        "url": "/services/licensing"
+      },
+      {
+        "key": "Life Insurance Executive Assistant",
+        "url": "/services/insurance"
       }
     ]
   },

@@ -1,18 +1,18 @@
 ---
-import FacebookIcon from "./icons/socials/FacebookIcon.astro";
-import InstagramIcon from "./icons/socials/InstagramIcon.astro";
-import TwitterIcon from "./icons/socials/TwitterIcon.astro";
-
 import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import Logo from "@assets/images/logo/main-logo.png";
+import navData from "@data/navData.json";
+import clientData from "@data/client.json";
 ---
 
 <!-- ============================================ --><!--                   Footer                     --><!-- ============================================ -->
 <footer
   id="cs-footer-269"
-  class="bg-[#1a1a1a] px-4 py-[clamp(3.75rem,7.82vw,6.25rem)]"
+  class="bg-primary px-4 py-[clamp(3.75rem,7.82vw,6.25rem)]"
 >
   <div
-    class="cs-container mx-auto flex w-full max-w-137.5 flex-wrap items-start justify-start gap-x-[clamp(4.25rem,10%,6.25rem)] md:max-w-7xl md:gap-y-0"
+    class="cs-container mx-auto flex w-full max-w-137.5 flex-wrap items-start justify-start gap-x-[clamp(4.25rem,10%,6.25rem)] md:max-w-5xl md:gap-y-0 md:px-6 lg:max-w-7xl"
   >
     <!-- Logo Group -->
     <div class="cs-logo-group relative w-full md:mr-auto md:w-auto">
@@ -25,37 +25,37 @@ import { Icon } from "astro-icon/components";
 
       <a
         aria-label="go back to home"
-        class="cs-logo mb-[clamp(1.75rem,4.17vw,2.75rem)] block h-auto w-[clamp(13.125rem,8vw,15rem)]"
-        href=""
+        class="cs-logo mb-[clamp(.9rem,4.17vw,1.25rem)] block h-auto w-[clamp(13.125rem,8vw,15rem)]"
+        href="/"
       >
+        <Image
+          src={Logo}
+          class="-ml-5 h-49.75 w-auto"
+          alt={"leiva assitant L with feather on top"}
+        />
         <span
-          class="font-bebas text-[20px] font-semibold tracking-wide text-primary-foreground uppercase select-none lg:text-[1.875rem]"
+          class="font-bebas text-[clamp(1.25rem,3.9vw,2.8125rem)] leading-p text-primary-foreground uppercase select-none lg:text-[1.875rem]"
         >
           LEIVA ASSISTANTS
         </span>
       </a>
-      <!-- <a
-        aria-label="go back to home"
-        class="cs-logo w-[clamp(13.125rem,8vw,15rem)] h-auto block mb-[clamp(1.75rem,4.17vw,2.75rem)]"
-        href=""
-      >
-        <img
-          class="cs-logo-img light w-full h-auto"
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          src="https://csimg.nyc3.digitaloceanspaces.com/Footer/logo-light.svg"
-          alt="logo"
-          width="240"
-          height="32"
-        />
-      </a> -->
+      <!-- margin: 0;
+    max-width: 40.625rem;
+    width: 100%;
+    font-size: var(--bodyFontSize);
+    line-height: 1.5em;
+    color: var(--bodyTextColor);
+    text-align: center; -->
       <p
-        class="cs-text m-0 mb-8 max-w-135 text-[clamp(0.875rem,2.5vw,1rem)] leading-normal text-white md:mb-0 md:w-4/5 md:max-w-76.25"
+        class="m-0 mb-8 inline-flex w-full max-w-135 flex-col font-bebas leading-[100%] text-[#fafbfc]! md:mb-0 md:max-w-150 lg:gap-6"
       >
-        Etiam nulla ultrices consequat, posuere nulla. Ac iaculis lorem
-        phasellus ultrices adipiscing viverra sit ut quam. In diam mattis
-        elementum diam at sed ultricies.
+        <span class="text-[clamp(1.075rem,2.5vw,1.5625rem)]!"
+          >VIRTUAL ASSISTANT WHO TAKE DAY-TO-DAY</span
+        >
+        <span
+          class="text-[clamp(2rem,2.5vw,3.125rem)]! leading-8 md:leading-[100%]"
+          >SO YOU CAN BUILD ON WHAT’S NEXT.</span
+        >
       </p>
     </div>
 
@@ -68,46 +68,18 @@ import { Icon } from "astro-icon/components";
           Sitemap
         </span>
       </li>
-      <li class="cs-nav-li mb-2 list-none leading-[1.5] last:mb-0">
-        <a
-          class="cs-nav-link relative text-base leading-[1.5] text-white no-underline"
-          href=""
-        >
-          Home
-        </a>
-      </li>
-      <li class="cs-nav-li mb-2 list-none leading-[1.5] last:mb-0">
-        <a
-          class="cs-nav-link relative text-base leading-[1.5] text-white no-underline"
-          href=""
-        >
-          About
-        </a>
-      </li>
-      <li class="cs-nav-li mb-2 list-none leading-[1.5] last:mb-0">
-        <a
-          class="cs-nav-link relative text-base leading-[1.5] text-white no-underline"
-          href=""
-        >
-          Services
-        </a>
-      </li>
-      <li class="cs-nav-li mb-2 list-none leading-[1.5] last:mb-0">
-        <a
-          class="cs-nav-link relative text-base leading-[1.5] text-white no-underline"
-          href=""
-        >
-          Portfolio
-        </a>
-      </li>
-      <li class="cs-nav-li mb-2 list-none leading-[1.5] last:mb-0">
-        <a
-          class="cs-nav-link relative text-base leading-[1.5] text-white no-underline"
-          href=""
-        >
-          Contact
-        </a>
-      </li>
+      {
+        navData.map((item) => (
+          <li class="cs-nav-li mb-2 list-none leading-[1.5] last:mb-0">
+            <a
+              class="cs-nav-link relative text-base leading-[1.5] text-white no-underline before:bg-accent!"
+              href={item.url}
+            >
+              {item.key}
+            </a>
+          </li>
+        ))
+      }
     </ul>
 
     <!-- Contact Info -->
@@ -124,24 +96,21 @@ import { Icon } from "astro-icon/components";
       <li class="cs-contact-li mb-0 list-none last:mb-0">
         <a
           class="cs-contact-link inline-block text-left text-base leading-[1.5] text-white no-underline hover:underline"
-          href="tel: 123-456-7890"
+          href={"tel:" + clientData.phoneForTel}
         >
-          (123) 456-7890
+          {clientData.phoneFormatted}
         </a>
       </li>
       <li class="cs-contact-li mb-0 list-none last:mb-0">
         <a
           class="cs-contact-link inline-block text-left text-base leading-[1.5] text-white no-underline hover:underline"
-          href="mailto:info@codestitch.com"
+          href={"mailto:" + clientData.email}
         >
-          info@codestitch.com
+          {clientData.email}
         </a>
       </li>
 
-      <!-- Social Media -->
-      <li class="cs-contact-li cs-social-group mt-auto mb-0 ml-auto list-none">
-        <div class="cs-social inline-flex justify-start gap-3">
-          <a
+      <!-- <a
             class="cs-social-link relative z-[1] flex h-6 w-6 items-center justify-center rounded-full bg-[#4e4b66] transition-all duration-300"
             aria-label="visit google profile"
             href=""
@@ -150,24 +119,44 @@ import { Icon } from "astro-icon/components";
               name="tabler:brand-google"
               class="cs-social-img block h-3.25 w-auto"
             />
-          </a>
+          </a> -->
+
+      <!-- Social Media -->
+      <li class="cs-contact-li cs-social-group mt-auto mb-0 ml-auto list-none">
+        <div class="cs-social inline-flex justify-start gap-3">
           <a
-            class="cs-social-link relative z-[1] flex h-6 w-6 items-center justify-center rounded-full bg-[#4e4b66] transition-all duration-300"
-            aria-label="visit facebook profile"
-            href=""
+            class="cs-social-link relative z-1 flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-b from-[#E329B0] to-[#46D4F0] transition-all duration-300 hover:-translate-y-0.75 hover:from-[#4e4b66] hover:to-[#4e4b66] hover:text-accent-foreground"
+            aria-label="visit google profile"
+            href={clientData.address.mapLink}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Icon
-              name="tabler:brand-facebook-filled"
+              name="tabler:brand-google"
               class="cs-social-img block h-3.25 w-auto"
             />
           </a>
           <a
-            class="cs-social-link relative z-[1] flex h-6 w-6 items-center justify-center rounded-full bg-[#4e4b66] transition-all duration-300"
+            class="cs-social-link relative z-1 flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-b from-[#E329B0] to-[#46D4F0] transition-all duration-300 hover:-translate-y-0.75 hover:from-[#4e4b66] hover:to-[#4e4b66] hover:text-accent-foreground"
             aria-label="visit instagram profile"
-            href=""
+            href={clientData.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Icon
               name="tabler:brand-instagram-filled"
+              class="cs-social-img block h-3.25 w-auto"
+            />
+          </a>
+          <a
+            class="cs-social-link relative z-1 flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-b from-[#E329B0] to-[#46D4F0] transition-all duration-300 hover:-translate-y-0.75 hover:from-[#4e4b66] hover:to-[#4e4b66] hover:text-accent-foreground"
+            aria-label="visit linkedin profile"
+            href={clientData.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon
+              name="tabler:brand-linkedin"
               class="cs-social-img block h-3.25 w-auto"
             />
           </a>

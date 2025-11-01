@@ -1,0 +1,52 @@
+---
+import s3Bg from "@assets/images/bg/section-bg-3.png";
+import s3Blur from "@assets/images/bg/section-bg-3-blur.png";
+
+import { Image } from "astro:assets";
+import HireBtn from "./HireBtn.astro";
+import type { ComponentProps } from "astro/types";
+interface Props {
+  title: string;
+  showTopper?: boolean;
+}
+
+const { title, showTopper = true } = Astro.props as Props;
+---
+
+<section id="main-services" class="relative z-1 overflow-clip px-4 py-section">
+  <div
+    class="mx-auto flex w-full max-w-176 flex-col gap-[clamp(2rem,4vw,3rem)] md:max-w-7xl"
+  >
+    <div class="max-w-367.75">
+      {
+        showTopper && (
+          <span class="mb-6 block text-center font-roboto text-base leading-h font-bold tracking-widest text-accent uppercase">
+            Use case
+          </span>
+        )
+      }
+
+      <!-- 3. Header with text gradient -->
+      <h2
+        class="m-0 mb-10.75 bg-linear-to-r from-primary to-accent bg-clip-text text-center font-roboto text-[clamp(2.5rem,5vw,3.0625rem)] leading-h font-bold tracking-normal text-transparent"
+      >
+        {title}
+      </h2>
+      <slot name="title" />
+
+      <HireBtn />
+    </div>
+    <!-- grid-cols-[repeat(auto-fit,minmax(min(413.33px,100%),1fr))] -->
+    <!-- sm:grid-cols-2 lg:grid-cols-6 lg:grid-rows-2 -->
+
+    <div class="">
+      <slot />
+    </div>
+  </div>
+
+  <Image
+    src={s3Bg}
+    alt={"blur for bg"}
+    class={"absolute inset-0 w-full h-full -z-1  "}
+  />
+</section>

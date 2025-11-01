@@ -6,6 +6,23 @@ import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"header"> {}
 
+const normalize = (p: string) => (p.endsWith("/") ? p : p + "/");
+const currentPath = normalize(Astro.url.pathname);
+const isHome = (url: string) => url === "/";
+const isEntryActive = (entry: {
+  url: string;
+  children?: Array<{ url: string }>;
+}) => {
+  const entryUrl = normalize(entry.url);
+  if (isHome(entryUrl)) return currentPath === "/";
+  const exact = currentPath === entryUrl;
+  const childHit =
+    entry.children?.some((c) => normalize(c.url) === currentPath) ?? false;
+  const inSection = currentPath.startsWith(entryUrl);
+  // Mark active if exact, any child matches, or you’re inside the section
+  return exact || childHit || inSection;
+};
+
 const props = Astro.props as Props;
 ---
 
@@ -36,21 +53,24 @@ const props = Astro.props as Props;
     </a>
 
     <!-- Navigation -->
-    <nav class="cs-nav flex items-center gap-6 lg:gap-8" role="navigation">
+    <nav class="cs-nav flex items-center lg:gap-8" role="navigation">
       <!-- Mobile Nav Toggle -->
       <button
-        class="cs-toggle order-2 ml-auto flex h-11 w-11 items-center justify-center rounded border-none bg-transparent lg:order-1 lg:hidden"
+        class="cs-toggle order-2 ml-auto flex h-11 w-11 items-center justify-center rounded border-none bg-transparent pl-6 lg:order-1 lg:hidden"
         id="mobile-menu-toggle"
         aria-expanded="false"
         aria-controls="cs-expanded-ul"
         aria-label="Toggle mobile menu."
       >
         <div class="cs-box relative h-3.5 w-6" aria-hidden="true">
-          <span class="cs-line cs-line1 absolute left-1/2 -translate-x-1/2"
+          <span
+            class="cs-line cs-line1 absolute left-1/2 -translate-x-1/2 bg-primary-foreground!"
           ></span>
-          <span class="cs-line cs-line2 absolute left-1/2 -translate-x-1/2"
+          <span
+            class="cs-line cs-line2 absolute left-1/2 -translate-x-1/2 bg-primary-foreground!"
           ></span>
-          <span class="cs-line cs-line3 absolute left-1/2 -translate-x-1/2"
+          <span
+            class="cs-line cs-line3 absolute left-1/2 -translate-x-1/2 bg-primary-foreground!"
           ></span>
         </div>
       </button>
@@ -84,14 +104,9 @@ const props = Astro.props as Props;
                         "lg:block lg:px-2 before:lg:block",
                         "before:absolute before:bottom-0.5 before:left-0 before:hidden before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-accent before:opacity-100 before:transition-transform before:duration-300",
                         "group-hover:before:scale-x-100 hover:before:scale-x-100",
-                        {
-                          "cs-active bg-orange-200 text-gray-50":
-                            Astro.url.pathname === entry.url,
-                        },
+                        { "before:scale-x-100": isEntryActive(entry) },
                       ]}
-                      aria-current={
-                        Astro.url.pathname === entry.url ? "page" : undefined
-                      }
+                      aria-current={isEntryActive(entry) ? "page" : undefined}
                     >
                       {entry.key}
                     </a>
@@ -100,7 +115,7 @@ const props = Astro.props as Props;
                       aria-controls={`submenu-${entry.key}`}
                       class:list={[
                         "submenu-btn absolute top-1/2 right-0 z-10 block h-full -translate-y-1/2 rounded-full rounded-tl-none rounded-bl-none bg-accent px-1 py-1 text-accent-foreground transition-colors hover:bg-orange-100 lg:hidden",
-                        { "cs-active": Astro.url.pathname.includes(entry.url) },
+                        { "cs-active": isEntryActive(entry) },
                       ]}
                     >
                       <span class="down-icon">
@@ -120,12 +135,12 @@ const props = Astro.props as Props;
                       "before:absolute before:bottom-0.5 before:left-0 before:block before:h-0.5 before:w-full before:origin-left before:scale-x-0 before:bg-accent before:opacity-100 before:transition-transform before:duration-300",
                       "hover:before:scale-x-100",
                       {
-                        "cs-active bg-orange-200 text-gray-50":
-                          Astro.url.pathname === entry.url,
+                        "before:scale-x-100":
+                          currentPath === normalize(entry.url),
                       },
                     ]}
                     aria-current={
-                      Astro.url.pathname === entry.url ? "page" : undefined
+                      currentPath === normalize(entry.url) ? "page" : undefined
                     }
                   >
                     {entry.key}
@@ -149,9 +164,13 @@ const props = Astro.props as Props;
                           class:list={[
                             "cs-li-link cs-drop-link font-roboto text-sm leading-tight whitespace-nowrap text-accent-foreground transition-colors",
                             "hover:bg-primary-foreground lg:box-border lg:block lg:w-full lg:p-3 lg:text-base lg:leading-normal lg:text-primary-foreground lg:duration-500 lg:hover:text-primary",
+                            {
+                              "bg-primary-foreground text-accent!":
+                                currentPath === normalize(child.url),
+                            },
                           ]}
                           aria-current={
-                            Astro.url.pathname === child.url
+                            currentPath === normalize(child.url)
                               ? "page"
                               : undefined
                           }
@@ -169,9 +188,9 @@ const props = Astro.props as Props;
       </div>
 
       <a
-        href="#"
+        href="/contact-us"
         class:list={[
-          "relative inline-block w-full max-w-[172px] overflow-clip rounded-lg bg-primary px-2 py-[18px] text-center font-roboto text-sm leading-tight font-bold whitespace-nowrap text-accent-foreground uppercase no-underline transition-colors md:text-base lg:ml-8",
+          "o relative inline-block w-full overflow-clip rounded-lg bg-primary px-4 py-[18px] text-center font-roboto text-xs leading-tight font-bold whitespace-nowrap text-accent-foreground uppercase no-underline transition-colors xs:px-6 xs:text-sm sm:max-w-[172px] md:text-base lg:ml-8",
           "before:absolute before:inset-0 before:bg-accent before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-[105%]",
           "lg:px-8",
         ]}

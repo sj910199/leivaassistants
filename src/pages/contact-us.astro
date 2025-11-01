@@ -1,0 +1,163 @@
+---
+import Layout from "src/layouts/Layout.astro";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import { getBlurStyle } from "@utils/imageOptimization";
+import ApplicationLogosCarousel from "@components/ApplicationLogosCarousel.astro";
+import HireBtn from "@components/HireBtn.astro";
+
+import Admin1Img from "@assets/images/services/admin-1.png";
+import Support1Img from "@assets/images/services/support-1.png";
+
+import s3Bg from "@assets/images/bg/section-bg-3.png";
+import heroBg from "@assets/images/bg/hero-bg.png";
+import reservation from "@assets/images/reservation.png";
+import reservationBlur from "@assets/images/reservation-blur.png";
+import VerticalTestimonial from "@components/VerticalTestimonial.astro";
+import OptimizedImage from "@components/OptimizedImage.astro";
+import ImageWithBlur from "@components/ImageWithBlur.astro";
+import TestimonialsCarousel from "@components/TestimonialsCarousel.astro";
+import ServiceDetail from "@components/ServiceDetail.astro";
+import ServiceCard from "@components/ServiceCard.astro";
+---
+
+<Layout preloadedImage={s3Bg}>
+  <section id="main-services" class="relative overflow-clip py-section pb-20">
+    <div
+      class="relative mx-auto flex w-full flex-col gap-[clamp(2rem,4vw,3rem)]"
+    >
+      <div
+        class="mask-bg-3-vertical flex w-full flex-col gap-9.5 lg:max-h-240.25 lg:flex-row lg:gap-11"
+      >
+        <div
+          class="flex max-h-[inherit] flex-1 items-center justify-center px-4 pt-10 lg:max-w-[70%] lg:pt-0 lg:pr-0 lg:pl-10"
+        >
+          <ImageWithBlur
+            blurSrc={reservationBlur.src}
+            src={reservation}
+            alt={"reservation form but image"}
+          />
+        </div>
+        <div class="lg:max-w-[30%] lg:flex-1">
+          <div class="hidden lg:contents">
+            <VerticalTestimonial className="pr-10" />
+          </div>
+          <div class="contents lg:hidden">
+            <TestimonialsCarousel />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <Image
+      src={heroBg}
+      alt={"blur for bg"}
+      class={"absolute inset-0 w-full h-full -z-1  "}
+    />
+  </section>
+
+  <ServiceDetail
+    showTopper={false}
+    title="THE RIGHT ASSISTANT CAN CHANGE EVERYTHING"
+  >
+    <Fragment slot={"title"}>
+      <p
+        class="text-[] mb-7.75 text-center font-roboto text-[clamp(1.25rem,5vw,2.1875rem)] leading-h font-light"
+      >
+        Every minute spent on admin, emails, and follow-ups is time away from
+        growing your business. That’s where our virtual assistants come in — the
+        top 1% of global talent ready to work as your partner. In just 21 days
+        or less, we’ll match you with a trusted virtual assistant to help you
+        get back on track.
+      </p>
+    </Fragment>
+    <div
+      class="grid w-full grid-cols-1 justify-items-center gap-10.75 md:grid-cols-2"
+    >
+      <!-- max-w-136  -->
+      <ServiceCard
+        class="w-full max-w-154.5 bg-[#ededed]! px-5 xl:px-10 2xl:px-15"
+        contentClass="lg:size-full lg:pb-20 "
+        id="calendar-service"
+      >
+        <Fragment slot="title">
+          Update and maintain SOPs for
+          <br />
+          consistency and accuracy
+        </Fragment>
+        <Fragment slot="content">
+          <!-- <Support1 /> -->
+          <Image src={Admin1Img} alt={"virtual assistant "} />
+          <!-- <Admin1 />
+          <Admin11
+            class={"absolute inset-0 h-full w-1/2 mx-auto pb-20 object-cover"}
+          /> -->
+        </Fragment>
+      </ServiceCard>
+      <ServiceCard
+        class="w-full max-w-154.5 bg-[#ededed]! px-5 xl:px-10 2xl:px-15"
+        contentClass="lg:size-full lg:pb-20 "
+        id="calendar-service"
+      >
+        <Fragment slot="title">
+          Prepare talking points
+          <br />
+          and meeting notes in advance
+        </Fragment>
+        <Fragment slot="content">
+          <!-- <Support1 /> -->
+          <Image src={Support1Img} alt={"chat messages"} />
+        </Fragment>
+      </ServiceCard>
+    </div>
+  </ServiceDetail>
+
+  <ApplicationLogosCarousel />
+</Layout>
+
+<style>
+  .service-grid {
+    display: grid;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    place-content: center;
+    gap: 4.0625rem;
+    grid-template-areas:
+      "step1"
+      "step2"
+      "step3";
+  }
+
+  @media (width >= 60rem) {
+    .service-grid {
+      grid-template-columns: repeat(2, auto);
+      grid-template-rows: 1fr 1fr;
+      align-items: center;
+      grid-template-areas:
+        "step1 step2"
+        "step1 step3";
+    }
+    #app-service {
+      background-color: #ededed;
+    }
+  }
+  @media (width >= 90rem) {
+    .service-grid {
+      grid-template-columns: repeat(3, auto);
+      grid-template-rows: 1fr auto 5.9375rem;
+      place-content: center;
+      grid-template-areas:
+        ". step2 ."
+        "step1 step2 step3"
+        "step1 . step3";
+    }
+  }
+  .step-shadow {
+    /* Ellipse 1 */
+    /* background: rgba(219, 210, 210, 0.75); */
+    box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
+  }
+</style>

@@ -1,0 +1,77 @@
+---
+import { Image } from "astro:assets";
+import type { SvgComponent } from "astro/types";
+
+import heroBg from "@assets/images/bg/hero-bg.png";
+import HireBtn from "./HireBtn.astro";
+
+interface FeatureItem {
+  Icon: SvgComponent;
+  description: string;
+}
+
+export interface ServiceFeature {
+  title: string;
+  description: string;
+  features: FeatureItem[];
+}
+
+interface Props {
+  serviceFeature: ServiceFeature;
+}
+
+const { serviceFeature } = Astro.props;
+---
+
+<section id="main-services" class="relative z-1 overflow-clip px-4 py-section">
+  <!-- md:max-w-237.5 -->
+  <div
+    class="mx-auto flex w-full flex-col items-center gap-[clamp(1.75rem,4vw,2.75rem)] sm:items-start md:max-w-217.5"
+  >
+    <div class="">
+      <span
+        class="mb-1.75 block text-center font-roboto text-base leading-h font-bold tracking-widest text-accent uppercase md:text-left"
+      >
+        services
+      </span>
+
+      <!-- 3. Header with text gradient -->
+      <h2
+        class="m-0 mb-8 text-center font-roboto text-[clamp(2.5rem,5vw,3.0625rem)] leading-h font-bold tracking-normal text-primary md:text-left"
+      >
+        {serviceFeature.title}
+      </h2>
+
+      <p
+        class="m-0 w-full text-center font-roboto text-base leading-p text-tertiary md:text-left"
+      >
+        {serviceFeature.description}
+      </p>
+    </div>
+
+    <ul
+      class="mx-auto mt-5 grid grid-cols-1 gap-x-17 gap-y-8 sm:grid-cols-2 lg:mx-0"
+    >
+      {
+        serviceFeature.features.map(({ Icon, description }) => (
+          <li class="flex size-full items-center gap-8">
+            <div class="size-10 place-content-center">
+              <Icon />
+            </div>
+            <p class="py-3 pr-6 font-roboto leading-p font-bold text-balance text-primary">
+              {description}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+
+    <HireBtn />
+  </div>
+
+  <Image
+    src={heroBg}
+    alt={"blur for bg"}
+    class={"absolute inset-0 w-full h-full -z-1  "}
+  />
+</section>

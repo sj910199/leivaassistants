@@ -1,0 +1,182 @@
+---
+import { getBlurStyle } from "@utils/imageOptimization";
+import { Image } from "astro:assets";
+
+import aLister from "@assets/images/client-logos/a-lister.png";
+import aListerBlur from "@assets/images/client-logos/a-lister-blur.png";
+import expLogo from "@assets/images/client-logos/exp-logo.png";
+import expLogoBlur from "@assets/images/client-logos/exp-logo-blur.png";
+import kwLogo from "@assets/images/client-logos/kw-logo.png";
+import kwLogoBlur from "@assets/images/client-logos/kw-logo-blur.png";
+import goddessLoft from "@assets/images/client-logos/goddess-loft.svg";
+import riseupLogo from "@assets/images/client-logos/riseup-logo.jpg";
+import riseupLogoBlur from "@assets/images/client-logos/riseup-logo-blur.jpg";
+import roneLogo from "@assets/images/client-logos/rone-logo.avif";
+import roneLogoBlur from "@assets/images/client-logos/rone-logo-blur.avif";
+import OptimizedImage from "./OptimizedImage.astro";
+import ImageWithBlur from "./ImageWithBlur.astro";
+
+export interface Card {
+  src: ImageMetadata;
+  blurSrc: ImageMetadata;
+  alt: string;
+  name: string;
+  testimonial: string;
+  rating: number;
+}
+
+
+const clientCards: Card[] = [
+  {
+    src: roneLogo,
+    blurSrc: roneLogoBlur,
+    alt: "rone",
+    name: "Jack Healy, Founder of RONE Nutrition",
+    testimonial:
+      `
+Working with Leiva Assistants has been a game changer for RONE Nutrition. As our e-commerce brand scaled quickly, customer support became overwhelming — but Gen and Gabbi stepped in and transformed everything.
+Gabbi has been incredibly professional, responsive, and reliable in managing our support tickets and customer inquiries. Thanks to their help, we’ve been able to focus on growth and are already planning to scale further.
+I’m truly grateful for the Leiva Assistants team and excited to keep working with them.
+      `,
+    rating: 5,
+  },
+  {
+    src: aLister,
+    blurSrc: aListerBlur,
+    alt: "Alister",
+    name: "Alister, Founder of A-List Media",
+    testimonial:
+      `
+Gen from Leiva Assistants has been an incredible addition to our team at A-List Media. From day one, she’s been proactive, professional, and a pleasure to work with — handling both client-facing and backend tasks with ease.
+Her communication skills and positive attitude make her a standout partner. I highly recommend Gen and the Leiva Assistants team to anyone looking for reliable, high-quality support.
+      `,
+    rating: 5,
+  },
+  {
+    src: kwLogo,
+    blurSrc: kwLogoBlur,
+    alt: "Keller Williams",
+    name: "Kathy, Keller Williams Realty",
+    testimonial:
+      `
+      Leiva Assistants has been an incredible support system for our Keller Williams Realty team. From creating engaging content to handling our admin tasks behind the scenes, they’ve made everything so much more efficient.
+      Gen and her team are organized, creative, and always one step ahead. It’s been such a relief having them on board — I truly feel like they’re part of our team!
+      `,
+    rating: 5,
+  },
+  {
+    src: expLogo,
+    blurSrc: expLogoBlur,
+    alt: "Exp Realty",
+    name: "Matthew, eXp Realty",
+    testimonial:
+      `
+Working with Leiva Assistants has made a big difference in my business. They helped with my email marketing, content, and admin work — they’re organized, reliable, and make everything run smoother. Hiring a VA truly gave me back my time and let me focus on my clients again
+      `,
+    rating: 5,
+  },
+  {
+    src: riseupLogo,
+    blurSrc: riseupLogoBlur,
+    alt: " RiseUp Community",
+    name: "Max, Founder of RiseUp Community",
+    testimonial:
+      `
+Leiva Assistants, especially Gen and Dominic, have been a huge help in growing my brand, RiseUp Community.
+They’ve created amazing graphics for our Instagram and School of Rise, helped generate leads, and managed a lot of the behind-the-scenes work that keeps things running smoothly.
+They’re fast, reliable, and super easy to work with — I barely have to check in because they just get things done. For the quality of work and the value, I couldn’t recommend Leiva Assistants more
+      `,
+    rating: 5,
+  },
+  {
+    src: goddessLoft,
+    blurSrc: goddessLoft,
+    alt: "Goddess Loft",
+    name: "— Mirv, Owner of The Goddess Loft",
+    testimonial:
+      `
+I finally had time to sit and reflect on how far we’ve come, and you guys are doing such a great job — thank you!
+As a business owner, I’m always looking for ways to do more and do better (story of my life!), and
+working with Leiva Assistants has made that so much easier. I really appreciate all your effort and consistency.
+      `,
+    rating: 5,
+  },
+];
+
+interface Props {
+  className?: string
+}
+const { className = "" } = Astro.props;
+---
+
+<article class:list={["z-1 bg-background relative overflow-y-clip @container", className]}>
+  <div class="relative flex items-center flex-col min-h-[28.56rem] overflow-x-visible animate-pause-hover-parent scrollbar-hide w-fit">
+
+    {[...Array(2)].map((_,i)=>(
+
+    <div class:list={[`grid grid-cols-1 items-center pb-8  animate-move-to-top will-change-transform `]} style={`grid-template-rows:repeat(${clientCards.length},auto)`} >
+      {
+        clientCards.map((logo, index) => {
+          const blurStyle = getBlurStyle(logo.blurSrc.src);
+          const isStaggered = index % 2 === 1;
+
+                // " w-[clamp(29rem,100dvw,39.75rem)] h-full sm:min-w-159 md:w-[clamp(29rem,50dvw,39.75rem)]",
+          return (
+            <div
+              class:list={[
+                "@sm:max-w-91.5 @md:max-w-105 @lg:max-w-130 pt-8 first:pt-0 ",
+              ]}
+            >
+              <div
+                class="relative flex h-full w-full flex-col rounded-secondary bg-[#ebebeb]  py-7.5 px-8 @md:px-14  shadow-[0px_4px_100px_10px_#2C2B2C63_inset,0px_4px_70px_0px_#E329B073] backdrop-blur-sm "
+              >
+
+                <!-- style={blurStyle} -->
+                {/* Logo & Rating */}
+                <div class="mb-5 flex flex-wrap @lg:flex-row flex-col items-start justify-between gap-4">
+                  <ImageWithBlur
+                    class:list="h-12 @lg:h-15.5 w-auto object-contain"
+                    src={logo.src}
+                    alt={logo.alt}
+                      blurSrc={logo.blurSrc.src}
+                  />
+
+                  {/* Star Rating */}
+                  <div class="flex shrink-0 gap-1">
+                    {Array.from({ length: 5 }, (_, i) => (
+                      <svg
+                        class:list={[
+                          "w-6 h-5 @md:w-7.5 @md:h-6.5",
+                          i < logo.rating
+                            ? "fill-[#FFA500] text-[#FFA500]"
+                            : "fill-gray-300 text-gray-300",
+                        ]}
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                      </svg>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Testimonial */}
+                <p class="text-[clamp(0.8rem,3vw,1rem)] mb-5.5 leading-[130%] font-inter tracking-normal font-normal text-balck flex-1">
+                  {logo.testimonial}
+                </p>
+
+                <p class="text-[clamp(1rem,3vw,1.19rem] italic leading-[130%] font-inter tracking-normal font-normal text-balck ">
+                  —{logo.name}
+                </p>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+    ))}
+  </div>
+</article>
+
+<style>
+</style>
