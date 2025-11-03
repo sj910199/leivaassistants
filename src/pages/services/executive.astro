@@ -61,7 +61,9 @@ const serviceFeature: ServiceFeature = {
 };
 ---
 
-<Layout preloadedImage={heroBg}>
+<Layout
+  preloadedImage={[heroBg, Mail, Calendar, Filter, Shield, Drafting, StoreBell]}
+>
   <ServiceHero serviceFeature={serviceFeature} />
   <ServiceDetail title="Keep your customers happy, even while you sleep.">
     <div class="service-grid w-full">

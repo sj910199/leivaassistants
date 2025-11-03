@@ -79,7 +79,10 @@ const gridLayout = [
 const logoBg = ["bg-[#F3CDEB]", "bg-[#E6E6E6]", "bg-[#CFD3F6]"];
 ---
 
-<Layout preloadedImage={heroBg} renderNav={false}>
+<Layout
+  preloadedImage={[heroBg, s3Bg, s4Bg, aLister, expLogo, riseupLogo]}
+  renderNav={false}
+>
   <!-- ============================================ -->
   <!--                    Hero                      -->
   <!-- ============================================ -->

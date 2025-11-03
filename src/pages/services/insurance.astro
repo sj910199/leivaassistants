@@ -56,7 +56,17 @@ const serviceFeature: ServiceFeature = {
 };
 ---
 
-<Layout preloadedImage={heroBg}>
+<Layout
+  preloadedImage={[
+    heroBg,
+    insurance1,
+    insurance2,
+    insurance3,
+    Shield,
+    Drafting,
+    StoreBell,
+  ]}
+>
   <ServiceHero serviceFeature={serviceFeature} />
 
   <ServiceDetail

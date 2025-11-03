@@ -18,17 +18,32 @@ import type { GetImageResult, ImageMetadata } from "astro";
 
 const ogImage = await getOptimizedImage(ogImg);
 
+type FontInfo = {
+  href: string;
+  type: string;
+};
+
+const woffFonts: string[] = [
+  "BebasNeue-Regular.woff2",
+  "roboto-v29-latin-700.woff",
+  "roboto-v29-latin-700.woff2",
+  "roboto-v29-latin-900.woff",
+  "roboto-v29-latin-900.woff2",
+  "roboto-v29-latin-regular.woff",
+  "roboto-v29-latin-regular.woff2",
+];
+
 interface Props {
   title?: string;
   description?: string;
-  preloadedImage: GetImageResult | ImageMetadata;
+  preloadedImage?: Array<GetImageResult | ImageMetadata>;
   renderNav?: boolean;
 }
 
 const {
   title = "Leiva Assistant",
   description = "Leiva Assistant",
-  preloadedImage = ogImage,
+  preloadedImage = [],
   renderNav = true,
 } = Astro.props;
 ---
@@ -56,8 +71,25 @@ const {
       href={`https://${client.domain}${Astro.url.pathname}`}
     />
 
+    <!-- Preloads the fonts thats always in used -->
+    {
+      woffFonts.map((font) => (
+        <link
+          rel="preload"
+          href={`"/assets/fonts/${font}`}
+          as="font"
+          type="font/woff2"
+          crossorigin="anonymous"
+        />
+      ))
+    }
+
     <!-- Preloads the image passed as a prop -->
-    <link rel="preload" href={preloadedImage.src} as="image" />
+    {
+      preloadedImage.map((image) => (
+        <link rel="preload" href={image.src} as="image" />
+      ))
+    }
     <link rel="preload" href={ogImage.src} as="image" />
 
     <!--Social Media Display-->
