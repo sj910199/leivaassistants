@@ -1,0 +1,145 @@
+---
+import { Image, getImage } from "astro:assets";
+import type { ComponentProps } from "astro/types";
+
+type Props = ComponentProps<typeof Image> & {
+  // Optional LQIP controls
+  blurSrc?: string; // provide your own tiny placeholder (e.g., 12px-wide)
+  blurWidth?: number; // if no blurSrc, auto-generate tiny from src at this width
+  blurAmount?: number; // CSS blur strength (px), applied to the placeholder
+  transitionMs?: number; // fade duration
+  wrapperClass?: string; // optional class applied to the wrapper
+};
+
+const {
+  // LQIP additions
+  blurSrc,
+  blurWidth = 16,
+  blurAmount = 20,
+  transitionMs = 300,
+  wrapperClass,
+
+  // Keep Image props intact and pass them through unchanged
+  class: imgClass,
+  style: imgStyle,
+  ...imageProps
+} = Astro.props as Props;
+
+const id = `lqip-${Math.random().toString(36).slice(2, 10)}`;
+
+// If no blurSrc provided, auto-generate a tiny placeholder from local ImageMetadata.
+let phSrc = blurSrc;
+if (!phSrc && typeof imageProps.src === "object") {
+  const tiny = await getImage({
+    src: imageProps.src,
+    width: blurWidth,
+    format: "webp",
+    quality: 30,
+  });
+  phSrc = tiny.src;
+}
+---
+
+<div
+  id={id}
+  class:list={["lqip-wrapper", wrapperClass]}
+  style={`--blur:${blurAmount}px; --dur:${transitionMs}ms;`}
+  data-loaded="false"
+>
+  {
+    phSrc && (
+      <div
+        class="lqip"
+        aria-hidden="true"
+        style={`background-image:url('${phSrc}');`}
+      />
+    )
+  }
+
+  <!-- We pass through all Image props, including class & style -->
+  <Image {...imageProps} class={imgClass} style={imgStyle} />
+</div>
+
+<style>
+  .lqip-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    line-height: 0;
+  }
+
+  /* Placeholder layer (blurred tiny image) */
+  .lqip-wrapper .lqip {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(var(--blur));
+    transform: scale(1.06);
+    transition: opacity var(--dur) ease;
+    opacity: 1;
+  }
+
+  /* Ensure the real image sits above the placeholder */
+  .lqip-wrapper img {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity var(--dur) ease;
+  }
+
+  .lqip-wrapper[data-loaded="true"] img {
+    opacity: 1;
+  }
+
+  .lqip-wrapper[data-loaded="true"] .lqip {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lqip-wrapper .lqip,
+    .lqip-wrapper img {
+      transition: none;
+    }
+  }
+</style>
+
+<script define:vars={{ id }}>
+  document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.getElementById(id);
+    if (!wrapper) return;
+
+    // Find the actual <img> produced by <Image> (handles <img> or <picture><img>)
+    const img = wrapper.querySelector("img");
+    if (!img) return;
+
+    const onLoaded = () => {
+      wrapper.dataset.loaded = "true";
+      const ph = wrapper.querySelector(".lqip");
+      if (ph) {
+        ph.addEventListener("transitionend", () => ph.remove(), { once: true });
+      }
+    };
+
+    if (img.complete && img.naturalWidth > 0) {
+      // Cache hit
+      onLoaded();
+    } else {
+      img.addEventListener("load", onLoaded, { once: true });
+    }
+
+    img.addEventListener(
+      "error",
+      () => {
+        wrapper.dataset.loaded = "error";
+        const ph = wrapper.querySelector(".lqip");
+        if (ph) ph.remove();
+      },
+      { once: true },
+    );
+  });
+</script>

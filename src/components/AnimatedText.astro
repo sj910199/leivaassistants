@@ -1,0 +1,96 @@
+---
+// src/components/AnimatedText.astro
+// Define the props that this component will accept
+interface Props {
+  text: string;
+  duration?: number; // Optional duration for the animation (in seconds)
+  initialCursor?: number; // Optional starting cursor position (e.g., to show some text initially)
+  id?: string; // Optional unique ID for the span element, useful if you have multiple instances
+}
+
+// Destructure props, providing default values
+const {
+  text,
+  duration = 1, // Default duration of 5 seconds
+  initialCursor = 0, // Default to 0, meaning it starts typing from an empty string
+  id = "animated-text-" + Math.random().toString(36).substring(7), // Generate a unique ID if not provided
+} = Astro.props;
+---
+
+<!--
+  The span element where the animated text will be displayed.
+  We are now passing the `text`, `duration`, and `initialCursor` as `data-*` attributes.
+  This allows the client-side script to read them directly from the DOM.
+-->
+<span
+  id={id}
+  aria-live="polite"
+  class="contents"
+  data-text={text}
+  data-duration={duration}
+  data-initial-cursor={initialCursor}
+>
+  <!-- Initial content is still set here for SEO and non-JS users -->
+  {text.slice(0, initialCursor)}
+</span>
+
+<!--
+  This script block will run on the client-side.
+  By *not* having `define:vars` on the script, Astro treats it as a standard
+  module script, which *will* be processed and bundled by Vite,
+  allowing `import { gsap } from "gsap";` to work correctly.
+-->
+<script>
+  // Import GSAP from your node_modules
+  import { gsap } from "gsap";
+
+  // Get a reference to the span element where the text will be displayed
+  // We use `document.currentScript.previousElementSibling` to reliably get the
+  // preceding span, even if multiple instances are on the page without unique IDs
+  // or if the script is loaded asynchronously.
+  // Alternatively, if you are sure about unique IDs, `document.getElementById(id)` could be used,
+  // but this approach is more robust for components.
+  const targetElements = document.querySelectorAll(
+    "span[data-text][data-duration][data-initial-cursor]",
+  );
+
+  targetElements.forEach((targetElement) => {
+    if (targetElement && targetElement instanceof HTMLSpanElement) {
+      // Read the data directly from the dataset of the target element
+      const textToAnimate = targetElement.dataset.text || "";
+      // Parse numbers from strings, providing defaults if not present
+      const animationDuration = parseFloat(
+        targetElement.dataset.duration || "5",
+      );
+      const initialStartCursor = parseInt(
+        targetElement.dataset.initialCursor || "0",
+        10,
+      );
+
+      // Create a mutable object for GSAP to animate.
+      let currentCursor = { value: initialStartCursor };
+
+      // Use gsap.to to animate the 'value' property
+      gsap.to(currentCursor, {
+        value: textToAnimate.length, // Animate up to the full length of the text
+        duration: animationDuration, // Use the provided duration
+        ease: "linear", // Linear easing for a consistent typing speed
+        onUpdate: () => {
+          // On each animation frame, update the text content of the span
+          targetElement.textContent = textToAnimate.slice(
+            0,
+            Math.floor(currentCursor.value),
+          );
+        },
+        onComplete: () => {
+          // Ensure the full text is displayed once the animation finishes
+          targetElement.textContent = textToAnimate;
+        },
+      });
+    } else {
+      console.error(
+        "AnimatedText: Could not find target span element for animation.",
+      );
+    }
+  });
+</script>

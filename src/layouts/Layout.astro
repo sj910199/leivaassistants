@@ -18,11 +18,6 @@ import type { GetImageResult, ImageMetadata } from "astro";
 
 const ogImage = await getOptimizedImage(ogImg);
 
-type FontInfo = {
-  href: string;
-  type: string;
-};
-
 const woffFonts: string[] = [
   "BebasNeue-Regular.woff2",
   "roboto-v29-latin-700.woff",
@@ -76,7 +71,7 @@ const {
       woffFonts.map((font) => (
         <link
           rel="preload"
-          href={`"/assets/fonts/${font}`}
+          href={`/assets/fonts/${font}`}
           as="font"
           type="font/woff2"
           crossorigin="anonymous"

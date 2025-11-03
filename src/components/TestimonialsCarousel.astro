@@ -34,6 +34,7 @@ import tdsBlur from "@assets/images/client-logos/tds-blur.png";
 import treethebarberLogo from "@assets/images/client-logos/treethebarber-logo.jpg";
 import treethebarberLogoBlur from "@assets/images/client-logos/treethebarber-logo-blur.jpg";
 import ImageWithBlur from "./ImageWithBlur.astro";
+import AnimatedText from "./AnimatedText.astro";
 
 export interface Card {
   src: ImageMetadata;
@@ -178,6 +179,7 @@ working with Leiva Assistants has made that so much easier. I really appreciate 
                 {/* Testimonial */}
                 <p class="text-[clamp(1rem,3vw,1.19rem)] mb-5.5 leading-[130%] font-inter tracking-normal font-normal text-balck ">
                   {logo.testimonial}
+                {/* <AnimatedText text={logo.testimonial} /> */}
                 </p>
 
                 <p class="text-[clamp(1rem,3vw,1.19rem] italic leading-[130%] font-inter tracking-normal font-normal text-balck ">
