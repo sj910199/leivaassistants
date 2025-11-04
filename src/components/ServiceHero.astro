@@ -35,7 +35,6 @@ const { serviceFeature } = Astro.props;
         services
       </span>
 
-      <!-- 3. Header with text gradient -->
       <h2
         class="m-0 mb-8 text-center font-roboto text-[clamp(2.5rem,5vw,3.0625rem)] leading-h font-bold tracking-normal text-primary md:text-left"
       >
@@ -55,8 +54,8 @@ const { serviceFeature } = Astro.props;
       {
         serviceFeature.features.map(({ Icon, description }) => (
           <li class="flex size-full items-center gap-8">
-            <div class="size-10 place-content-center">
-              <Icon />
+            <div class="flex aspect-square size-16 items-center justify-center rounded-full border border-primary">
+              <Icon class={"size-10"} />
             </div>
             <p class="py-3 pr-6 font-roboto leading-p font-bold text-balance text-primary">
               {description}

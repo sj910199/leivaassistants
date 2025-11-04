@@ -8,8 +8,11 @@ import ServiceHero, {
   type ServiceFeature,
 } from "@components/ServiceHero.astro";
 import Shield from "@components/Icons/Shield.svg";
-import Drafting from "@components/Icons/Drafting.svg";
-import StoreBell from "@components/Icons/StoreBell.svg";
+import Money from "@components/Icons/Money.svg";
+import Computer from "@components/Icons/Computer.svg";
+import People from "@components/Icons/People.svg";
+import Convo from "@components/Icons/Convo.svg";
+
 import ServiceCard from "@components/ServiceCard.astro";
 
 import Support1 from "@components/ServiceIcon/Support1.svg";
@@ -31,26 +34,26 @@ const serviceFeature: ServiceFeature = {
       description: "Respond to customer inquiries via email or chat",
     },
     {
-      Icon: Shield,
+      Icon: Money,
       description: "Process returns or refunds",
     },
     {
-      Icon: Drafting,
+      Icon: Computer,
       description: "Manage ticketing systems (e.g., Zendesk, Freshdesk)",
     },
     {
-      Icon: Drafting,
+      Icon: Convo,
       description: "Monitor reviews and feedback channels",
     },
     {
-      Icon: StoreBell,
+      Icon: People,
       description: "Escalate issues to internal teams",
     },
   ],
 };
 ---
 
-<Layout preloadedImage={[heroBg, Shield, Drafting, StoreBell, Support1Img]}>
+<Layout preloadedImage={[heroBg, Support1Img]}>
   <ServiceHero serviceFeature={serviceFeature} />
   <ServiceDetail title="Keep your customers happy, even while you sleep.">
     <div
