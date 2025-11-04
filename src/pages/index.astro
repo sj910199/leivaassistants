@@ -31,6 +31,31 @@ import svcImg4 from "@assets/images/ai-images/img-4.png";
 import svcImg4Blur from "@assets/images/ai-images/img-4-blur.png";
 import svcImg5 from "@assets/images/ai-images/img-5.png";
 import svcImg5Blur from "@assets/images/ai-images/img-5-blur.png";
+
+import asanaLogo from "@assets/images/applications-logos/asana_logo.png";
+import clickupLogo from "@assets/images/applications-logos/clickup.png";
+import googleCalendarIcon from "@assets/images/applications-logos/google_calendar_icon.png";
+import googleWorkspaceLogo from "@assets/images/applications-logos/google_workspace_logo.png";
+import metaPlatformsLogo from "@assets/images/applications-logos/meta_platforms_inc_logo.png";
+import microsoftTeamsLogo from "@assets/images/applications-logos/microsoft_office_teams.png";
+import mondayLogo from "@assets/images/applications-logos/monday_logo.png";
+import notionLogo from "@assets/images/applications-logos/notion-logo.png";
+import slackLogo from "@assets/images/applications-logos/slack_technologies_logo.png";
+import zapierLogo from "@assets/images/applications-logos/zapier_logo.png";
+import zoomLogo from "@assets/images/applications-logos/zoom_communications_logo.png";
+
+import aLister from "@assets/images/client-logos/a-lister.png";
+import aListerBlur from "@assets/images/client-logos/a-lister-blur.png";
+import expLogo from "@assets/images/client-logos/exp-logo.png";
+import expLogoBlur from "@assets/images/client-logos/exp-logo-blur.png";
+import kwLogo from "@assets/images/client-logos/kw-logo.png";
+import kwLogoBlur from "@assets/images/client-logos/kw-logo-blur.png";
+import goddessLoft from "@assets/images/client-logos/goddess-loft.svg";
+import riseupLogo from "@assets/images/client-logos/rise-up-logo.png";
+import riseupLogoBlur from "@assets/images/client-logos/riseup-logo-blur.jpg";
+import roneLogo from "@assets/images/client-logos/rone-logo.avif";
+import roneLogoBlur from "@assets/images/client-logos/rone-logo-blur.avif";
+
 import type { ImageMetadata } from "astro";
 import { title } from "process";
 import Hero from "@components/Hero.astro";
@@ -108,7 +133,33 @@ const serviceCards: ServiceCard[] = [
 ];
 ---
 
-<Layout preloadedImage={[heroBg]}>
+<Layout
+  preloadedImage={[
+    heroBg,
+    asanaLogo,
+    clickupLogo,
+    googleCalendarIcon,
+    googleWorkspaceLogo,
+    metaPlatformsLogo,
+    microsoftTeamsLogo,
+    mondayLogo,
+    notionLogo,
+    slackLogo,
+    zapierLogo,
+    zoomLogo,
+    aLister,
+    aListerBlur,
+    expLogo,
+    expLogoBlur,
+    kwLogo,
+    kwLogoBlur,
+    goddessLoft,
+    riseupLogo,
+    riseupLogoBlur,
+    roneLogo,
+    roneLogoBlur,
+  ]}
+>
   <!-- ============================================ -->
   <!--                    Hero                      -->
   <!-- ============================================ -->
