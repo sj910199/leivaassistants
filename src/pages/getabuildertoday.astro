@@ -179,7 +179,7 @@ const logoBg = ["bg-[#F3CDEB]", "bg-[#E6E6E6]", "bg-[#CFD3F6]"];
               // Review tile
               return (
                 <article
-                  class={`rounded-2xl bg-white/80 p-6 text-center shadow-[0_6px_20px_rgba(0,0,0,0.06)] backdrop-blur lg:bg-transparent lg:shadow-none ${slot.pos}`}
+                  class={`rounded-2xl bg-white/80 p-4 text-center shadow-[0_6px_20px_rgba(0,0,0,0.06)] backdrop-blur lg:bg-transparent lg:shadow-none ${slot.pos}`}
                 >
                   {/* Stars */}
                   <div class="mb-3 flex justify-center gap-1">
@@ -205,13 +205,13 @@ const logoBg = ["bg-[#F3CDEB]", "bg-[#E6E6E6]", "bg-[#CFD3F6]"];
                     <p class="m-0 font-roboto text-[1.25rem] leading-h font-bold text-primary">
                       {item.name}
                     </p>
-                    <p class="m-0 font-roboto leading-p text-[#4e4b66]">
+                    <p class="m-0 font-inter leading-p text-[#4e4b66]">
                       {item.position}
                     </p>
                   </div>
 
                   {/* Testimonial */}
-                  <p class="m-0 font-roboto text-[clamp(0.8rem,5vw,1.5625rem)] leading-h font-bold text-primary md:line-clamp-7">
+                  <p class="m-0 font-roboto text-[clamp(0.8rem,5vw,1rem)] leading-h text-primary">
                     "{item.testimonial}"
                   </p>
                 </article>
