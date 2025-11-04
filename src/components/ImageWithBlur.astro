@@ -19,19 +19,24 @@ const uniqueId = `img-blur-${Math.random().toString(36).substring(2, 11)}`;
     "transition-opacity duration-300 ease-in-out", // Add transition for opacity
     className,
   ]}
-  id={uniqueId}
+  data-blur-uniq-id={uniqueId}
   data-img-loaded="false"
   style={blurSrc
     ? `background-image: url('${blurSrc}'); opacity: 0;`
     : "opacity: 0;"}
 />
 
-<script define:vars={{ uniqueId: uniqueId }}>
-  document.addEventListener("DOMContentLoaded", () => {
+<script>
+  document.addEventListener("astro:page-load", () => {
     // Select the specific image instance by its unique ID
-    const img = document.getElementById(uniqueId);
+    const images = document.querySelectorAll(`img[data-blur-uniq-id]`) as NodeListOf<HTMLImageElement>;
 
-    if (!img) return; // Exit if the image element is not found
+    if (images.length === 0) return; // Exit if the image element is not found
+
+    images.forEach((img:HTMLImageElement) => {
+      // const uniqueId = img.dataset.blurUniqId;
+      // const img = document.getElementById(uniqueId);
+
 
     // Now that the script is running, make the main image visible to trigger the fade-in
     // If blurSrc is defined, this means both the background-image (blur) and the main image content
@@ -63,6 +68,8 @@ const uniqueId = `img-blur-${Math.random().toString(36).substring(2, 11)}`;
         // You might want to display a fallback image or an error icon here
       },
       { once: true },
-    );
-  });
+      );
+    });
+
+  })
 </script>

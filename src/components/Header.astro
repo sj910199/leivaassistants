@@ -6,6 +6,7 @@ import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<"header"> {}
 
+
 const normalize = (p: string) => (p.endsWith("/") ? p : p + "/");
 const currentPath = normalize(Astro.url.pathname);
 const isHome = (url: string) => url === "/";
@@ -107,6 +108,7 @@ const props = Astro.props as Props;
                         { "before:scale-x-100": isEntryActive(entry) },
                       ]}
                       aria-current={isEntryActive(entry) ? "page" : undefined}
+                      data-astro-prefetch
                     >
                       {entry.key}
                     </a>
@@ -142,6 +144,7 @@ const props = Astro.props as Props;
                     aria-current={
                       currentPath === normalize(entry.url) ? "page" : undefined
                     }
+                    data-astro-prefetch
                   >
                     {entry.key}
                   </a>
@@ -174,6 +177,7 @@ const props = Astro.props as Props;
                               ? "page"
                               : undefined
                           }
+                          data-astro-prefetch
                         >
                           {child.key}
                         </a>
@@ -195,6 +199,7 @@ const props = Astro.props as Props;
           "lg:px-8",
         ]}
         aria-current="page"
+        data-astro-prefetch
       >
         <span class="relative z-100">Hire Now</span>
       </a>
@@ -203,37 +208,46 @@ const props = Astro.props as Props;
 </header>
 
 <script>
-  document.addEventListener("click", (e) => {
-    const target = e.target;
-    if (target instanceof Element && target.closest(".submenu-btn")) {
-      e.stopPropagation();
-    }
-  });
+import {
+  navigate,
+} from 'astro:transitions/client';
 
-  // Mobile menu toggle
-  const mobileToggle = document.getElementById("mobile-menu-toggle");
-  const navigation = document.getElementById("cs-navigation");
-  const body = document.body;
+document.addEventListener("astro:page-load", () => {
+    document.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target instanceof Element && target.closest(".submenu-btn")) {
+        e.stopPropagation();
+      }
 
-  mobileToggle?.addEventListener("click", () => {
-    const isActive = navigation?.classList.toggle("cs-active");
-    mobileToggle.setAttribute("aria-expanded", isActive ? "true" : "false");
-    if (isActive) {
-      body.classList.add("cs-open");
-    } else {
-      body.classList.remove("cs-open");
-    }
-  });
-
-  // Mobile dropdown toggles
-  document.querySelectorAll(".submenu-btn").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const parent = btn.closest(".cs-dropdown");
-      const isActive = parent?.classList.toggle("cs-active");
-      btn.setAttribute("aria-expanded", isActive ? "true" : "false");
     });
-  });
+
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById("mobile-menu-toggle");
+    const navigation = document.getElementById("cs-navigation");
+    const body = document.body;
+
+    mobileToggle?.addEventListener("click", () => {
+      const isActive = navigation?.classList.toggle("cs-active");
+      mobileToggle.setAttribute("aria-expanded", isActive ? "true" : "false");
+      if (isActive) {
+        body.classList.add("cs-open");
+      } else {
+        body.classList.remove("cs-open");
+      }
+    });
+
+    // Mobile dropdown toggles
+    document.querySelectorAll(".submenu-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const parent = btn.closest(".cs-dropdown");
+        const isActive = parent?.classList.toggle("cs-active");
+        btn.setAttribute("aria-expanded", isActive ? "true" : "false");
+      });
+    });
+
+
+  })
 </script>
 
 <style>
