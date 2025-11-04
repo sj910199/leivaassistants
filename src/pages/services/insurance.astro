@@ -8,6 +8,12 @@ import ServiceHero, {
 } from "@components/ServiceHero.astro";
 
 import Shield from "@components/Icons/Shield.svg";
+import Calendar from "@components/Icons/Calendar.svg";
+import Upload from "@components/Icons/Upload.svg";
+import InboxEmpty from "@components/Icons/InboxEmpty.svg";
+import FileGraph from "@components/Icons/FileGraph.svg";
+import Download from "@components/Icons/Download.svg";
+import ListCheck from "@components/Icons/ListCheck.svg";
 import Drafting from "@components/Icons/Drafting.svg";
 import StoreBell from "@components/Icons/StoreBell.svg";
 import ServiceCard from "@components/ServiceCard.astro";
@@ -29,7 +35,7 @@ const serviceFeature: ServiceFeature = {
   description,
   features: [
     {
-      Icon: Shield,
+      Icon: Calendar,
       description: "Calendar and appointment management",
     },
     {
@@ -37,36 +43,26 @@ const serviceFeature: ServiceFeature = {
       description: "Meeting coordination and follow-ups",
     },
     {
-      Icon: Drafting,
+      Icon: InboxEmpty,
       description: "Inbox triage and client communication",
     },
     {
-      Icon: Drafting,
+      Icon: FileGraph,
       description: "Preparing reports, presentations, and policy summaries",
     },
     {
-      Icon: StoreBell,
+      Icon: Download,
       description: "CRM updates and data entry",
     },
     {
-      Icon: StoreBell,
+      Icon: ListCheck,
       description: "Managing to-do lists, reminders, and priorities",
     },
   ],
 };
 ---
 
-<Layout
-  preloadedImage={[
-    heroBg,
-    insurance1,
-    insurance2,
-    insurance3,
-    Shield,
-    Drafting,
-    StoreBell,
-  ]}
->
+<Layout preloadedImage={[heroBg, insurance1, insurance2, insurance3]}>
   <ServiceHero serviceFeature={serviceFeature} />
 
   <ServiceDetail
@@ -88,7 +84,11 @@ const serviceFeature: ServiceFeature = {
           or follow-up
         </Fragment>
         <Fragment slot="content">
-          <Image src={insurance1} class={"lg:w-full "} alt={"license img 1"} />
+          <Image
+            src={insurance1}
+            class={"border border-border rounded-full p-3 lg:lg:w-full lg:p-5 "}
+            alt={"license img 1"}
+          />
           <!-- <div class="w-[300px]">
             <Social1 />
           </div> -->
@@ -107,7 +107,11 @@ const serviceFeature: ServiceFeature = {
         <Fragment slot="content">
           <!-- <Social2 /> -->
 
-          <Image src={insurance2} alt={"license img 2"} />
+          <Image
+            src={insurance2}
+            class={"border border-border rounded-full p-3"}
+            alt={"license img 2"}
+          />
         </Fragment>
       </ServiceCard>
 
@@ -121,7 +125,11 @@ const serviceFeature: ServiceFeature = {
           agency like a pro
         </Fragment>
         <Fragment slot="content">
-          <Image src={insurance3} alt={"license img 3"} />
+          <Image
+            src={insurance3}
+            class={"border border-border rounded-full p-3"}
+            alt={"license img 3"}
+          />
         </Fragment>
       </ServiceCard>
     </div>

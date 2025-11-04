@@ -7,9 +7,13 @@ import ServiceDetail from "@components/ServiceDetail.astro";
 import ServiceHero, {
   type ServiceFeature,
 } from "@components/ServiceHero.astro";
-import Shield from "@components/Icons/Shield.svg";
-import Drafting from "@components/Icons/Drafting.svg";
-import StoreBell from "@components/Icons/StoreBell.svg";
+
+import FileTransfer from "@components/Icons/FileTransfer.svg";
+import Canva from "@components/Icons/Canva.svg";
+import PeopleLink from "@components/Icons/PeopleLink.svg";
+import BellCursor from "@components/Icons/BellCursor.svg";
+import FileStar from "@components/Icons/FileStar.svg";
+import Broom from "@components/Icons/Broom.svg";
 
 import ServiceCard from "@components/ServiceCard.astro";
 
@@ -28,34 +32,34 @@ const serviceFeature: ServiceFeature = {
   description,
   features: [
     {
-      Icon: Shield,
+      Icon: FileTransfer,
       description: "Internet research and data collection",
     },
     {
-      Icon: Shield,
+      Icon: Canva,
       description: "Light design (e.g., Canva) or presentation formatting",
     },
     {
-      Icon: Drafting,
+      Icon: PeopleLink,
       description: "Lead generation and CRM updates",
     },
     {
-      Icon: Drafting,
+      Icon: BellCursor,
       description: "Online order or subscription management",
     },
     {
-      Icon: StoreBell,
+      Icon: FileStar,
       description: "Scheduling meetings or events",
     },
     {
-      Icon: StoreBell,
+      Icon: Broom,
       description: "Inbox clean-up and automation",
     },
   ],
 };
 ---
 
-<Layout preloadedImage={[heroBg, Shield, Drafting, StoreBell, Virtual1]}>
+<Layout preloadedImage={[heroBg, Virtual1]}>
   <ServiceHero serviceFeature={serviceFeature} />
   <ServiceDetail title="Stop doing it all yourself.">
     <div

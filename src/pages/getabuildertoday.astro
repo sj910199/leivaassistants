@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { Image } from "astro:assets";
 
 import heroBg from "@assets/images/bg/hero-bg.png";
+import tyBg from "@assets/images/bg/ty-bg.png";
 import Hero from "@components/Hero.astro";
 import s3Bg from "@assets/images/bg/section-bg-3.png";
 import s3Blur from "@assets/images/bg/section-bg-3-blur.png";
@@ -13,7 +14,7 @@ import aLister from "@assets/images/client-logos/a-lister.png";
 import aListerBlur from "@assets/images/client-logos/a-lister-blur.png";
 import expLogo from "@assets/images/client-logos/exp-logo.png";
 import expLogoBlur from "@assets/images/client-logos/exp-logo-blur.png";
-import riseupLogo from "@assets/images/client-logos/riseup-logo.jpg";
+import riseupLogo from "@assets/images/client-logos/rise-up-logo.png";
 import riseupLogoBlur from "@assets/images/client-logos/riseup-logo-blur.jpg";
 
 interface reviewCard {
@@ -152,10 +153,11 @@ const logoBg = ["bg-[#F3CDEB]", "bg-[#E6E6E6]", "bg-[#CFD3F6]"];
             gridLayout.map((slot, i) => {
               const item = reviewCards[slot.index];
               // md:h-[320px]
+              // ${logoBg[slot.index]}
               if (slot.kind === "logo") {
                 return (
                   <div
-                    class={`rounded-2xl ${logoBg[slot.index]} flex h-[280px] items-center justify-center p-6 md:h-full ${slot.pos}`}
+                    class={`relative flex h-[280px] items-center justify-center rounded-2xl p-6 md:h-full ${slot.pos}`}
                   >
                     <ImageWithBlur
                       src={item.src}
@@ -163,6 +165,12 @@ const logoBg = ["bg-[#F3CDEB]", "bg-[#E6E6E6]", "bg-[#CFD3F6]"];
                       alt={item.alt}
                       class="max-h-full max-w-full object-contain"
                     />
+                    <Image
+                      src={tyBg}
+                      alt={"blur cyan purple bg"}
+                      class={"absolute inset-0 -z-1 h-full w-full"}
+                    />
+                    <div class="absolute inset-0 -z-1 bg-white/60" />
                   </div>
                 );
               }

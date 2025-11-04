@@ -8,6 +8,12 @@ import ServiceHero, {
   type ServiceFeature,
 } from "@components/ServiceHero.astro";
 import Shield from "@components/Icons/Shield.svg";
+import ListSearch from "@components/Icons/ListSearch.svg";
+import Files from "@components/Icons/Files.svg";
+import CalendarTime from "@components/Icons/CalendarTime.svg";
+import Upload from "@components/Icons/Upload.svg";
+import ConvoPerson from "@components/Icons/ConvoPerson.svg";
+import FileSearch2 from "@components/Icons/FileSearch2.svg";
 import Drafting from "@components/Icons/Drafting.svg";
 import StoreBell from "@components/Icons/StoreBell.svg";
 
@@ -26,34 +32,34 @@ const serviceFeature: ServiceFeature = {
   description,
   features: [
     {
-      Icon: Shield,
+      Icon: ListSearch,
       description: "Manage listing platforms (MLS, Zillow, etc.)",
     },
     {
-      Icon: Shield,
+      Icon: Files,
       description: "Handle contract paperwork and disclosures",
     },
     {
-      Icon: Drafting,
+      Icon: CalendarTime,
       description: "Schedule showings and client appointments",
     },
     {
-      Icon: Drafting,
+      Icon: Upload,
       description: "Follow up with leads via CRM",
     },
     {
-      Icon: StoreBell,
+      Icon: ConvoPerson,
       description: "Coordinate with brokers, buyers, and inspectors",
     },
     {
-      Icon: StoreBell,
+      Icon: FileSearch2,
       description: "Research comps and market data",
     },
   ],
 };
 ---
 
-<Layout preloadedImage={[heroBg, Shield, Drafting, StoreBell, EstateImg]}>
+<Layout preloadedImage={[heroBg, EstateImg]}>
   <ServiceHero serviceFeature={serviceFeature} />
 
   <ServiceDetail title="Every missed lead is a missed opportunity.">

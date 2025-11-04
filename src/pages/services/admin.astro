@@ -8,6 +8,12 @@ import ServiceHero, {
   type ServiceFeature,
 } from "@components/ServiceHero.astro";
 import Shield from "@components/Icons/Shield.svg";
+import File from "@components/Icons/File.svg";
+import People from "@components/Icons/People.svg";
+import Computer from "@components/Icons/Computer.svg";
+import GearStop from "@components/Icons/GearStop.svg";
+import Recycle from "@components/Icons/Recycle.svg";
+import Database from "@components/Icons/Database.svg";
 import Drafting from "@components/Icons/Drafting.svg";
 import StoreBell from "@components/Icons/StoreBell.svg";
 
@@ -30,34 +36,34 @@ const serviceFeature: ServiceFeature = {
   description,
   features: [
     {
-      Icon: Shield,
+      Icon: File,
       description: "File and document management",
     },
     {
-      Icon: Shield,
+      Icon: People,
       description: "Internal team coordination",
     },
     {
-      Icon: Drafting,
+      Icon: Database,
       description: "Data entry and report generation",
     },
     {
-      Icon: Drafting,
+      Icon: Computer,
       description: "System updates (e.g., Notion, Airtable)",
     },
     {
-      Icon: StoreBell,
+      Icon: GearStop,
       description: "SOP writing and template creation",
     },
     {
-      Icon: StoreBell,
+      Icon: Recycle,
       description: "Process documentation and upkeep",
     },
   ],
 };
 ---
 
-<Layout preloadedImage={[heroBg, Admin1Img, Drafting, Shield, StoreBell]}>
+<Layout preloadedImage={[heroBg, Admin1Img]}>
   <ServiceHero serviceFeature={serviceFeature} />
 
   <ServiceDetail title="Make your operations run smooth, not stressful.">

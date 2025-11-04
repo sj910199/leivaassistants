@@ -8,7 +8,12 @@ import ServiceHero, {
 } from "@components/ServiceHero.astro";
 
 import Shield from "@components/Icons/Shield.svg";
-import Drafting from "@components/Icons/Drafting.svg";
+import FileMedal from "@components/Icons/FileMedal.svg";
+import FileMedalPen from "@components/Icons/FileMedalPen.svg";
+import Calendar from "@components/Icons/Calendar.svg";
+import HandShake from "@components/Icons/HandShake.svg";
+import ConvoMsg from "@components/Icons/ConvoMsg.svg";
+import FileBlank from "@components/Icons/FileBlank.svg";
 import StoreBell from "@components/Icons/StoreBell.svg";
 import ServiceCard from "@components/ServiceCard.astro";
 
@@ -29,44 +34,34 @@ const serviceFeature: ServiceFeature = {
   description,
   features: [
     {
-      Icon: Shield,
+      Icon: FileMedal,
       description: "Agent licensing applications and renewals",
     },
     {
-      Icon: Shield,
+      Icon: ConvoMsg,
       description: "Communication with carriers and state departments",
     },
     {
-      Icon: Drafting,
+      Icon: FileMedalPen,
       description: "Carrier contracting and appointment management",
     },
     {
-      Icon: Drafting,
+      Icon: Calendar,
       description: "License and compliance calendar management",
     },
     {
-      Icon: StoreBell,
+      Icon: HandShake,
       description: "Agent onboarding and status tracking",
     },
     {
-      Icon: StoreBell,
+      Icon: FileBlank,
       description: "Document filing and CRM updates",
     },
   ],
 };
 ---
 
-<Layout
-  preloadedImage={[
-    heroBg,
-    Shield,
-    Drafting,
-    StoreBell,
-    licensing1,
-    licensing2,
-    licensing3,
-  ]}
->
+<Layout preloadedImage={[heroBg, licensing1, licensing2, licensing3]}>
   <ServiceHero serviceFeature={serviceFeature} />
 
   <ServiceDetail
@@ -88,7 +83,16 @@ const serviceFeature: ServiceFeature = {
           sell
         </Fragment>
         <Fragment slot="content">
-          <Image src={licensing1} class={"lg:w-full "} alt={"license img 1"} />
+          <!-- 239 338 -->
+          <div
+            class="grid aspect-square place-content-center rounded-full border border-border p-5"
+          >
+            <Image
+              src={licensing1}
+              class={"lg:w-full lg:size-59.75 lg:aspect-square lg:object-contain"}
+              alt={"license img 1"}
+            />
+          </div>
           <!-- <div class="w-[300px]">
             <Social1 />
           </div> -->
@@ -106,8 +110,11 @@ const serviceFeature: ServiceFeature = {
         </Fragment>
         <Fragment slot="content">
           <!-- <Social2 /> -->
-
-          <Image src={licensing2} alt={"license img 2"} />
+          <div
+            class="grid size-37.5 place-content-center rounded-full border border-border"
+          >
+            <Image src={licensing2} class={"size-25"} alt={"license img 2"} />
+          </div>
         </Fragment>
       </ServiceCard>
 
@@ -121,7 +128,11 @@ const serviceFeature: ServiceFeature = {
           with your audience
         </Fragment>
         <Fragment slot="content">
-          <Image src={licensing3} alt={"license img 3"} />
+          <div
+            class="grid size-37.5 place-content-center rounded-full border border-border"
+          >
+            <Image src={licensing3} class={"size-28"} alt={"license img 3"} />
+          </div>
         </Fragment>
       </ServiceCard>
     </div>
