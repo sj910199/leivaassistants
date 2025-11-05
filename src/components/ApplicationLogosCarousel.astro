@@ -42,12 +42,32 @@ const LOGOS: AppLogo[] = [
   { src: zoomLogo, alt: "Zoom", calcWidth: getCalculatedWidth(zoomLogo) },
   { src: asanaLogo, alt: "Asana", calcWidth: getCalculatedWidth(asanaLogo) },
   { src: slackLogo, alt: "Slack", calcWidth: getCalculatedWidth(slackLogo) },
-  { src: googleWorkspaceLogo, alt: "Google Workspace", calcWidth: getCalculatedWidth(googleWorkspaceLogo) },
-  { src: googleCalendarIcon, alt: "Google Calendar", calcWidth: getCalculatedWidth(googleCalendarIcon) },
-  { src: microsoftTeamsLogo, alt: "Microsoft Teams", calcWidth: getCalculatedWidth(microsoftTeamsLogo) },
+  {
+    src: googleWorkspaceLogo,
+    alt: "Google Workspace",
+    calcWidth: getCalculatedWidth(googleWorkspaceLogo),
+  },
+  {
+    src: googleCalendarIcon,
+    alt: "Google Calendar",
+    calcWidth: getCalculatedWidth(googleCalendarIcon),
+  },
+  {
+    src: microsoftTeamsLogo,
+    alt: "Microsoft Teams",
+    calcWidth: getCalculatedWidth(microsoftTeamsLogo),
+  },
   { src: mondayLogo, alt: "Monday", calcWidth: getCalculatedWidth(mondayLogo) },
-  { src: clickupLogo, alt: "ClickUp", calcWidth: getCalculatedWidth(clickupLogo) },
-  { src: metaPlatformsLogo, alt: "Meta", calcWidth: getCalculatedWidth(metaPlatformsLogo) },
+  {
+    src: clickupLogo,
+    alt: "ClickUp",
+    calcWidth: getCalculatedWidth(clickupLogo),
+  },
+  {
+    src: metaPlatformsLogo,
+    alt: "Meta",
+    calcWidth: getCalculatedWidth(metaPlatformsLogo),
+  },
   { src: zapierLogo, alt: "Zapier", calcWidth: getCalculatedWidth(zapierLogo) },
 ] as const;
 ---
@@ -69,23 +89,22 @@ const LOGOS: AppLogo[] = [
     <div
       class="scrollbar-hide mask-bg-3 relative mx-auto flex w-full items-center justify-end"
     >
+      <!-- style={`grid-template-columns: repeat(${LOGOS.length},1fr);`} -->
       {
         [...Array(2)].map((_, i) => (
           <div
             aria-hidden={i === 1}
-            class="grid animate-move-to-right grid-rows-1 gap-32.5 pl-32.5"
-            style={`grid-template-columns: repeat(${LOGOS.length},1fr);`}
+            class="grid animate-move-to-right auto-cols-[1fr] grid-flow-col grid-rows-1 gap-32.5 pl-32.5"
           >
-            {LOGOS.map(({ src, alt,calcWidth }) => (
-              <div class="flex h-20 items-center justify-center" style={`width: ${calcWidth}px;`}>
-                    <Image
-                        src={src}
-                        alt={alt}
-                        class="size-full object-contain"
-                    />
-            </div>
-                // <Image src={src} alt={alt}  class="h-20 w-max object-contain" />
-                // style={`width: ${src.width}px;`}
+            {LOGOS.map(({ src, alt, calcWidth }) => (
+              <div
+                class="flex h-20 items-center justify-center"
+                style={`width: ${calcWidth}px;`}
+              >
+                <Image src={src} alt={alt} class="size-full object-contain" />
+              </div>
+              // <Image src={src} alt={alt}  class="h-20 w-max object-contain" />
+              // style={`width: ${src.width}px;`}
             ))}
           </div>
         ))
