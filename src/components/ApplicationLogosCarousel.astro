@@ -21,26 +21,34 @@ import { getBlurStyle } from "@utils/imageOptimization";
 export interface AppLogo {
   src: ImageMetadata;
   alt: string;
+  calcWidth: number;
 }
 
 const appBlurStyle = getBlurStyle(appBgBlur.src);
+// --- YOUR LOGIC IMPLEMENTED HERE ---
+const TARGET_HEIGHT_PX = 80; // h-20 = 5rem = 80px
+function getCalculatedWidth(logo: ImageMetadata): number {
+  const originalAspectRatio = logo.width / logo.height;
+  const calculatedWidth = originalAspectRatio * TARGET_HEIGHT_PX;
+  return calculatedWidth + 5;
+}
 
 // const { logos, } =
 //   Astro.props;
 const TITLE = "Our virtual assistants bring experience from";
 
 const LOGOS: AppLogo[] = [
-  { src: notionLogo, alt: "Notion" },
-  { src: zoomLogo, alt: "Zoom" },
-  { src: asanaLogo, alt: "Asana" },
-  { src: slackLogo, alt: "Slack" },
-  { src: googleWorkspaceLogo, alt: "Google Workspace" },
-  { src: googleCalendarIcon, alt: "Google Calendar" },
-  { src: microsoftTeamsLogo, alt: "Microsoft Teams" },
-  { src: mondayLogo, alt: "Monday" },
-  { src: clickupLogo, alt: "ClickUp" },
-  { src: metaPlatformsLogo, alt: "Meta" },
-  { src: zapierLogo, alt: "Zapier" },
+  { src: notionLogo, alt: "Notion", calcWidth: getCalculatedWidth(notionLogo) },
+  { src: zoomLogo, alt: "Zoom", calcWidth: getCalculatedWidth(zoomLogo) },
+  { src: asanaLogo, alt: "Asana", calcWidth: getCalculatedWidth(asanaLogo) },
+  { src: slackLogo, alt: "Slack", calcWidth: getCalculatedWidth(slackLogo) },
+  { src: googleWorkspaceLogo, alt: "Google Workspace", calcWidth: getCalculatedWidth(googleWorkspaceLogo) },
+  { src: googleCalendarIcon, alt: "Google Calendar", calcWidth: getCalculatedWidth(googleCalendarIcon) },
+  { src: microsoftTeamsLogo, alt: "Microsoft Teams", calcWidth: getCalculatedWidth(microsoftTeamsLogo) },
+  { src: mondayLogo, alt: "Monday", calcWidth: getCalculatedWidth(mondayLogo) },
+  { src: clickupLogo, alt: "ClickUp", calcWidth: getCalculatedWidth(clickupLogo) },
+  { src: metaPlatformsLogo, alt: "Meta", calcWidth: getCalculatedWidth(metaPlatformsLogo) },
+  { src: zapierLogo, alt: "Zapier", calcWidth: getCalculatedWidth(zapierLogo) },
 ] as const;
 ---
 
@@ -50,7 +58,7 @@ const LOGOS: AppLogo[] = [
     <!-- Title -->
     {
       TITLE && (
-        <h2 class="mx-auto mb-21.25 max-w-lg text-center text-[25px] leading-[130%] font-light text-primary italic md:text-[1.5625rem]">
+        <h2 class="mx-auto mb-21.25 max-w-lg text-center text-25px leading-[130%] font-light text-primary italic md:text-25px">
           {TITLE}
         </h2>
       )
@@ -68,12 +76,16 @@ const LOGOS: AppLogo[] = [
             class="grid animate-move-to-right grid-rows-1 gap-32.5 pl-32.5"
             style={`grid-template-columns: repeat(${LOGOS.length},1fr);`}
           >
-            {LOGOS.map(({ src: Icon, alt }) => (
-              <Image src={Icon} alt={alt} class="h-20 w-max object-contain" />
-
-              // <div class:list={"h-20 w-max object-contain"}>
-              //   <Icon class={"size-full"} />
-              // </div>
+            {LOGOS.map(({ src, alt,calcWidth }) => (
+              <div class="flex h-20 items-center justify-center" style={`width: ${calcWidth}px;`}>
+                    <Image
+                        src={src}
+                        alt={alt}
+                        class="size-full object-contain"
+                    />
+            </div>
+                // <Image src={src} alt={alt}  class="h-20 w-max object-contain" />
+                // style={`width: ${src.width}px;`}
             ))}
           </div>
         ))
