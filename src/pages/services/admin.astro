@@ -23,6 +23,7 @@ import Admin2 from "@components/ServiceIcon/Admin2.svg";
 import Admin1 from "@components/ServiceIcon/Admin1.svg";
 import Admin11 from "@components/ServiceIcon/Admin11.svg";
 import Admin1Img from "@assets/images/services/admin-1.png";
+import Admin2Img from "@assets/images/services/admin-2.png";
 import heroBg from "@assets/images/bg/hero-bg.png";
 
 import ApplicationLogosCarousel from "@components/ApplicationLogosCarousel.astro";
@@ -63,7 +64,7 @@ const serviceFeature: ServiceFeature = {
 };
 ---
 
-<Layout preloadedImage={[heroBg, Admin1Img]}>
+<Layout preloadedImage={[heroBg, Admin1Img, Admin2Img]}>
   <ServiceHero serviceFeature={serviceFeature} />
 
   <ServiceDetail title="Make your operations run smooth, not stressful.">
@@ -92,7 +93,7 @@ const serviceFeature: ServiceFeature = {
       </ServiceCard>
 
       <ServiceCard
-        class="w-full max-w-154.5 bg-[#ededed]! px-5 xl:px-10 2xl:px-15"
+        class="w-full max-w-154.5 bg-[#ebebeb]! px-5 xl:px-10 2xl:px-15"
         contentClass="lg:size-full lg:pb-20 "
         id="app-service"
       >
@@ -102,7 +103,8 @@ const serviceFeature: ServiceFeature = {
           for easy access
         </Fragment>
         <Fragment slot="content">
-          <Admin2 />
+          <Image src={Admin2Img} alt={"virtual assistant "} />
+          <!-- <Admin2 /> -->
         </Fragment>
       </ServiceCard>
     </div>

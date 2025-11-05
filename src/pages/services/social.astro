@@ -21,6 +21,7 @@ import Social2 from "@components/ServiceIcon/Social2.svg";
 
 import heroBg from "@assets/images/bg/hero-bg.png";
 import social1 from "@assets/images/services/social-1.png";
+import social2 from "@assets/images/services/social-2.png";
 import ApplicationLogosCarousel from "@components/ApplicationLogosCarousel.astro";
 
 const title = "Social Media Manager";
@@ -58,7 +59,7 @@ const serviceFeature: ServiceFeature = {
 };
 ---
 
-<Layout preloadedImage={[heroBg, social1]}>
+<Layout preloadedImage={[heroBg, social1, social2]}>
   <ServiceHero serviceFeature={serviceFeature} />
 
   <ServiceDetail
@@ -92,7 +93,7 @@ const serviceFeature: ServiceFeature = {
       </ServiceCard>
 
       <ServiceCard
-        class="w-full px-5 lg:row-start-1 lg:row-end-2 lg:max-w-148 xl:px-10 2xl:px-15"
+        class="w-full bg-[#eeeeee]! px-5 lg:row-start-1 lg:row-end-2 lg:max-w-148 xl:px-10 2xl:px-15"
         id="app-service"
       >
         <Fragment slot="title">
@@ -101,7 +102,12 @@ const serviceFeature: ServiceFeature = {
           that match your brand voice
         </Fragment>
         <Fragment slot="content">
-          <Social2 />
+          <Image
+            src={social2}
+            class={"size-45 object-contain"}
+            alt={"clock image"}
+          />
+          <!-- <Social2 /> -->
         </Fragment>
       </ServiceCard>
 

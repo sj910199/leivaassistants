@@ -48,7 +48,7 @@ const stepCards: StepCard[] = [
     class="relative z-1 overflow-clip px-4 py-section pb-20"
   >
     <div
-      class="mx-auto flex w-full max-w-176 flex-col gap-[clamp(2rem,4vw,3rem)] md:max-w-7xl"
+      class="mx-auto flex w-full max-w-176 flex-col gap-[clamp(2rem,4vw,3rem)] md:max-w-7xl lg:max-w-440.5"
     >
       <div class="mx-auto max-w-226.5">
         <span
@@ -81,7 +81,7 @@ const stepCards: StepCard[] = [
           {
             stepCards.map(({ title, Icon, description }, i) => (
               <ServiceCard
-                class="relative w-full px-5 xl:px-10 2xl:px-15"
+                class="relative w-full px-5 lg:max-w-136 xl:px-10 2xl:px-15"
                 style={`grid-area:step${i + 1}`}
               >
                 <Fragment slot="title">
@@ -97,11 +97,12 @@ const stepCards: StepCard[] = [
                   </div>
                 </Fragment>
                 <Fragment slot="footer">
-                  <p class="m-0 mt-6 w-full text-center font-roboto text-base leading-p text-tertiary">
+                  <p class="m-0 mt-6 w-full text-center font-roboto text-[1.25rem] leading-p text-primary">
                     {description}
                   </p>
-                  <div class="step-shadow absolute -top-4 -left-4 grid aspect-square place-content-center rounded-full bg-[#dbd2d2] p-4 font-roboto text-sm font-bold text-white xl:-top-8 xl:-left-8">
-                    <span class="pb-8 text-[20px] leading-0 font-bold text-[#828181] uppercase">
+
+                  <div class="step-shadow absolute -top-4 -left-4 grid aspect-square place-content-center rounded-full bg-primary-foreground p-4 font-roboto text-sm font-bold text-white xl:-top-8 xl:-left-8">
+                    <span class="pb-8 text-[20px] leading-0 font-bold text-primary uppercase">
                       step{" "}
                     </span>
                     <span class="text-center text-[2rem] leading-0 text-primary">
