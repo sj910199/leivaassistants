@@ -3,6 +3,12 @@ import HireBtn from "@components/HireBtn.astro";
 import { Image } from "astro:assets";
 import heroBg from "@assets/images/bg/hero-bg.png";
 import AnimatedText from "./AnimatedText.astro";
+
+interface Props {
+  showHireBtn?: boolean;
+}
+
+const { showHireBtn = true } = Astro.props;
 ---
 
 <section
@@ -29,7 +35,7 @@ import AnimatedText from "./AnimatedText.astro";
           up to 80% on payroll.
         </slot>
       </p>
-      <HireBtn />
+      {showHireBtn && <HireBtn />}
     </div>
   </div>
 
