@@ -16,6 +16,8 @@ import notionLogo from "@assets/images/applications-logos/notion-logo.png";
 import slackLogo from "@assets/images/applications-logos/slack_technologies_logo.png";
 import zapierLogo from "@assets/images/applications-logos/zapier_logo.png";
 import zoomLogo from "@assets/images/applications-logos/zoom_communications_logo.png";
+import gorgiasLogo from "@assets/images/applications-logos/gorgias.webp";
+
 import { getBlurStyle } from "@utils/imageOptimization";
 
 export interface AppLogo {
@@ -69,6 +71,11 @@ const LOGOS: AppLogo[] = [
     calcWidth: getCalculatedWidth(metaPlatformsLogo),
   },
   { src: zapierLogo, alt: "Zapier", calcWidth: getCalculatedWidth(zapierLogo) },
+  {
+    src: gorgiasLogo,
+    alt: "gorgias",
+    calcWidth: getCalculatedWidth(gorgiasLogo),
+  },
 ] as const;
 ---
 
