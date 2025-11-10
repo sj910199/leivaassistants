@@ -14,16 +14,20 @@ import AnimatedText from "./AnimatedText.astro";
   >
     <div class="w-full max-w-228">
       <h1
-        class="relative w-full text-center font-bebas text-[clamp(2.4375rem,6.4vw,6rem)] leading-[120%] font-normal tracking-normal text-pretty text-primary"
+        class="relative w-full text-center font-bebas text-[clamp(2.4375rem,6.4vw,6rem)] leading-h font-normal tracking-normal text-pretty text-primary"
       >
-        Hire the Top 1% of <br /> Virtual Assistants Who <br /> Build Businesses
+        <slot name="title">
+          Hire the Top 1% of <br /> Virtual Assistants Who <br /> Build Businesses
+        </slot>
       </h1>
 
       <p
         class="mx-auto mt-0 mb-8 w-full max-w-160 text-center font-roboto text-[clamp(1rem,1.95vw,1.25rem)] leading-[1.5em] font-normal tracking-normal text-secondary"
       >
-        Hire business-building virtual assistants in 21 days or less and save up
-        to 80% on payroll.
+        <slot name="description">
+          Hire business-building virtual assistants in 21 days or less and save
+          up to 80% on payroll.
+        </slot>
       </p>
       <HireBtn />
     </div>
