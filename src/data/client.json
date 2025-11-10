@@ -2,16 +2,16 @@
 	"name": "Leiva Assistants",
 	"email": "Leivaassistants@gmail.com",
 	"phoneForTel": "+1-754-354-3428",
-	"phoneFormatted": "(754) 354-3428",
-  "instagram": "instagram.com/leivaassistants",
-  "linkedin":"https://www.linkedin.com/company/hireleivaassistants/",
+	"phoneFormatted": "+1 (754) 354-3428",
+	"instagram": "instagram.com/leivaassistants",
+	"linkedin": "https://www.linkedin.com/company/hireleivaassistants/",
 	"address": {
-		"lineOne": "4301 S. Flamingo Road, Suite 106 #392,Davie, FL 33330",
+		"lineOne": "4301 S. Flamingo Road Suite 106 #392 Davie, FL 33330",
 		"lineTwo": null,
 		"city": "",
 		"state": "",
 		"zip": "",
-		"mapLink": "https://www.google.com/maps/place/4301+S+Flamingo+Rd+106+392,+Davie,+FL+33330,+USA/@26.066483,-80.3172456,17z/data=!4m5!3m4!1s0x88d9a7a3cb8c207b:0x3f8b478c224d77df!8m2!3d26.066483!4d-80.3146707?entry=ttu&g_ep=EgoyMDI1MTAyOS4yIKXMDSoASAFQAw%3D%3D"
+		"mapLink": ""
 	},
 	"domain": "https://leiva-assistants.com/"
 }
