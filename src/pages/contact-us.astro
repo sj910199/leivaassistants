@@ -60,13 +60,22 @@ import roneLogoBlur from "@assets/images/client-logos/rone-logo-blur.avif";
         class="mask-bg-3-vertical flex w-full flex-col gap-9.5 lg:max-h-240.25 lg:flex-row lg:gap-11"
       >
         <div
-          class="flex max-h-[inherit] flex-1 items-center justify-center px-4 pt-10 lg:max-w-[70%] lg:pt-0 lg:pr-0 lg:pl-10"
+          class="relative flex size-full max-h-[inherit] min-h-175 flex-1 items-center justify-center px-4 pt-10 lg:max-w-[70%] lg:pt-0 lg:pr-0 lg:pl-10"
         >
-          <ImageWithBlur
+          <div
+            class="calendly-inline-widget h-175 w-full min-w-[20rem] md:h-240.25"
+            data-url="https://calendly.com/getabuildertoday/30min"
+          >
+          </div>
+          <script
+            type="text/javascript"
+            src="https://assets.calendly.com/assets/external/widget.js"
+            async></script>
+          <!-- <ImageWithBlur
             blurSrc={reservationBlur.src}
             src={reservation}
             alt={"reservation form but image"}
-          />
+          /> -->
         </div>
         <div class="lg:max-w-[30%] lg:flex-1">
           <div class="hidden lg:contents">
@@ -189,5 +198,8 @@ import roneLogoBlur from "@assets/images/client-logos/rone-logo-blur.avif";
     /* Ellipse 1 */
     /* background: rgba(219, 210, 210, 0.75); */
     box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25);
+  }
+
+  .calendly-wrapper {
   }
 </style>
