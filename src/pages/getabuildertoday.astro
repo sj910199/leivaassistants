@@ -17,58 +17,62 @@ import expLogoBlur from "@assets/images/client-logos/exp-logo-blur.png";
 import riseupLogo from "@assets/images/client-logos/rise-up-logo.png";
 import riseupLogoBlur from "@assets/images/client-logos/riseup-logo-blur.jpg";
 
-interface reviewCard {
-  src: ImageMetadata;
-  blurSrc: ImageMetadata;
-  alt: string;
+type VideoMime = "video/webm" | "video/mp4" | "video/ogg";
+
+interface VideoSource {
+  src: string;
+  type: VideoMime;
+}
+
+interface ReviewCard {
+  sources: readonly VideoSource[];
+  poster?: string;
   name: string;
   position: string;
-  testimonial: string;
   rating: number;
 }
 
-const reviewCards: reviewCard[] = [
+const reviewCards: ReviewCard[] = [
   {
-    src: aLister,
-    blurSrc: aListerBlur,
-    alt: "Alister",
-    name: "Alister",
-    position: "Founder of A-List Media",
-    testimonial: `Gen from Leiva Assistants has been an incredible addition to our team at A-List Media. From day one, she’s been proactive, professional, and a pleasure to work with — handling both client-facing and backend tasks with ease.`,
+    sources: [{ src: "/videos/alister.mp4", type: "video/mp4" }],
+    name: "Alister Shirazi",
+    position: "SaaSPrenuer & Podcast Host",
     rating: 5,
   },
   {
-    src: expLogo,
-    blurSrc: expLogoBlur,
-    alt: "Exp Realty",
-    name: "Matthew",
-    position: "eXp Realty",
-    testimonial: `Working with Leiva Assistants has made a big difference in my business. They helped with my email marketing, content, and admin work — they’re organized, reliable, and make everything run smoother. Hiring a VA truly gave me back my time and let me focus on my clients again`,
+    sources: [{ src: "/videos/jack.mp4", type: "video/mp4" }],
+    name: "Jack Healy",
+    position: "Wellness Ecommerce Brand Owner",
     rating: 5,
   },
   {
-    src: riseupLogo,
-    blurSrc: riseupLogoBlur,
-    alt: " RiseUp Community",
-    name: "Max",
-    position: "Founder of RiseUp Community",
-    testimonial: `They’re fast, reliable, and super easy to work with — I barely have to check in because they just get things done. For the quality of work and the value, I couldn’t recommend Leiva Assistants more`,
+    sources: [{ src: "/videos/terry.mp4", type: "video/mp4" }],
+    name: "Terrel",
+    position: "Publicist & Enterpreneur",
+    rating: 5,
+  },
+  {
+    sources: [
+      { src: "/videos/tom.mp4", type: "video/mp4" },
+      { src: "/videos/tom.webm", type: "video/webm" },
+    ],
+    name: "Tom MacMullen",
+    position: "Wellness Ecommerce Executive Member",
+    rating: 5,
+  },
+  {
+    sources: [{ src: "/videos/max.mp4", type: "video/mp4" }],
+    name: "Max Riseman",
+    position: "Mental Health Advocate",
+    rating: 5,
+  },
+  {
+    sources: [{ src: "/videos/bentley.mp4", type: "video/mp4" }],
+    name: "Bentley Walker",
+    position: "Financial Consultant",
     rating: 5,
   },
 ];
-const gridLayout = [
-  // Row 1
-  { kind: "logo", index: 0, pos: "md:col-start-1 md:row-start-1" }, // A‑Lister
-  { kind: "review", index: 2, pos: "md:col-start-2 md:row-start-1" }, // RiseUp review
-  { kind: "logo", index: 2, pos: "md:col-start-3 md:row-start-1" }, // RiseUp
-  // Row 2
-  { kind: "review", index: 0, pos: "md:col-start-1 md:row-start-2" }, // A‑Lister review
-  { kind: "logo", index: 1, pos: "md:col-start-2 md:row-start-2" }, // eXp
-  { kind: "review", index: 1, pos: "md:col-start-3 md:row-start-2" }, // eXp review
-];
-
-// Soft backgrounds per brand (tweak as needed)
-const logoBg = ["bg-[#F3CDEB]", "bg-[#E6E6E6]", "bg-[#CFD3F6]"];
 ---
 
 <Layout
@@ -105,7 +109,7 @@ const logoBg = ["bg-[#F3CDEB]", "bg-[#E6E6E6]", "bg-[#CFD3F6]"];
       class={"absolute inset-0 w-full h-full -z-1  "}
     />
     <div
-      class="mx-auto aspect-video max-w-323.25 rounded-secondary bg-[#d9d9d9] p-8"
+      class="mx-auto aspect-video max-w-323.25 rounded-secondary bg-[#d9d9d9] p-2 md:p-8"
     >
       <iframe
         src="https://www.youtube.com/embed/voW54CMiBr4?autoplay=1&loop=0&playlist=voW54CMiBr4&controls=1&mute=0"
@@ -159,72 +163,56 @@ const logoBg = ["bg-[#F3CDEB]", "bg-[#E6E6E6]", "bg-[#CFD3F6]"];
           class="grid grid-cols-1 gap-8 md:[grid-auto-rows:minmax(0,1fr)] md:grid-cols-3"
         >
           {
-            gridLayout.map((slot, i) => {
-              const item = reviewCards[slot.index];
-              // md:h-[320px]
-              // ${logoBg[slot.index]}
-              if (slot.kind === "logo") {
-                return (
-                  <div
-                    class={`relative flex h-[280px] items-center justify-center rounded-2xl p-6 md:h-full ${slot.pos}`}
-                  >
-                    <ImageWithBlur
-                      src={item.src}
-                      blurSrc={item.blurSrc.src}
-                      alt={item.alt}
-                      class="max-h-full max-w-full object-contain"
-                    />
-                    <Image
-                      src={tyBg}
-                      alt={"blur cyan purple bg"}
-                      class={"absolute inset-0 -z-1 h-full w-full"}
-                    />
-                    <div class="absolute inset-0 -z-1 bg-white/60" />
-                  </div>
-                );
-              }
-
-              // Review tile
-              return (
-                <article
-                  class={`rounded-2xl bg-white/80 p-4 text-center shadow-[0_6px_20px_rgba(0,0,0,0.06)] backdrop-blur lg:bg-transparent lg:shadow-none ${slot.pos}`}
+            reviewCards.map((card, i) => (
+              <div
+                class={`relative flex flex-col items-center justify-center rounded-2xl p-6 md:h-full`}
+              >
+                <video
+                  controls
+                  playsinline
+                  preload="metadata"
+                  poster={card.poster}
+                  class="aspect-9/16 rounded-2xl bg-[#d9d9d9] p-3"
                 >
-                  {/* Stars */}
-                  <div class="mb-3 flex justify-center gap-1">
-                    {Array.from({ length: 5 }, (_, s) => (
-                      <svg
-                        class:list={[
-                          "h-4 w-5",
-                          s < item.rating
-                            ? "fill-[#FFA500] text-[#FFA500]"
-                            : "fill-gray-300 text-gray-300",
-                        ]}
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                        aria-hidden="true"
-                      >
-                        <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-                      </svg>
-                    ))}
-                  </div>
+                  {card.sources?.map((s) => (
+                    <source src={s.src} type={s.type} />
+                  ))}
+                  Sorry, your browser doesn’t support HTML5 video.
+                </video>
 
-                  {/* Author */}
-                  <div class="mb-3">
-                    <p class="m-0 font-roboto text-[1.25rem] leading-h font-bold text-primary">
-                      {item.name}
-                    </p>
-                    <p class="m-0 font-inter leading-p text-[#4e4b66]">
-                      {item.position}
-                    </p>
-                  </div>
+                {/* Stars */}
+                <div class="mt-4 mb-3 flex justify-center gap-1">
+                  {Array.from({ length: 5 }, (_, s) => (
+                    <svg
+                      class:list={[
+                        "h-4 w-5",
+                        s < card.rating
+                          ? "fill-[#FFA500] text-[#FFA500]"
+                          : "fill-gray-300 text-gray-300",
+                      ]}
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                    >
+                      <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+                    </svg>
+                  ))}
+                </div>
 
-                  {/* Testimonial */}
-                  <p class="m-0 font-roboto text-[clamp(0.8rem,5vw,1rem)] leading-h text-primary">
-                    {item.testimonial}
-                  </p>
-                </article>
-              );
-            })
+                <p class="m-0 text-center font-roboto text-[1.25rem] leading-h font-bold text-primary">
+                  {card.name}
+                </p>
+                <p class="m-0 text-center font-inter leading-p text-[#4e4b66]">
+                  {card.position}
+                </p>
+                <Image
+                  src={tyBg}
+                  alt={"blur cyan purple bg"}
+                  class={"absolute inset-0 -z-1 h-full w-full"}
+                />
+                <div class="absolute inset-0 -z-1 bg-white/60" />
+              </div>
+            ))
           }
         </div>
       </div>
